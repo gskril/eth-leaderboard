@@ -3,21 +3,49 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 	<title>Crypto Twitter Leaderboard</title>
+	<meta name="description" content="Most followed Twitter accounts with ENS names.">
+    <meta property="og:title" content="Crypto Twitter Leaderboard">
+    <meta property="og:description" content="Most followed Twitter accounts with ENS names.">
+    <meta property="og:image" content="https://banners.beyondco.de/Crypto%20Twitter%20Leaderboard.png?theme=dark&style=style_2&pattern=texture&description=Most%20followed%20.eth%20names&md=0&showWatermark=0&fontSize=100px&images=x&widths=0&heights=0">
+	<meta name="twitter:card" content="summary_large_image">
+	<link rel="canonical" href="https://ethleaderboard.xyz/">
+
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="/style.css">
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-JFX7VQ8937"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'G-JFX7VQ8937');
+	</script>
+	
 </head>
 <body>
 	<main class="container">
 		<div class="hero">
-			<h1>Crypto Twitter Leaderboard</h1>
+			<div class="hero__title">
+				<h1>Crypto Twitter Leaderboard</h1>
+				<a href="https://twitter.com/ethleaderboard" target="_blank">
+					<svg width="24" height="24" role="img" viewBox="0 0 24 24" color="#000"
+						xmlns="http://www.w3.org/2000/svg">
+						<title>Twitter icon</title>
+						<path
+							d="M23.954 4.569c-.885.389-1.83.654-2.825.775 1.014-.611 1.794-1.574 2.163-2.723-.951.555-2.005.959-3.127 1.184-.896-.959-2.173-1.559-3.591-1.559-2.717 0-4.92 2.203-4.92 4.917 0 .39.045.765.127 1.124C7.691 8.094 4.066 6.13 1.64 3.161c-.427.722-.666 1.561-.666 2.475 0 1.71.87 3.213 2.188 4.096-.807-.026-1.566-.248-2.228-.616v.061c0 2.385 1.693 4.374 3.946 4.827-.413.111-.849.171-1.296.171-.314 0-.615-.03-.916-.086.631 1.953 2.445 3.377 4.604 3.417-1.68 1.319-3.809 2.105-6.102 2.105-.39 0-.779-.023-1.17-.067 2.189 1.394 4.768 2.209 7.557 2.209 9.054 0 13.999-7.496 13.999-13.986 0-.209 0-.42-.015-.63.961-.689 1.8-1.56 2.46-2.548l-.047-.02z">
+						</path>
+					</svg>
+				</a>
+			</div>
 			<span class="subtitle">Most followed .eth handles</span>
 		</div>
 		<div class="legend">
-			<!-- <div class="legend__color"></div>
-			<span class="legend__description">Top account</span> -->
 			<span class="legend__description">Data is updated every 5 minutes</span>
 		</div>
 		<div class="table-wrapper">
@@ -58,8 +86,8 @@
 
 			<br>
 
-			<!-- <small>Curated by <a href="https://twitter.com/ultrasoundmoney" target="_blank">@ultrasoundmoney</a></small> -->
 			<small>Website by <a href="https://twitter.com/gregskril" target="_blank">@gregskril</a></small>
+			<small>See updates to this list on Twitter <a href="https://twitter.com/ethleaderboard" target="_blank">@ethleaderboard</a></small>
 		</div>
 	</main>
 

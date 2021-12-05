@@ -80,6 +80,28 @@ small {
 	margin-bottom: 2rem;
 }
 
+.hero__title {
+	display: flex;
+	align-items: baseline;
+}
+
+.hero__title a {
+	margin-left: 1rem;
+	text-decoration: none;
+	color: currentColor;
+	fill: #1DA1F2;
+}
+
+@media screen and (max-width: 38.75em) {
+	.hero {
+		padding: 2rem 1rem;
+	}
+
+	.hero__title a {
+		display: none;
+	}
+}
+
 /* ----- Table ----- */
 .legend {
 	display: flex;
