@@ -1,0 +1,178 @@
+/* ----- CSS Resets ----- */
+body {
+	margin: 0;
+	font-size: 100%;
+	font-family: 'Poppins', sans-serif;
+	font-weight: 400;
+	line-height: 1.4;
+}
+
+*,
+*::after,
+*::before {
+	box-sizing: border-box;
+}
+
+button,
+input,
+select,
+textarea {
+	font-family: inherit;
+	font-size: 100%;
+	margin: 0;
+}
+
+/* ----- Global ----- */
+:root {
+	--radius: 0.75rem;
+	--color-background: #f0f1f5;
+	--color-outline: #e8e9ed;
+}
+
+h1,
+h2,
+h3,
+h4 {
+	margin: 0 0 1em;
+	line-height: 1.2;
+	font-weight: 600;
+}
+
+h1 {
+	font-size: 2rem;
+	margin-bottom: 0.25em;
+}
+
+h2 {
+	font-size: 1.625rem;
+}
+
+h3 {
+	font-size: 1.375rem;
+}
+
+h4 {
+	font-size: 1.25rem;
+}
+
+small {
+	display: block;
+	font-size: 87.5%;
+	margin-bottom: 0.25em;
+}
+
+.container {
+	max-width: 60rem;
+	margin: 0 auto;
+	padding: 2rem;
+}
+
+@media screen and (min-width: 45em) {
+
+}
+
+/* ----- Hero ----- */
+.hero {
+	background: var(--color-background);
+	border: 0.0625rem solid var(--color-outline);
+	padding: 4rem 2rem;
+	border-radius: var(--radius);
+	margin-bottom: 2rem;
+}
+
+/* ----- Table ----- */
+.legend {
+	display: flex;
+	margin-bottom: 0.75rem;
+	align-items: center;
+}
+
+.legend__color {
+	width: 1.5rem;
+	height: 1.25rem;
+	background-color: var(--color-background);
+	margin-right: 0.325rem;
+	border: 0.0625rem solid var(--color-outline);
+}
+
+.table-wrapper {
+	max-width: 100%;
+	position: relative;
+	overflow-x: scroll;
+}
+
+.profiles {
+	border-collapse: collapse;
+	width: 100%;
+	min-width: 30rem;
+	border-radius: var(--radius);
+	border-style: hidden;
+	box-shadow: inset 0 0 0 0.0625rem var(--color-outline);
+}
+
+.profiles tr > th:nth-child(3)::after {
+	content: url(https://s2.svgbox.net/hero-outline.svg?ic=external-link);
+    width: 1.125rem;
+    height: 1.125rem;
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 0.25rem;
+    opacity: 0.8;
+}
+
+.profiles tr > *:first-child {
+	max-width: 16rem;
+}
+
+.profiles tr > *:nth-child(2) {
+	min-width: 100px;
+}
+
+.profiles tr > *:last-child {
+	min-width: 100px;
+}
+
+.profiles th,
+.profiles td {
+	text-align: left;
+	padding: 0.5rem;
+	border: 0.0625rem solid var(--color-outline);
+}
+
+.profiles .top-account td {
+	background: var(--color-background);
+}
+
+.profiles a {
+	text-decoration: none;
+	color: inherit;
+	opacity: 1;
+	transition: opacity 0.15s ease-in-out;
+}
+
+.profiles a:hover,
+.profiles a:focus {
+	opacity: 0.6;
+	outline: none;
+}
+
+.profiles a:focus {
+	text-decoration: underline;
+}
+
+/* ----- Miscellaneous ----- */
+.credits {
+	margin-top: 2rem;
+}
+
+.copy-json {
+	all: unset;
+	display: block;
+	font-size: 87.5%;
+	margin-bottom: 0.25em;
+	text-decoration: underline;
+}
+
+.copy-json:hover {
+	cursor: pointer;
+}

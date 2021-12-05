@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Crypto Twitter Leaderboard</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+	<main class="container">
+		<div class="hero">
+			<h1>Crypto Twitter Leaderboard</h1>
+			<span class="subtitle">Most followed .eth handles</span>
+		</div>
+		<div class="legend">
+			<!-- <div class="legend__color"></div>
+			<span class="legend__description">Top account</span> -->
+			<span class="legend__description">Data is updated every 2 minutes</span>
+		</div>
+		<div class="table-wrapper">
+			<table class="profiles">
+				<tr>
+					<th></th>
+					<th>Name</th>
+					<th>Twitter</th>
+					<th>Followers</th>
+				</tr>
+				<% for(let i = 0; i < profiles.length; i++) {
+					const profile = profiles[i]
+
+					let number = i + 1
+					let handle = profile.handle
+					let name = profile.name
+					let followers = profile.followers
+					let ultrasoundFollowers = profile.ultrasoundFollowers
+				%>
+					<tr <% if (ultrasoundFollowers > 500) { %> class="top-account" <% } %> >
+						<td><%= number %></td>
+						<td><%= name %></td>
+						<td><a href="https://twitter.com/<%= handle %>" target="_blank">@<%= handle %></a></td>
+						<td><%= followers.toLocaleString() %></td>
+					</tr>
+				<% } %>
+			</table>
+		</div>
+
+		<div class="credits">
+			<button class="copy-json" onclick="copyData()">Copy JSON</button>
+
+			<code style="display: none;">
+				<textarea id="json">
+					<%= JSON.stringify(profiles, null, " ") %>
+				</textarea>
+			</code>
+
+			<br>
+
+			<!-- <small>Curated by <a href="https://twitter.com/ultrasoundmoney" target="_blank">@ultrasoundmoney</a></small> -->
+			<small>Website by <a href="https://twitter.com/gregskril" target="_blank">@gregskril</a></small>
+		</div>
+	</main>
+
+	<script src="/app.js"></script>
+
+</body>
+</html>
