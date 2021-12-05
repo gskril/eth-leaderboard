@@ -13,15 +13,21 @@ function searchTwitterUsers(page) {
 	let previous100 = []
 	try {
 		// Set previous100 array to the contents of the saved json file
-		previous100 = JSON.parse(fs.readFileSync('./public/eth-profiles.json', 'utf8')).splice(0, 100)
+		previous100 = JSON.parse(
+			fs.readFileSync('./public/eth-profiles.json', 'utf8')
+		).splice(0, 100)
 	} catch (e) {}
 
 	// Twitter API: "Only the first 1,000 matching results are available."
 	// Similar to results on this search page: https://twitter.com/search?q=.eth&f=user
-	T.get(
-		'users/search',
-		{ q: '.eth', count: 20, include_entities: false, page: page },
-		function (err, data, response) {
+	T.get('users/search', {
+		q: '.eth',
+		count: 20,
+		include_entities: false,
+		page: page,
+	})
+		.then((res) => {
+			const data = res.data
 			if (data.length >= 1 && page < 20) {
 				data.forEach((profile) => {
 					if (profile.name.includes('.eth')) {
@@ -38,7 +44,7 @@ function searchTwitterUsers(page) {
 				page = page + 1
 				searchTwitterUsers(page)
 			} else {
-				// Sort list from greatest to least followers
+				// Sort list from greatest to least followers and limit to 200 profiles
 				ethProfiles.sort((a, b) => (a.followers > b.followers ? -1 : 1))
 				ethProfiles.splice(200)
 				outputTwitterUsers(ethProfiles)
@@ -53,8 +59,10 @@ function searchTwitterUsers(page) {
 
 				ethProfiles = []
 			}
-		}
-	)
+		})
+		.catch((err) => {
+			console.log('Error fetching data from Twitter API.', err)
+		})
 }
 
 async function outputTwitterUsers(ethProfiles) {
@@ -79,22 +87,29 @@ function findNewUsers(previous100, top100) {
 		}
 	})
 
-	const time = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' })
+	const time = new Date().toLocaleString('en-US', {
+		timeZone: 'America/New_York',
+	})
+
 	if (newUsers.length > 0) {
 		console.log(`New users found at ${time}`)
 		console.table(newUsers)
+
 		newUsers.forEach((user) => {
 			// Compose tweet about the new profile
 			const tweet = `${user.name} just entered the top 100 most followed Twitter accounts with a .eth name at number ${top100.indexOf(user) + 1}`
-			// const tweet = `${user.name} just entered the top 100 most followed Twitter accounts with a @ensdomains name! \n\nWelcome @${user.handle} 🎉`
 			T.post('statuses/update', { status: tweet })
-				.then(() => {
+				.then((res) => {
 					const tweetLink = `https://twitter.com/${res.data.user.screen_name}/status/${res.data.id_str}`
 					console.log('Posted tweet:', tweetLink)
 				})
-				.catch((err) => console.log('Error posting tweet', err))
+				.catch((err) =>
+					console.log(
+						'Error posting tweet.',
+						err.allErrors[0].message
+					)
+				)
 		})
-		process.exit()
 	} else {
 		console.log(`Fetched new data at ${time}`)
 	}
