@@ -1,7 +1,5 @@
 require('dotenv').config()
 const express = require('express')
-const axios = require('axios')
-const path = require('path')
 const app = express()
 
 app.use(express.json())
@@ -26,7 +24,10 @@ app.get('/', async function (req, res) {
 	})
 })
 
-const { searchTwitterUsers } = require('./twitter')
-setInterval(() => searchTwitterUsers(1), 2 * 60 * 1000)
+const { searchTwitterUsers, updateTwitterLocation } = require('./twitter')
+setInterval(async() => {
+	searchTwitterUsers(1)
+	updateTwitterLocation()
+}, 5 * 60 * 1000)
 searchTwitterUsers(1)
 

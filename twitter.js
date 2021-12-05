@@ -1,3 +1,4 @@
+const axios = require('axios')
 const Twit = require('twit')
 const fs = require('fs')
 
@@ -97,7 +98,7 @@ function findNewUsers(previous100, top100) {
 
 		newUsers.forEach((user) => {
 			// Compose tweet about the new profile
-			const tweet = `${user.name} just entered the top 100 most followed Twitter accounts with a .eth name at number ${top100.indexOf(user) + 1}`
+			const tweet = `${user.name} just entered the top 100 most followed Twitter accounts with a @ensdomains name! \n\nWelcome @${user.handle} 🎉`
 			T.post('statuses/update', { status: tweet })
 				.then((res) => {
 					const tweetLink = `https://twitter.com/${res.data.user.screen_name}/status/${res.data.id_str}`
@@ -115,4 +116,32 @@ function findNewUsers(previous100, top100) {
 	}
 }
 
-module.exports = { searchTwitterUsers }
+async function updateTwitterLocation() {
+	// Get number of registered ENS names from OpenSea
+	const ensNames = () => {
+		return axios
+			.request({
+				method: 'GET',
+				url: 'https://api.opensea.io/api/v1/collection/ens/stats',
+				headers: { Accept: 'application/json' },
+			})
+			.then((res) => {
+				return new Intl.NumberFormat().format(res.data.stats.count)
+			})
+			.catch((err) => {
+				console.log('Error fetching data from OpenSea API.', err)
+				return 'Unknown'
+			})
+	}
+
+	// Update Twitter profile's location with number of registered names every minute
+	T.post('account/update_profile', {
+		location: `${await ensNames()} names registered`,
+	})
+		.then((res) => {
+			console.log('Updated location.')
+		})
+		.catch((err) => console.log('Error updating location.', err))
+}
+
+module.exports = { searchTwitterUsers, updateTwitterLocation }
