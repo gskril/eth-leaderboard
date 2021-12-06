@@ -55,7 +55,7 @@ function searchTwitterUsers(page) {
 				} else {
 					// Only check for new users if there is a previous list
 					const top100 = ethProfiles.splice(0, 100)
-					findNewUsers(previous100, top100)
+					// findNewUsers(previous100, top100)
 				}
 
 				ethProfiles = []
