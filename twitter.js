@@ -138,9 +138,7 @@ async function updateTwitterLocation() {
 	T.post('account/update_profile', {
 		location: `${await ensNames()} names registered`,
 	})
-		.then((res) => {
-			console.log('Updated location.')
-		})
+		// .then((res) => console.log('Updated location.'))
 		.catch((err) => console.log('Error updating location.', err))
 }
 
