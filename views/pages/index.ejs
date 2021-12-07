@@ -62,7 +62,7 @@
 					let number = i + 1
 					let handle = profile.handle
 					let name = profile.name
-					let followers = profile.followers
+					let followers = new Intl.NumberFormat().format(profile.followers)
 					let ultrasoundFollowers = profile.ultrasoundFollowers
 				%>
 					<tr <% if (ultrasoundFollowers > 500) { %> class="top-account" <% } %> >

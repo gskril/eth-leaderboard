@@ -1,3 +1,4 @@
+const fs = require('fs')
 require('dotenv').config()
 const express = require('express')
 const app = express()
@@ -11,7 +12,6 @@ app.listen(process.env.PORT || 8080)
 
 // Use live data from Twitter
 app.get('/', async function (req, res) {
-	const fs = require('fs')
 	fs.readFile('./public/eth-profiles.json', (err, data) => {
 		if (err) {
 			console.log('File read failed:', err)
@@ -24,10 +24,16 @@ app.get('/', async function (req, res) {
 	})
 })
 
-const { searchTwitterUsers, updateTwitterLocation } = require('./twitter')
-setInterval(async() => {
-	searchTwitterUsers(1)
-	updateTwitterLocation()
-}, 5 * 60 * 1000)
-searchTwitterUsers(1)
+const db = require('./database')
+const twitter = require('./twitter')
 
+setInterval(async() => {
+	twitter.searchTwitterUsers(1)
+	twitter.updateTwitterLocation()
+	await db.readData()
+}, 5 * 60 * 1000)
+
+;(async () => {
+	await db.readData()
+	twitter.searchTwitterUsers(1)
+})()

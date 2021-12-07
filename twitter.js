@@ -1,6 +1,8 @@
 const axios = require('axios')
 const Twit = require('twit')
 const fs = require('fs')
+const db = require('./database')
+const sleep = (ms) => { return new Promise(resolve => setTimeout(resolve, ms)) }
 
 const T = new Twit({
 	consumer_key: process.env.consumer_key,
@@ -10,15 +12,7 @@ const T = new Twit({
 })
 
 let ethProfiles = []
-function searchTwitterUsers(page) {
-	let previous100 = []
-	try {
-		// Set previous100 array to the contents of the saved json file
-		previous100 = JSON.parse(
-			fs.readFileSync('./public/eth-profiles.json', 'utf8')
-		).splice(0, 100)
-	} catch (e) {}
-
+async function searchTwitterUsers(page) {
 	// Twitter API: "Only the first 1,000 matching results are available."
 	// Similar to results on this search page: https://twitter.com/search?q=.eth&f=user
 	T.get('users/search', {
@@ -27,12 +21,13 @@ function searchTwitterUsers(page) {
 		include_entities: false,
 		page: page,
 	})
-		.then((res) => {
+		.then(async(res) => {
 			const data = res.data
 			if (data.length >= 1 && page < 20) {
 				data.forEach((profile) => {
 					if (profile.name.includes('.eth')) {
 						ethProfiles.push({
+							id: profile.id_str,
 							name: profile.name,
 							handle: profile.screen_name,
 							followers: profile.followers_count,
@@ -48,14 +43,41 @@ function searchTwitterUsers(page) {
 				// Sort list from greatest to least followers and limit to 200 profiles
 				ethProfiles.sort((a, b) => (a.followers > b.followers ? -1 : 1))
 				ethProfiles.splice(200)
-				outputTwitterUsers(ethProfiles)
+
+				previous100 = await db.readData()
+				previous100.splice(0, 100)
+
+				// Update data in Google Sheet
+				for (let i = 0; i < ethProfiles.length; i++) {
+					let profile = ethProfiles[i]
+					// Rate limit is 60 requests per minute
+					await sleep(1010)
+				
+					db.writeData([
+						[
+							profile.id,
+							profile.name,
+							profile.handle,
+							profile.followers,
+							profile.created,
+							profile.verified,
+						]
+					])
+					.catch((err) => {
+						console.log('Error updating data in Google Sheet.', err.response.statusText)
+					})
+				}
+
+				// Order database by follower count
+				await db.reorderData()
 
 				if (previous100.length === 0) {
 					console.log('No previous list found')
 				} else {
 					// Only check for new users if there is a previous list
-					const top100 = ethProfiles.splice(0, 100)
-					// findNewUsers(previous100, top100)
+					const top100 = await db.readData()
+					top100.splice(0, 100)
+					findNewUsers(previous100, top100)
 				}
 
 				ethProfiles = []
@@ -64,19 +86,6 @@ function searchTwitterUsers(page) {
 		.catch((err) => {
 			console.log('Error fetching data from Twitter API.', err)
 		})
-}
-
-async function outputTwitterUsers(ethProfiles) {
-	fs.writeFile(
-		'./public/eth-profiles.json',
-		JSON.stringify(ethProfiles),
-		'utf8',
-		function (err) {
-			if (err) {
-				return console.log(err)
-			}
-		}
-	)
 }
 
 function findNewUsers(previous100, top100) {
@@ -99,7 +108,8 @@ function findNewUsers(previous100, top100) {
 		newUsers.forEach((user) => {
 			// Compose tweet about the new profile
 			const tweet = `${user.name} just entered the top 100 most followed Twitter accounts with a @ensdomains name! \n\nWelcome @${user.handle} 🎉`
-			T.post('statuses/update', { status: tweet })
+			console.log(tweet)
+			/* T.post('statuses/update', { status: tweet })
 				.then((res) => {
 					const tweetLink = `https://twitter.com/${res.data.user.screen_name}/status/${res.data.id_str}`
 					console.log('Posted tweet:', tweetLink)
@@ -109,10 +119,10 @@ function findNewUsers(previous100, top100) {
 						'Error posting tweet.',
 						err.allErrors[0].message
 					)
-				)
+				) */
 		})
 	} else {
-		console.log(`Fetched new data at ${time}`)
+		console.log(`No updates found at ${time}`)
 	}
 }
 
