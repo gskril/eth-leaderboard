@@ -51,7 +51,7 @@ async function searchTwitterUsers(page) {
 				for (let i = 0; i < ethProfiles.length; i++) {
 					let profile = ethProfiles[i]
 					// Rate limit is 60 requests per minute
-					await sleep(1010)
+					await sleep(1050)
 				
 					db.writeData([
 						[

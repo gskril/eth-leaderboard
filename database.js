@@ -22,7 +22,7 @@ const sheetRange = 'database!A2:G'
 const sheets = google.sheets('v4')
 
 // Read data from Google Sheets
-async function readData(purpose) {
+async function readData() {
 	const data = []
 	let response = await sheets.spreadsheets.values.get({
 		auth: jwtClient,
@@ -82,7 +82,7 @@ async function writeData(values) {
 			valueInputOption: 'USER_ENTERED',
 		})
 		// .then(() => console.log('Added new row'))
-		.catch(err => console.log('Unable to add new row.', err))
+		.catch(err => console.log('Error adding row in Google Sheets.', err.errors[0].message))
 	} else {
 		// If the id does exist in the database, update the row
 		await sheets.spreadsheets.values.update({
@@ -93,7 +93,7 @@ async function writeData(values) {
 			resource: sheetResource
 		})
 		// .then(() => console.log('Updated row in Google Sheets'))
-		.catch(err => console.log('Error updating row in Google Sheets', err))
+		.catch(err => console.log('Error updating row in Google Sheets.', err.errors[0].message))
 	}
 }
 
@@ -121,7 +121,7 @@ async function reorderData() {
 				],
 			},
 		})
-		.then(() => console.log('Reordered data in Google Sheets'))
+		// .then(() => console.log('Reordered data in Google Sheets'))
 		.catch((err) =>
 			console.log(
 				'Error reordering data in Google Sheets.',
