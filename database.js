@@ -98,7 +98,7 @@ async function writeData(values) {
 }
 
 async function reorderData() {
-	removeDuplicateRows()
+	await removeDuplicateRows()
 
 	// Sort data in the Google Sheet descending by the number of followers
 	await sheets.spreadsheets

@@ -132,7 +132,8 @@ small {
 	box-shadow: inset 0 0 0 0.0625rem var(--color-outline);
 }
 
-.profiles tr > th:nth-child(3)::after {
+.profiles tr > th:nth-child(3)::after,
+.profiles tr > th:nth-child(2)::after {
 	content: url(https://s2.svgbox.net/hero-outline.svg?ic=external-link);
     width: 1.125rem;
     height: 1.125rem;

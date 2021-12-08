@@ -62,12 +62,19 @@
 					let number = i + 1
 					let handle = profile.handle
 					let name = profile.name
+					let ens = name.match(/[\w]*[.]eth/)[0]
 					let followers = new Intl.NumberFormat().format(profile.followers)
 					let ultrasoundFollowers = profile.ultrasoundFollowers
 				%>
 					<tr <% if (ultrasoundFollowers > 500) { %> class="top-account" <% } %> >
 						<td><%= number %></td>
-						<td><%= name %></td>
+						<td>
+							<% if (ens == '.eth') { %>
+								<%= name %>
+							<% } else { %>
+								<a href="https://<%= ens %>.xyz" target="_blank"><%= name %></a>
+							<% } %>
+						</td>
 						<td><a href="https://twitter.com/<%= handle %>" target="_blank">@<%= handle %></a></td>
 						<td><%= followers.toLocaleString() %></td>
 					</tr>
