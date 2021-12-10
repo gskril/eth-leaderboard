@@ -53,7 +53,7 @@ async function searchTwitterUsers(page) {
 					// Rate limit is 60 requests per minute
 					await sleep(1050)
 				
-					db.writeData([
+					await db.writeData([
 						[
 							profile.id,
 							profile.name,
@@ -64,7 +64,7 @@ async function searchTwitterUsers(page) {
 						]
 					])
 					.catch((err) => {
-						console.log('Error updating data in Google Sheet.', err.response.statusText)
+						console.log('Error updating data in Google Sheets.', err.response.statusText)
 					})
 				}
 

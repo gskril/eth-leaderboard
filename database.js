@@ -94,8 +94,8 @@ async function writeData(values) {
 			valueInputOption: 'USER_ENTERED',
 			resource: sheetResource
 		})
-		// .then(() => console.log('Updated row in Google Sheets'))
-		.catch(err => console.log('Error updating row in Google Sheets.', err.errors[0].message))
+			// .then(() => console.log('Updated row in Google Sheets'))
+			.catch(err => console.log('Error updating data in Google Sheets.', err.response.statusText))
 	}
 }
 
@@ -155,7 +155,7 @@ async function reorderData() {
 					spreadsheetId,
 					range: `database!A${index + 2}:G${index + 2}`
 				})
-				.then(() => console.log('Removed duplicate row from Google Sheets'))
+				// .then(() => console.log('Removed duplicate row from Google Sheets'))
 				.catch((err) =>
 					console.log(
 						'Error removing duplicate row from Google Sheets.',

@@ -27,13 +27,11 @@ app.get('/', async function (req, res) {
 const db = require('./database')
 const twitter = require('./twitter')
 
-setInterval(async() => {
-	// twitter.searchTwitterUsers(1)
-	// twitter.updateTwitterLocation()
-	await db.readData()
+setInterval(() => {
+	twitter.searchTwitterUsers(1)
+	twitter.updateTwitterLocation()
+	db.readData()
 }, 5 * 60 * 1000)
 
-;(async () => {
-	await db.readData()
-	// twitter.searchTwitterUsers(1)
-})()
+db.readData()
+twitter.searchTwitterUsers(1)
