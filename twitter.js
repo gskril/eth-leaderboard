@@ -139,14 +139,15 @@ async function updateTwitterLocation() {
 				return new Intl.NumberFormat().format(res.data.stats.count)
 			})
 			.catch((err) => {
-				console.log('Error fetching data from OpenSea API.', err)
-				return 'Unknown'
+				console.log('Error fetching data from OpenSea API.', err.response.statusText)
+				return 0
 			})
 	}
 
 	// Update Twitter profile's location with number of registered names every minute
+	const numOfEnsNames = await ensNames()
 	T.post('account/update_profile', {
-		location: `${await ensNames()} names registered`,
+		location: numOfEnsNames === 0 ? `` : `${numOfEnsNames} names registered`,
 	})
 		// .then((res) => console.log('Updated location.'))
 		.catch((err) => console.log('Error updating location.', err))
