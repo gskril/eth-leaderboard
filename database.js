@@ -23,6 +23,8 @@ const sheets = google.sheets('v4')
 
 // Read data from Google Sheets
 async function readData() {
+	await reorderData()
+	
 	const data = []
 	let response = await sheets.spreadsheets.values.get({
 		auth: jwtClient,
@@ -53,7 +55,7 @@ async function readData() {
 			if (err) console.log(err)
 		})
 	} catch (err) {
-		console.log('The API returned an error: ' + err)
+		console.log('Having trouble reading data from the Google Sheet.', err)
 		return
 	}
 
@@ -99,6 +101,7 @@ async function writeData(values) {
 
 async function reorderData() {
 	await removeDuplicateRows()
+		.catch(() => console.log('Error removing duplicate rows.'))
 
 	// Sort data in the Google Sheet descending by the number of followers
 	await sheets.spreadsheets
