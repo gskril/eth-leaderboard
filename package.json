@@ -13,6 +13,8 @@
     "ejs": "^3.1.6",
     "express": "^4.17.1",
     "googleapis": "^92.0.0",
-    "twit": "^2.2.11"
+    "twit": "^2.2.11",
+    "discord-reply": "^0.1.2",
+    "discord.js": "^12.5.3"
   }
 }

@@ -153,4 +153,31 @@ async function updateTwitterLocation() {
 		.catch((err) => console.log('Error updating location.', err))
 }
 
-module.exports = { searchTwitterUsers, updateTwitterLocation }
+async function getTwitterProfile(handle) {
+	return T.get('users/show', { screen_name: handle })
+		.then((res) => {
+			return res.data
+		})
+		.catch((err) => {
+			console.log('Error fetching profile from Twitter API.', err)
+		})
+}
+
+async function tweetNewProfile(msg, name, handle, rank) {
+	const tweet = `${name} entered the top 100 most followed Twitter accounts with a @ensdomains name at number ${rank}! \n\nWelcome @${handle} 🎉`
+
+	T.post('statuses/update', { status: tweet })
+		.then((res) => {
+			const tweetLink = `https://twitter.com/${res.data.user.screen_name}/status/${res.data.id_str}`
+			console.log('Posted tweet:', tweetLink)
+			msg.lineReply(`Posted tweet: ${tweetLink}`)
+		})
+		.catch((err) =>
+			console.log(
+				'Error posting tweet.',
+				err.allErrors[0].message
+			)
+		)
+}
+
+module.exports = { searchTwitterUsers, updateTwitterLocation, getTwitterProfile, tweetNewProfile }
