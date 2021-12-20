@@ -84,7 +84,7 @@ async function searchTwitterUsers(page) {
 			}
 		})
 		.catch((err) => {
-			console.log('Error fetching data from Twitter API.', err)
+			console.log('Error fetching data from Twitter API.', err.response.statusText)
 		})
 }
 

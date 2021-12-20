@@ -13,6 +13,7 @@ function startDiscordBot() {
 	
 	const gmpoliceChannel = '921149237796929566'
 	const leaderboardChannel = '921149271972118548'
+	const testChannel = '922312173655572550'
 	
 	discord.on('ready', () => {
 		console.log('Discord bot is online')
@@ -27,7 +28,7 @@ function startDiscordBot() {
 		if (msg.channel.id === gmpoliceChannel) {
 			const link = message.split(' ')[0]
 			gmpoliceTweet(msg, link)
-		} else if (msg.channel.id === leaderboardChannel) {
+		} else if (msg.channel.id === leaderboardChannel || msg.channel.id === testChannel) {
 			const handle = message.split('https://twitter.com/')[1].split(/[?\/ ]/)[0]
 			const profile = await twitter.getTwitterProfile(handle)
 			await db.writeData([
@@ -46,7 +47,17 @@ function startDiscordBot() {
 					// Get index of the object with the id of profile.id_str
 					const index = data.findIndex((obj) => obj.id === profile.id_str)
 					
+					let tweeted = false
 					if (index < 100 && index !== -1) {
+						tweeted = data[index].tweeted || 'false'
+						if (tweeted.toString().toLowerCase() === 'true') {
+							tweeted = true
+						} else {
+							tweeted = false
+						}
+					}
+
+					if (index < 100 && index !== -1 && tweeted === false) {
 						const embed = new MessageEmbed()
 							.setDescription(`@${profile.screen_name} is in the top 100! \n\nReact with ✅ to tweet this`)
 							.addField('Name', profile.name, true)
@@ -55,8 +66,10 @@ function startDiscordBot() {
 
 						msg.lineReply(embed)
 							.then((msg) => msg.react('✅'))
+					} else if (index < 100 && tweeted === true) {
+						msg.lineReply(`${profile.screen_name} has been updated in the database. They've already been tweeted`)
 					} else {
-						msg.lineReply(`${profile.screen_name} has been added/updated, but is not in the top 100`)
+						msg.lineReply(`${profile.screen_name} has been added to the database, but is not eligible for a tweet`)
 					}
 				})
 		}

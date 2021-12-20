@@ -36,7 +36,7 @@ function startTwitterMonitor(discord, gmpoliceChannel, leaderboardChannel) {
 			.setTitle('New gm tweet')
 			.setURL(tweetUrl)
 			.setDescription(tweet.text)
-			.addField('**Followers**', tweet.user.followers_count)
+			.addField('**Followers**', new Intl.NumberFormat().format(tweet.user.followers_count))
 			.addField('**Share**', 'React to this message with ✅ to tweet it')
 	
 		// Send discord message with new gm tweets and reaction to trigger sharing
