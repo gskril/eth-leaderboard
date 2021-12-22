@@ -66,7 +66,7 @@
 					let number = i + 1
 					let handle = profile.handle
 					let name = profile.name
-					let ens = name.match(/[\w]*[.]eth/)[0]
+					let ens = name.toLowerCase().match(/[\w]*[.]eth/)[0]
 					let followers = new Intl.NumberFormat().format(profile.followers)
 					let ultrasoundFollowers = profile.ultrasoundFollowers
 				%>

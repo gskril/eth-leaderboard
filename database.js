@@ -35,7 +35,7 @@ async function readData() {
 	try {
 		for (const row of response.data.values) {
 			// Exclude profiles if they no longer have .eth names
-			if (!row[1].includes('.eth')) continue
+			if (!row[1].toString().toLowerCase().includes('.eth')) continue
 
 			data.push({
 				id: row[0],

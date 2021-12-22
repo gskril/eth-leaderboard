@@ -11,9 +11,10 @@ const T = new Twit({
 const user = {
 	name: '',
 	handle: '',
+	rank: '',
 }
 
-const tweet = `${user.name} just entered the top 100 most followed Twitter accounts with a @ensdomains name! \n\nWelcome @${user.handle} 🎉`
+const tweet = `${user.name} entered the top 100 most followed Twitter accounts with a @ensdomains name at number ${user.rank}! \n\nWelcome @${user.handle} 🎉`
 T.post('statuses/update', { status: tweet })
 	.then((res) => {
 		const tweetLink = `https://twitter.com/${res.data.user.screen_name}/status/${res.data.id_str}`
