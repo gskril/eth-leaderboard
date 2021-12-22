@@ -21,8 +21,27 @@ app.get('/', async function (req, res) {
 			res.send('Error')
 			return
 		}
+
+		const profiles = JSON.parse(data)
+
+		const followers = profiles.map((profile) => {
+			if (profile.followers.toString().length === 6) {
+				return profile.followers.toString().slice(0, -3) + 'k'
+			} else if (profile.followers.toString().length === 5) {
+				return profile.followers.toString().slice(0, -3) + 'k'
+			}
+			return profile.followers
+		})
+
+		const floor10 = followers[9]
+		const floor100 = followers[99]
+		const floor200 = followers[199]
+
 		res.render('pages/index', {
-			profiles: JSON.parse(data),
+			profiles: profiles,
+			floor10: floor10,
+			floor100: floor100,
+			floor200: floor200,
 		})
 	})
 })

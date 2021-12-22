@@ -92,6 +92,28 @@ small {
 	fill: #1DA1F2;
 }
 
+.floor {
+	display: flex;
+	width: 42rem;
+	margin-top: 2rem;
+	justify-content: space-between;
+}
+
+@media screen and (max-width: 51.25rem) {
+	.floor {
+		display: block;
+	}
+	.floor__section {
+		margin-bottom: 1rem;
+	}
+}
+
+.floor__number {
+	display: block;
+	font-weight: 600;
+	font-size: 2rem;
+}
+
 @media screen and (max-width: 38.75em) {
 	.hero {
 		padding: 2rem 1rem;
