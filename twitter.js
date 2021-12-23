@@ -33,7 +33,7 @@ async function searchTwitterUsers(page) {
 							followers: profile.followers_count,
 							created: profile.created_at,
 							verified: profile.verified,
-							pfp: profile.profile_image_url_https.split('_normal')[0] + '_100x100.jpg',
+							pfp: profile.profile_image_url_https,
 						})
 					}
 				})
