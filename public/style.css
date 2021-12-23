@@ -61,6 +61,10 @@ small {
 	margin-bottom: 0.25em;
 }
 
+strong {
+	font-weight: 600;
+}
+
 .container {
 	max-width: 60rem;
 	margin: 0 auto;
@@ -73,9 +77,10 @@ small {
 
 /* ----- Hero ----- */
 .hero {
-	background: var(--color-background);
-	border: 0.0625rem solid var(--color-outline);
-	padding: 4rem 2rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 2rem 0;
 	border-radius: var(--radius);
 	margin-bottom: 2rem;
 }
@@ -83,9 +88,27 @@ small {
 .hero__title {
 	display: flex;
 	align-items: baseline;
+	margin-bottom: 0.5rem;
+}
+
+.hero__subtitle {
+	color: #717171;
+}
+
+.hero__highlight {
+	color: #7298F8;
 }
 
 .hero__title a {
+	background-color: #FFFFFF;
+	border-radius: 50%;
+	padding: 0.25rem;
+	width: 2.875rem;
+	height: 2.875rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: .0625rem solid rgba(0, 0, 0, 0.1);
 	margin-left: 1rem;
 	text-decoration: none;
 	color: currentColor;
@@ -94,18 +117,14 @@ small {
 
 .floor {
 	display: flex;
-	width: 42rem;
-	margin-top: 2rem;
-	justify-content: space-between;
+	flex-wrap: wrap;
+	width: 100%;
+	margin-top: 1rem;
+	justify-content: center;
 }
 
-@media screen and (max-width: 51.25rem) {
-	.floor {
-		display: block;
-	}
-	.floor__section {
-		margin-bottom: 1rem;
-	}
+.floor__section {
+	padding: 1rem 2.5rem;
 }
 
 .floor__number {
@@ -114,11 +133,25 @@ small {
 	font-size: 2rem;
 }
 
+@media screen and (max-width: 50em) {
+	.floor__section {
+		padding: 1.125rem 1.5rem;
+	}
+}
+
 @media screen and (max-width: 38.75em) {
 	.hero {
-		padding: 2rem 1rem;
+		align-items: flex-start;
+		padding: 0.5rem 0 1rem;
 	}
-
+	.floor {
+		margin-top: 0.5rem;
+		justify-content: flex-start;
+	}
+	.floor__section {
+		padding-left: 0;
+		padding-bottom: 0;
+	}
 	.hero__title a {
 		display: none;
 	}
