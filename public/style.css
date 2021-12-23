@@ -1,10 +1,12 @@
 /* ----- CSS Resets ----- */
 body {
+	background: radial-gradient(40.48% 67.6% at 50% 32.4%, #ECF4FF 0%, #F7F7FF 52.77%, #F7F7F7 100%), #FFFFFF;
 	margin: 0;
 	font-size: 100%;
 	font-family: 'Poppins', sans-serif;
-	font-weight: 400;
+	font-weight: 500;
 	line-height: 1.4;
+	color: #3F3F3F;
 }
 
 *,
@@ -39,7 +41,7 @@ h4 {
 }
 
 h1 {
-	font-size: 2rem;
+	font-size: 2.15rem;
 	margin-bottom: 0.25em;
 }
 
@@ -61,23 +63,28 @@ small {
 	margin-bottom: 0.25em;
 }
 
+strong {
+	font-weight: 600;
+}
+
 .container {
-	max-width: 60rem;
+	max-width: 70rem;
 	margin: 0 auto;
 	padding: 2rem;
 }
 
 @media screen and (max-width: 45em) {
 	h1 {
-		font-size: 1.75rem;
+		font-size: 2rem;
 	}
 }
 
 /* ----- Hero ----- */
 .hero {
-	background: var(--color-background);
-	border: 0.0625rem solid var(--color-outline);
-	padding: 4rem 2rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 2rem 0;
 	border-radius: var(--radius);
 	margin-bottom: 2rem;
 }
@@ -85,9 +92,27 @@ small {
 .hero__title {
 	display: flex;
 	align-items: baseline;
+	margin-bottom: 0.5rem;
+}
+
+.hero__subtitle {
+	color: #717171;
+}
+
+.hero__highlight {
+	color: #7298F8;
 }
 
 .hero__title a {
+	background-color: #FFFFFF;
+	border-radius: 50%;
+	padding: 0.25rem;
+	width: 2.875rem;
+	height: 2.875rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: .0625rem solid rgba(0, 0, 0, 0.1);
 	margin-left: 1rem;
 	text-decoration: none;
 	color: currentColor;
@@ -95,18 +120,25 @@ small {
 }
 
 .floor {
-	display: flex;
-	max-width: 42rem;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	max-width: 60rem;
 	margin-top: 2rem;
-	justify-content: space-between;
+	justify-content: center;
 }
 
-@media screen and (max-width: 51.25rem) {
-	.floor {
-		display: block;
-	}
-	.floor__section {
-		margin-bottom: 1rem;
+.floor__section {
+	padding: 0.125rem 2.5rem;
+}
+
+.floor__section *:not(.floor__number):not(strong) {
+	opacity: 0.6;
+}
+
+@media screen and (min-width: 38.75em) {
+	.floor__section:nth-child(2) {
+		border-left: 1px solid rgba(0, 0, 0, 0.1);
+		border-right: 1px solid rgba(0, 0, 0, 0.1);
 	}
 }
 
@@ -114,11 +146,33 @@ small {
 	display: block;
 	font-weight: 600;
 	font-size: 2rem;
+	color: #0F0F0F;
+}
+
+@media screen and (max-width: 50em) {
+	.floor__section {
+		padding: 1.125rem 1.5rem;
+	}
 }
 
 @media screen and (max-width: 38.75em) {
+	.floor {
+		grid-template-columns: 1fr;
+	}
 	.hero {
-		padding: 2rem 1rem 1rem;
+		align-items: flex-start;
+		padding: 0.5rem 0 1rem;
+	}
+	.floor {
+		margin-top: 0.5rem;
+		justify-content: flex-start;
+	}
+	.floor__section {
+		align-content: center;
+		padding: 1rem 0 0;
+	}
+	.floor__number {
+		font-size: 1.5rem;
 	}
 	.hero__title a {
 		display: none;
@@ -154,39 +208,43 @@ small {
 	border-collapse: collapse;
 	width: 100%;
 	min-width: 30rem;
-	border-radius: var(--radius);
 	border-style: hidden;
-	box-shadow: inset 0 0 0 0.0625rem var(--color-outline);
-}
-
-.profiles tr > th:nth-child(3)::after,
-.profiles tr > th:nth-child(2)::after {
-	content: url(https://s2.svgbox.net/hero-outline.svg?ic=external-link);
-    width: 1.125rem;
-    height: 1.125rem;
-    display: inline-block;
-    vertical-align: top;
-    margin-left: 0.25rem;
-    opacity: 0.8;
 }
 
 .profiles tr > *:first-child {
-	max-width: 16rem;
+	text-align: center;
+	padding-left: 1.5rem;
+	padding-right: 2.5rem;
+}
+
+.profiles tr > td:first-child {
+	color: #717171;
 }
 
 .profiles tr > *:nth-child(2) {
-	min-width: 100px;
+	min-width: 6.25rem;
 }
 
 .profiles tr > *:last-child {
-	min-width: 100px;
+	min-width: 6.25rem;
+	padding-right: 1.5rem;
+}
+
+th {
+	color: #717171;
+	opacity: 0.5;
+}
+
+td svg {
+	margin-left: 0.125rem;
+	transform: translateY(0.0625rem);
 }
 
 .profiles th,
 .profiles td {
 	text-align: left;
-	padding: 0.5rem;
-	border: 0.0625rem solid var(--color-outline);
+	padding: 0.875rem 0.5rem;
+	border-bottom: 0.0625rem solid var(--color-outline);
 }
 
 .profiles .top-account td {
@@ -208,6 +266,14 @@ small {
 
 .profiles a:focus {
 	text-decoration: underline;
+}
+
+@media screen and (max-width: 38.75em) {
+	.profiles tr > *:first-child,
+	.profiles tr > *:last-child {
+		padding-left: 1rem;
+		padding-right: 1.5rem;
+	}
 }
 
 /* ----- Miscellaneous ----- */

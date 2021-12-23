@@ -36,7 +36,7 @@
 	<main class="container">
 		<div class="hero">
 			<div class="hero__title">
-				<h1>.eth Leaderboard</h1>
+				<h1><span class="hero__highlight">.eth</span> Leaderboard</h1>
 				<a href="https://twitter.com/ethleaderboard" target="_blank">
 					<svg width="24" height="24" role="img" viewBox="0 0 24 24" color="#000"
 						xmlns="http://www.w3.org/2000/svg">
@@ -47,29 +47,26 @@
 					</svg>
 				</a>
 			</div>
-			<span class="subtitle">The most followed accounts with .eth names on Twitter</span>
+			<span class="hero__subtitle">The most followed accounts with <strong>.eth</strong> names on Twitter</span>
 			<div class="floor">
 				<div class="floor__section">
 					<span class="floor__number">> <%= floor10 %></span>
-					Followers for <strong>Top 10</strong>
+					<span>Followers for <strong>Top 10</strong></span>
 				</div>
 				<div class="floor__section">
 					<span class="floor__number">> <%= floor100 %></span>
-					Followers for <strong>Top 100</strong>
+					<span>Followers for <strong>Top 100</strong></span>
 				</div>
 				<div class="floor__section">
 					<span class="floor__number">> <%= floor200 %></span>
-					Followers for <strong>Top 200</strong>
+					<span>Followers for <strong>Top 200</strong></span>
 				</div>
 			</div>
-		</div>
-		<div class="legend">
-			<span class="legend__description">Data is updated every 5 minutes</span>
 		</div>
 		<div class="table-wrapper">
 			<table class="profiles">
 				<tr>
-					<th></th>
+					<th>Rank</th>
 					<th>Name</th>
 					<th>Twitter</th>
 					<th>Followers</th>
@@ -89,10 +86,20 @@
 							<% if (ens == '.eth') { %>
 								<%= name %>
 							<% } else { %>
-								<a href="https://<%= ens %>.xyz" target="_blank"><%= name %></a>
+								<a href="https://<%= ens %>.xyz" target="_blank">
+									<%= name %>
+									<svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<path opacity="0.3" d="M7.95739 14.7955L15.1165 7.63636L7.95739 0.477273L6.30966 2.1179L10.6349 6.43608H0.5V8.83665H10.6349L6.30966 13.1619L7.95739 14.7955Z" fill="black"/>
+									</svg>										
+								</a>
 							<% } %>
 						</td>
-						<td><a href="https://twitter.com/<%= handle %>" target="_blank">@<%= handle %></a></td>
+						<td><a href="https://twitter.com/<%= handle %>" target="_blank">
+							@<%= handle %>
+							<svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path opacity="0.3" d="M7.95739 14.7955L15.1165 7.63636L7.95739 0.477273L6.30966 2.1179L10.6349 6.43608H0.5V8.83665H10.6349L6.30966 13.1619L7.95739 14.7955Z" fill="black"/>
+							</svg>
+						</a></td>
 						<td><%= followers.toLocaleString() %></td>
 					</tr>
 				<% } %>
