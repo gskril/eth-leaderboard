@@ -24,8 +24,18 @@ app.get('/', async function (req, res) {
 
 		const profiles = JSON.parse(data)
 
+		// Handle rounding numbers for floor stats
 		const followers = profiles.map((profile) => {
-			if (profile.followers.toString().length === 6) {
+			if (profile.followers.toString().length === 7) {
+				const firstDigit = profile.followers.toString()[0]
+				const secondDigit = profile.followers.toString()[1]
+
+				if (secondDigit === '0') {
+					return firstDigit + 'm'
+				} else {
+					return firstDigit + '.' + secondDigit + 'm'
+				}
+			} else if (profile.followers.toString().length === 6) {
 				return profile.followers.toString().slice(0, -3) + 'k'
 			} else if (profile.followers.toString().length === 5) {
 				return profile.followers.toString().slice(0, -3) + 'k'
