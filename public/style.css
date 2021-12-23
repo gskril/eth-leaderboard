@@ -67,8 +67,10 @@ small {
 	padding: 2rem;
 }
 
-@media screen and (min-width: 45em) {
-
+@media screen and (max-width: 45em) {
+	h1 {
+		font-size: 1.75rem;
+	}
 }
 
 /* ----- Hero ----- */
@@ -94,7 +96,7 @@ small {
 
 .floor {
 	display: flex;
-	width: 42rem;
+	max-width: 42rem;
 	margin-top: 2rem;
 	justify-content: space-between;
 }
@@ -116,11 +118,14 @@ small {
 
 @media screen and (max-width: 38.75em) {
 	.hero {
-		padding: 2rem 1rem;
+		padding: 2rem 1rem 1rem;
 	}
-
 	.hero__title a {
 		display: none;
+	}
+	.floor__number {
+		font-size: 1.5rem;
+		margin-bottom: 0.25rem;
 	}
 }
 
