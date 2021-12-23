@@ -161,7 +161,7 @@ async function getTwitterProfile(handle) {
 			return res.data
 		})
 		.catch((err) => {
-			console.log('Error fetching profile from Twitter API.', err)
+			return console.log(`Error fetching @${handle} from Twitter API.`, err.allErrors[0].message)
 		})
 }
 
@@ -189,20 +189,22 @@ async function updateAllProfiles() {
 	for (let i = 0; i < handles.length; i++) {
 		const handle = handles[i]
 
-		await sleep(100)
-		const profile = await getTwitterProfile(handle)
-		await db.writeData([
-			[
-				profile.id_str,
-				profile.name,
-				profile.screen_name,
-				profile.followers_count,
-				profile.created_at,
-				profile.verified,
-				profile.profile_image_url_https,
-			]
-		])
-			.catch((err) => console.log('Error updating all profiles in Google Sheets.', err.errors[0].message))
+		await sleep(500)
+		try {
+			const profile = await getTwitterProfile(handle)
+	
+			await db.writeData([
+				[
+					profile.id_str,
+					profile.name,
+					profile.screen_name,
+					profile.followers_count,
+					profile.created_at,
+					profile.verified,
+					profile.profile_image_url_https,
+				]
+			])
+		} catch (err) {}
 	}
 }
 
