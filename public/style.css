@@ -231,6 +231,13 @@ th {
 	opacity: 0.5;
 }
 
+.pfp {
+	border-radius: 50%;
+	width: 1.875rem;
+	margin-right: 0.3125rem;
+	vertical-align: middle;
+}
+
 td svg {
 	margin-left: 0.125rem;
 	transform: translateY(0.0625rem);

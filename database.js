@@ -18,7 +18,7 @@ jwtClient.authorize((err) => {
 
 // Google Sheets API
 const spreadsheetId = process.env.spreadsheetId
-const sheetRange = 'database!A2:G'
+const sheetRange = 'database!A2:H'
 const sheets = google.sheets('v4')
 
 // Read data from Google Sheets
@@ -44,7 +44,8 @@ async function readData() {
 				followers: row[3],
 				created: row[4],
 				verified: row[5],
-				tweeted: row[6],
+				twitter_pfp: row[6],
+				tweeted: row[7],
 			})
 		}
 

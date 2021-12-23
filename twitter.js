@@ -33,6 +33,7 @@ async function searchTwitterUsers(page) {
 							followers: profile.followers_count,
 							created: profile.created_at,
 							verified: profile.verified,
+							pfp: profile.profile_image_url_https.split('_normal')[0] + '_100x100.jpg',
 						})
 					}
 				})
@@ -61,6 +62,7 @@ async function searchTwitterUsers(page) {
 							profile.followers,
 							profile.created,
 							profile.verified,
+							profile.pfp,
 						]
 					])
 					.catch((err) => {
@@ -180,4 +182,28 @@ async function tweetNewProfile(msg, name, handle, rank) {
 		)
 }
 
-module.exports = { searchTwitterUsers, updateTwitterLocation, getTwitterProfile, tweetNewProfile }
+async function updateAllProfiles() {
+	const data = await db.readData()
+	const handles = data.map((profile) => profile.handle)
+	
+	for (let i = 0; i < handles.length; i++) {
+		const handle = handles[i]
+
+		await sleep(100)
+		const profile = await getTwitterProfile(handle)
+		await db.writeData([
+			[
+				profile.id_str,
+				profile.name,
+				profile.screen_name,
+				profile.followers_count,
+				profile.created_at,
+				profile.verified,
+				profile.profile_image_url_https,
+			]
+		])
+			.catch((err) => console.log('Error updating all profiles in Google Sheets.', err.errors[0].message))
+	}
+}
+
+module.exports = { searchTwitterUsers, updateTwitterLocation, getTwitterProfile, tweetNewProfile, updateAllProfiles }

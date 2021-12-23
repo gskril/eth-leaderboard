@@ -39,6 +39,7 @@ function startDiscordBot() {
 					profile.followers_count,
 					profile.created_at,
 					profile.verified,
+					profile.profile_image_url_https,
 				]
 			])
 			
