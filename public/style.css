@@ -221,6 +221,10 @@ strong {
 	min-width: 6.25rem;
 }
 
+.profiles tr > *:nth-child(3) {
+	min-width: 14rem;
+}
+
 .profiles tr > *:last-child {
 	min-width: 6.25rem;
 	padding-right: 1.5rem;
@@ -282,16 +286,4 @@ td svg {
 /* ----- Miscellaneous ----- */
 .credits {
 	margin-top: 2rem;
-}
-
-.copy-json {
-	all: unset;
-	display: block;
-	font-size: 87.5%;
-	margin-bottom: 0.25em;
-	text-decoration: underline;
-}
-
-.copy-json:hover {
-	cursor: pointer;
 }
