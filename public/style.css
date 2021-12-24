@@ -126,7 +126,6 @@ strong {
 	width: 100%;
 	max-width: 48rem;
 	margin-top: 2rem;
-	gap: 1rem;
 }
 
 .floor__section {
@@ -171,6 +170,7 @@ strong {
 	}
 	.floor {
 		margin-top: 0.5rem;
+		gap: 1rem;
 	}
 	.floor__section {
 		align-content: center;
