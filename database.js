@@ -179,7 +179,7 @@ async function getAvatar(ensName) {
 	const url = `https://metadata.ens.domains/mainnet/avatar/${ensName}`
 
 	try {
-		await axios.get(url, { timeout: 2000 })
+		await axios.get(url, { timeout: 3000 })
 		// Save image at {url} to /public/avatars/{ensName}
 		const image = await axios.get(url, { responseType: 'arraybuffer' })
 		const imageBuffer = Buffer.from(image.data, 'binary')
