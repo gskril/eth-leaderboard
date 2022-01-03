@@ -1,4 +1,7 @@
 const fs = require('fs')
+const path = require('path')
+const sharp = require('sharp')
+const axios = require('axios')
 const { google } = require('googleapis')
 
 const jwtClient = new google.auth.JWT(
@@ -18,7 +21,7 @@ jwtClient.authorize((err) => {
 
 // Google Sheets API
 const spreadsheetId = process.env.spreadsheetId
-const sheetRange = 'database!A2:H'
+const sheetRange = 'database!A2:I'
 const sheets = google.sheets('v4')
 
 // Read data from Google Sheets
@@ -45,7 +48,8 @@ async function readData() {
 				created: row[4],
 				verified: row[5],
 				twitter_pfp: row[6],
-				tweeted: row[7],
+				ens_pfp: row[7],
+				tweeted: row[8],
 			})
 		}
 
@@ -91,7 +95,7 @@ async function writeData(values) {
 		await sheets.spreadsheets.values.update({
 			auth: jwtClient,
 			spreadsheetId,
-			range: `database!A${row + 2}:G${row + 2}`,
+			range: `database!A${row + 2}:H${row + 2}`,
 			valueInputOption: 'USER_ENTERED',
 			resource: sheetResource
 		})
@@ -154,7 +158,7 @@ async function reorderData() {
 				await sheets.spreadsheets.values.clear({
 					auth: jwtClient,
 					spreadsheetId,
-					range: `database!A${index + 2}:G${index + 2}`
+					range: `database!A${index + 2}:H${index + 2}`
 				})
 				// .then(() => console.log('Removed duplicate row from Google Sheets'))
 				.catch((err) =>
@@ -168,4 +172,27 @@ async function reorderData() {
 	}
 }
 
-module.exports = { readData, writeData, reorderData }
+async function getAvatar(ensName) {
+	if (ensName == null || ensName === '') throw err
+
+	const nameBeforeDot = ensName.split('.eth')[0]
+	const url = `https://metadata.ens.domains/mainnet/avatar/${ensName}`
+
+	try {
+		await axios.get(url, { timeout: 2000 })
+		// Save image at {url} to /public/avatars/{ensName}
+		const image = await axios.get(url, { responseType: 'arraybuffer' })
+		const imageBuffer = Buffer.from(image.data, 'binary')
+		
+		// Resize image
+		const imageResized = await sharp(imageBuffer)
+			.resize(128, 128)
+			.toBuffer()
+		fs.writeFileSync(path.join(__dirname, `/public/avatars/${nameBeforeDot}.png`), imageResized)
+		return `/avatars/${nameBeforeDot}.png`
+	} catch (err) {
+		return '/avatars/default.png'
+	}
+}
+
+module.exports = { readData, writeData, reorderData, getAvatar }

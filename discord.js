@@ -31,6 +31,8 @@ function startDiscordBot() {
 		} else if (msg.channel.id === leaderboardChannel || msg.channel.id === testChannel) {
 			const handle = message.split('https://twitter.com/')[1].split(/[?\/ ]/)[0]
 			const profile = await twitter.getTwitterProfile(handle)
+			const ens = profile.name.toLowerCase().match(/[\w]*[.]eth/)[0]
+
 			await db.writeData([
 				[
 					profile.id_str,
@@ -40,6 +42,7 @@ function startDiscordBot() {
 					profile.created_at,
 					profile.verified,
 					profile.profile_image_url_https,
+					await db.getAvatar(ens),
 				]
 			])
 			

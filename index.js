@@ -59,7 +59,6 @@ app.get('/', async function (req, res) {
 const db = require('./database')
 const twitter = require('./twitter')
 
-db.readData()
 twitter.updateAllProfiles()
 setInterval(twitter.updateTwitterLocation, 2 * 60 * 1000)
 setInterval(repeatingTasks, 30 * 60 * 1000)
@@ -72,7 +71,7 @@ function repeatingTasks() {
 	setTimeout(async () => {
 		clearInterval(timer)
 		cycle2()
-	}, 25 * 60 * 1000)
+	}, 20 * 60 * 1000)
 
 	function cycle1() {
 		twitter.searchTwitterUsers(1)
