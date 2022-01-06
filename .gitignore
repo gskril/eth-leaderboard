@@ -4,3 +4,4 @@ node_modules
 
 /public/avatars/*
 !public/avatars/default.png
+/public/eth-profiles.json
