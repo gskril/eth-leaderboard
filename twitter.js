@@ -2,6 +2,7 @@ const axios = require('axios')
 const Twit = require('twit')
 const fs = require('fs')
 const db = require('./database')
+const utils = require('./utils')
 const sleep = (ms) => { return new Promise(resolve => setTimeout(resolve, ms)) }
 
 const T = new Twit({
@@ -53,7 +54,7 @@ async function searchTwitterUsers(page) {
 					let profile = ethProfiles[i]
 					// Rate limit is 60 requests per minute
 					await sleep(1050)
-					const ens = profile.name.toLowerCase().match(/[\w]*[.]eth/)[0]
+					const ens = utils.extractEns(profile.name.toLowerCase())
 				
 					await db.writeData([
 						[
@@ -177,7 +178,7 @@ async function updateAllProfiles() {
 		await sleep(500)
 		try {
 			const profile = await getTwitterProfile(handle)
-			const ens = profile.name.toLowerCase().match(/[\w]*[.]eth/)[0]
+			const ens = utils.extractEns(profile.name.toLowerCase())
 	
 			await db.writeData([
 				[
