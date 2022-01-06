@@ -23,7 +23,7 @@ async function searchTwitterUsers(page) {
 	})
 		.then(async(res) => {
 			const data = res.data
-			if (data.length >= 1 && page < 20) {
+			if (data.length >= 1 && page < 40) {
 				data.forEach((profile) => {
 					if (profile.name.includes('.eth')) {
 						ethProfiles.push({
@@ -41,9 +41,9 @@ async function searchTwitterUsers(page) {
 				page = page + 1
 				searchTwitterUsers(page)
 			} else {
-				// Sort list from greatest to least followers and limit to 200 profiles
+				// Sort list from greatest to least followers and limit to 300 profiles
 				ethProfiles.sort((a, b) => (a.followers > b.followers ? -1 : 1))
-				ethProfiles.splice(200)
+				ethProfiles.splice(300)
 
 				previous100 = await db.readData()
 				previous100.splice(0, 100)
@@ -108,23 +108,6 @@ function findNewUsers(previous100, top100) {
 	if (newUsers.length > 0) {
 		console.log(`New users found at ${time}`)
 		console.table(newUsers)
-
-		newUsers.forEach((user) => {
-			// Compose tweet about the new profile
-			const tweet = `${user.name} just entered the top 100 most followed Twitter accounts with a @ensdomains name! \n\nWelcome @${user.handle} 🎉`
-			console.log(tweet)
-			/* T.post('statuses/update', { status: tweet })
-				.then((res) => {
-					const tweetLink = `https://twitter.com/${res.data.user.screen_name}/status/${res.data.id_str}`
-					console.log('Posted tweet:', tweetLink)
-				})
-				.catch((err) =>
-					console.log(
-						'Error posting tweet.',
-						err.allErrors[0].message
-					)
-				) */
-		})
 	} else {
 		console.log(`No updates found at ${time}`)
 	}

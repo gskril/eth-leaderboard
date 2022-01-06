@@ -252,7 +252,7 @@ th {
 
 .pfp {
 	border-radius: 50%;
-	width: 1.875rem;
+	width: 2.125rem;
 	margin-right: 0.3125rem;
 	vertical-align: middle;
 }
@@ -265,7 +265,7 @@ td svg {
 .profiles th,
 .profiles td {
 	text-align: left;
-	padding: 0.875rem 0.5rem;
+	padding: 0.725rem 0.5rem;
 	border-bottom: 0.0625rem solid var(--color-outline);
 }
 
@@ -295,6 +295,9 @@ td svg {
 	.profiles tr > *:last-child {
 		padding-left: 1rem;
 		padding-right: 1.5rem;
+	}
+	td svg {
+		display: none;
 	}
 }
 

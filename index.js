@@ -45,13 +45,13 @@ app.get('/', async function (req, res) {
 
 		const floor10 = followers[9]
 		const floor100 = followers[99]
-		const floor200 = followers[199]
+		const floor300 = followers[299]
 
 		res.render('pages/index', {
 			profiles: profiles,
 			floor10: floor10,
 			floor100: floor100,
-			floor200: floor200,
+			floor300: floor300,
 		})
 	})
 })
