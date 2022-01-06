@@ -2,7 +2,6 @@ const { Client, MessageEmbed } = require("discord.js")
 require('discord-reply')
 const discord = new Client({ fetchAllMembers: true })
 
-const { gmpoliceTweet, startTwitterMonitor } = require('./gmpolice')
 const db = require('./database')
 const twitter = require('./twitter')
 
@@ -11,13 +10,11 @@ function startDiscordBot() {
 		.login(process.env.DISCORD_CLIENT_TOKEN)
 		.catch((err) => console.log('Invalid client token', err))
 	
-	const gmpoliceChannel = '921149237796929566'
 	const leaderboardChannel = '921149271972118548'
 	const testChannel = '922312173655572550'
 	
 	discord.on('ready', () => {
 		console.log('Discord bot is online')
-		startTwitterMonitor(discord, gmpoliceChannel, leaderboardChannel)
 	})
 	
 	discord.on('message', async(msg) => {
@@ -25,10 +22,7 @@ function startDiscordBot() {
 		if (msg.author.bot || msg.channel.type === 'dm') return
 		if (!message.startsWith('https://twitter.com/')) return
 	
-		if (msg.channel.id === gmpoliceChannel) {
-			const link = message.split(' ')[0]
-			gmpoliceTweet(msg, link)
-		} else if (msg.channel.id === leaderboardChannel || msg.channel.id === testChannel) {
+		if (msg.channel.id === leaderboardChannel || msg.channel.id === testChannel) {
 			const handle = message.split('https://twitter.com/')[1].split(/[?\/ ]/)[0]
 			const profile = await twitter.getTwitterProfile(handle)
 			const ens = profile.name.toLowerCase().match(/[\w]*[.]eth/)[0]
@@ -80,7 +74,7 @@ function startDiscordBot() {
 	})
 	
 	discord.on('messageReactionAdd', (reaction, user) => {
-		// Send tweet from gmpolice based on reaction emoji
+		// Send tweet based on Discord reaction emoji
 		if (
 			user.bot ||
 			!reaction.message.author.bot ||
@@ -88,10 +82,7 @@ function startDiscordBot() {
 		) 
 			return
 
-		if (reaction.message.channel.id === gmpoliceChannel) {
-			// Get the url from the embedded message
-			gmpoliceTweet(reaction.message, reaction.message.embeds[0].url)
-		} else if (reaction.message.channel.id === leaderboardChannel) {
+		if (reaction.message.channel.id === leaderboardChannel) {
 			// Tweet the profile to ethleaderboard
 			const name = reaction.message.embeds[0].fields[0].value
 			const handle = reaction.message.embeds[0].fields[1].value
