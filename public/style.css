@@ -253,6 +253,7 @@ a:hover {
 	text-align: center;
 	padding-left: 1.5rem;
 	padding-right: 2.5rem;
+	width: 5.125rem;
 }
 
 .profiles tr > td:first-child {
@@ -261,10 +262,12 @@ a:hover {
 
 .profiles tr > *:nth-child(2) {
 	min-width: 6.25rem;
+	width: 38rem;
 }
 
 .profiles tr > *:nth-child(3) {
 	min-width: 14rem;
+	width: 22rem;
 }
 
 .profiles tr > *:last-child {
