@@ -155,19 +155,30 @@ a:hover {
 	color: #0F0F0F;
 }
 
-.search {
+.filters {
+	display: flex;
+	gap: 2rem;
+	max-width: 38rem;
+	width: 100%;
+	margin-top: 2rem;
+}
+
+.filters__search {
 	border: none;
 	background-color: #EAEAEA;
 	padding: .5rem 1.5rem;
 	border-radius: 2.5rem;
 	font-weight: 500;
-	margin-top: 2rem;
 	width: 100%;
-	max-width: 25rem;
+	height: max-content;
 }
 
-.search:focus {
+.filters__search:focus {
 	outline-color: #7298F8;
+}
+
+.filters__dropdown {
+	width: 20rem;
 }
 
 @media screen and (min-width: 38.75em) {

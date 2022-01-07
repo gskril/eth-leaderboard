@@ -69,7 +69,23 @@
 						</span>
 					</div>
 				</div>
-				<input type="text" class="search" id="search" placeholder="Seach by ENS or Twitter name...">
+				<div class="filters">
+					<input type="text" class="filters__search" id="search" placeholder="Seach by ENS or Twitter name...">
+					<details class="filters__dropdown">
+						<summary>Verified</summary>
+						<input type="radio" name="verified" id="verified-all" value="all" checked>
+						<label for="verified-all">All</label>
+						<input type="radio" name="verified" id="verified-yes" value="yes">
+						<label for="verified-yes">Yes</label>
+						<input type="radio" name="verified" id="verified-no" value="no">
+						<label for="verified-no">No</label>
+					</details>
+					<details class="filters__dropdown">
+						<summary>ENS Avatar</summary>
+						<input type="checkbox" id="avatar" name="avatar">
+						<label for="avatar">ENS Avatar</label>
+					</details>
+				</div>
 			</div>
 		</div>
 		<div class="table-wrapper">
@@ -92,9 +108,10 @@
 						let pfp = profile.twitter_pfp
 						let ens = name.toLowerCase().match(/[\w]*[.]eth/)[0]
 						let ens_pfp = profile.ens_pfp
+						let verified = profile.verified
 						let followers = new Intl.NumberFormat().format(profile.followers)
 					%>
-						<tr>
+						<tr data-verified="<%= verified %>" data-avatar="<% if (ens_pfp.includes('default')) { %>FALSE<% } else { %>TRUE<% } %>">
 							<td><%= number %></td>
 							<td>
 								<% if (ens == '.eth') { %>

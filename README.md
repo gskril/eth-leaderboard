@@ -8,5 +8,5 @@ Build with Express.js and EJS. Deployed on [Railway](https://railway.app/).
 - [x] Search bar
 - [ ] Improved Twitter monitor
 - [ ] Better way to deal with ENS avatars
-- [ ] Filtering (ENS avatar, Twitter verified)
+- [x] Filtering (ENS avatar, Twitter verified)
 - [ ] Daily/weekly snapshots of the leaderboard
