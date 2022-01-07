@@ -72,6 +72,12 @@ a {
 	color: #7298F8;
 }
 
+label {
+	display: block;
+	opacity: 0.8;
+	margin-bottom: 0.25rem;
+}
+
 a:hover {
 	color: #5d80d6;
 }
@@ -156,11 +162,10 @@ a:hover {
 }
 
 .filters {
-	display: flex;
-	gap: 2rem;
-	max-width: 38rem;
+	display: block;
+	max-width: 28rem;
 	width: 100%;
-	margin-top: 2rem;
+	margin-top: 2.5rem;
 }
 
 .filters__search {
@@ -171,14 +176,62 @@ a:hover {
 	font-weight: 500;
 	width: 100%;
 	height: max-content;
+	margin-bottom: 1rem;
 }
 
 .filters__search:focus {
 	outline-color: #7298F8;
 }
 
-.filters__dropdown {
-	width: 20rem;
+.filters__col {
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 2rem;
+}
+
+.filters__options {
+	display: flex;
+	justify-content: space-between;
+}
+
+.filters__option {
+	width: 100%;
+	position: relative;
+	overflow: hidden;
+}
+
+.filters__option:first-child {
+	border-radius: .25rem 0 0 .25rem;
+}
+
+.filters__option:last-child {
+	border-radius: 0 .25rem .25rem 0;
+}
+
+.filters__option input {
+	visibility: hidden;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.filters__option label {
+	width: 100%;
+	margin: 0;
+	text-align: center;
+	background-color: #EAEAEA;
+	padding: .125rem;
+}
+
+.filters__option > label:hover,
+.filters__option > label:focus-visible {
+	cursor: pointer;
+	background-color: #e4e4e4;
+}
+
+.filters__option > input[type="radio"]:checked ~ label {
+	background-color: #d8d8d8;
 }
 
 @media screen and (min-width: 38.75em) {
@@ -272,7 +325,7 @@ a:hover {
 }
 
 .profiles tr > *:nth-child(2) {
-	min-width: 6.25rem;
+	min-width: 15rem;
 	width: 38rem;
 }
 

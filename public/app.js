@@ -11,13 +11,17 @@ search.addEventListener('keyup', () => {
 		}
 	})
 
-	// check if there are any profiles left
+	// Show message if there are no results
 	const visibleProfiles = document.querySelectorAll('.profiles tbody > tr:not(.hide)')
 	if (visibleProfiles.length === 0) {
 		document.querySelector('.no-results').style.display = 'block'
 	} else {
 		document.querySelector('.no-results').style.display = 'none'
 	}
+
+	// Set other filters back to default
+	verifiedFilter[0].checked = true
+	avatarFilter[0].checked = true
 })
 
 // Filter list based on Twitter verification status
@@ -45,25 +49,39 @@ verifiedFilter.forEach(verifiedOption => {
 			}
 		})
 
-		// Reset ENS avatar filter to unchecked (need to improve this to allow both at the same time)
-		avatarFilter.checked = false
+		// Reset search and other filter (need to improve this to allow multiple filters at the same time)
+		avatarFilter[0].checked = true
+		search.value = ''
 	})
 })
 
 // Filter list based on ENS avatar
-const avatarFilter = document.querySelector('input[name="avatar"]')
-avatarFilter.addEventListener('change', () => {
-	profiles.forEach(profile => {
-		if (avatarFilter.checked) {
-			// If the filter is checked, hide profiles that do not have an ENS avatar
-			if (profile.getAttribute('data-avatar') === 'FALSE') {
-				profile.classList.add('hide')
+const avatarFilter = document.querySelectorAll('input[name="avatar"]')
+avatarFilter.forEach(avatarOption => {
+	avatarOption.addEventListener('change', () => {
+		profiles.forEach(profile => {
+			if (avatarOption.value === 'yes') {
+				// If the selected filter is 'yes', hide profiles that are not verified
+				if (profile.getAttribute('data-avatar') === 'FALSE') {
+					profile.classList.add('hide')
+				} else {
+					profile.classList.remove('hide')
+				}
+			} else if (avatarOption.value === 'no') {
+				// If the selected filter is 'no', hide profiles that are verified
+				if (profile.getAttribute('data-avatar') === 'TRUE') {
+					profile.classList.add('hide')
+				} else {
+					profile.classList.remove('hide')
+				}
+			} else {
+				// Show all profiles
+				profile.classList.remove('hide')
 			}
-		} else {
-			profile.classList.remove('hide')
-		}
-	})
+		})
 
-	// Reset verified filter back to 'all' (need to improve this to allow both at the same time)
-	verifiedFilter[0].checked = true
+		// Reset search and other filter (need to improve this to allow multiple filters at the same time)
+		verifiedFilter[0].checked = true
+		search.value = ''
+	})
 })

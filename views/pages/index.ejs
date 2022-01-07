@@ -70,21 +70,43 @@
 					</div>
 				</div>
 				<div class="filters">
-					<input type="text" class="filters__search" id="search" placeholder="Seach by ENS or Twitter name...">
-					<details class="filters__dropdown">
-						<summary>Verified</summary>
-						<input type="radio" name="verified" id="verified-all" value="all" checked>
-						<label for="verified-all">All</label>
-						<input type="radio" name="verified" id="verified-yes" value="yes">
-						<label for="verified-yes">Yes</label>
-						<input type="radio" name="verified" id="verified-no" value="no">
-						<label for="verified-no">No</label>
-					</details>
-					<details class="filters__dropdown">
-						<summary>ENS Avatar</summary>
-						<input type="checkbox" id="avatar" name="avatar">
-						<label for="avatar">ENS Avatar</label>
-					</details>
+					<input type="text" class="filters__search" id="search" placeholder="Seach by ENS or Twitter name..." autocomplete="off">
+					<div class="filters__col">
+						<div class="filters__filter">
+							<label>Verified on Twitter</label>
+							<div class="filters__options">
+								<div class="filters__option">
+									<input type="radio" name="verified" id="verified-all" value="all" checked>
+									<label for="verified-all">All</label>
+								</div>
+								<div class="filters__option">
+									<input type="radio" name="verified" id="verified-yes" value="yes">
+									<label for="verified-yes">Yes</label>
+								</div>
+								<div class="filters__option">
+									<input type="radio" name="verified" id="verified-no" value="no">
+									<label for="verified-no">No</label>
+								</div>
+							</div>
+						</div>
+						<div class="filters__filter">
+							<label>ENS Avatar</label>
+							<div class="filters__options">
+								<div class="filters__option">
+									<input type="radio" name="avatar" id="avatar-all" value="all" checked>
+									<label for="avatar-all">All</label>
+								</div>
+								<div class="filters__option">
+									<input type="radio" name="avatar" id="avatar-yes" value="yes">
+									<label for="avatar-yes">Yes</label>
+								</div>
+								<div class="filters__option">
+									<input type="radio" name="avatar" id="avatar-no" value="no">
+									<label for="avatar-no">No</label>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
