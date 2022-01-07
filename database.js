@@ -53,7 +53,7 @@ async function readData() {
 			})
 		}
 
-		data.splice(300)
+		data.splice(500)
 
 		// Save data to public/eth-profiles.json
 		fs.writeFile('./public/eth-profiles.json', JSON.stringify(data), (err) => {

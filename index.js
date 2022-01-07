@@ -39,19 +39,29 @@ app.get('/', async function (req, res) {
 				return profile.followers.toString().slice(0, -3) + 'k'
 			} else if (profile.followers.toString().length === 5) {
 				return profile.followers.toString().slice(0, -3) + 'k'
+			} else if (profile.followers.toString().length === 4) {
+				const firstDigit = profile.followers.toString()[0]
+				const secondDigit = profile.followers.toString()[1]
+
+				if (secondDigit === '0') {
+					return firstDigit + 'k'
+				} else {
+					return firstDigit + '.' + secondDigit + 'k'
+				}
+			} else {
+				return profile.followers
 			}
-			return profile.followers
 		})
 
 		const floor10 = followers[9]
 		const floor100 = followers[99]
-		const floor300 = followers[299]
+		const floor500 = followers[499]
 
 		res.render('pages/index', {
 			profiles: profiles,
 			floor10: floor10,
 			floor100: floor100,
-			floor300: floor300,
+			floor500: floor500,
 		})
 	})
 })
