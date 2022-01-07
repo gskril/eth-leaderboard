@@ -12,108 +12,6 @@ const T = new Twit({
 	access_token_secret: process.env.access_token_secret,
 })
 
-let ethProfiles = []
-async function searchTwitterUsers(page) {
-	// Twitter API: "Only the first 1,000 matching results are available."
-	// Similar to results on this search page: https://twitter.com/search?q=.eth&f=user
-	T.get('users/search', {
-		q: '.eth',
-		count: 20,
-		include_entities: false,
-		page: page,
-	})
-		.then(async(res) => {
-			const data = res.data
-			if (data.length >= 1 && page < 40) {
-				data.forEach((profile) => {
-					if (profile.name.includes('.eth')) {
-						ethProfiles.push({
-							id: profile.id_str,
-							name: profile.name,
-							handle: profile.screen_name,
-							followers: profile.followers_count,
-							created: profile.created_at,
-							verified: profile.verified,
-							pfp: profile.profile_image_url_https,
-						})
-					}
-				})
-
-				page = page + 1
-				searchTwitterUsers(page)
-			} else {
-				// Sort list from greatest to least followers and limit to 300 profiles
-				ethProfiles.sort((a, b) => (a.followers > b.followers ? -1 : 1))
-				ethProfiles.splice(300)
-
-				previous100 = await db.readData()
-				previous100.splice(0, 100)
-
-				// Update data in Google Sheet
-				for (let i = 0; i < ethProfiles.length; i++) {
-					let profile = ethProfiles[i]
-					// Rate limit is 60 requests per minute
-					await sleep(1050)
-					const ens = utils.extractEns(profile.name.toLowerCase())
-				
-					await db.writeData([
-						[
-							profile.id,
-							profile.name,
-							profile.handle,
-							profile.followers,
-							profile.created,
-							profile.verified,
-							profile.pfp,
-							await db.getAvatar(ens),
-						]
-					])
-					.catch((err) => {
-						console.log('Error updating data in Google Sheets.', err.response.statusText)
-					})
-				}
-
-				// Order database by follower count
-				await db.reorderData()
-
-				if (previous100.length === 0) {
-					console.log('No previous list found')
-				} else {
-					// Only check for new users if there is a previous list
-					const top100 = await db.readData()
-					top100.splice(0, 100)
-					findNewUsers(previous100, top100)
-				}
-
-				ethProfiles = []
-			}
-		})
-		.catch((err) => {
-			console.log('Error fetching data from Twitter API.', err.response.statusText)
-		})
-}
-
-function findNewUsers(previous100, top100) {
-	const newUsers = []
-
-	top100.forEach((profile) => {
-		if (!previous100.find((p) => p.handle === profile.handle)) {
-			newUsers.push(profile)
-		}
-	})
-
-	const time = new Date().toLocaleString('en-US', {
-		timeZone: 'America/New_York',
-	})
-
-	if (newUsers.length > 0) {
-		console.log(`New users found at ${time}`)
-		console.table(newUsers)
-	} else {
-		console.log(`No updates found at ${time}`)
-	}
-}
-
 async function updateTwitterLocation() {
 	// Get number of registered ENS names from OpenSea
 	const ensNames = () => {
@@ -196,4 +94,4 @@ async function updateAllProfiles() {
 	}
 }
 
-module.exports = { searchTwitterUsers, updateTwitterLocation, getTwitterProfile, tweetNewProfile, updateAllProfiles }
+module.exports = { updateTwitterLocation, getTwitterProfile, tweetNewProfile, updateAllProfiles }
