@@ -39,19 +39,29 @@ app.get('/', async function (req, res) {
 				return profile.followers.toString().slice(0, -3) + 'k'
 			} else if (profile.followers.toString().length === 5) {
 				return profile.followers.toString().slice(0, -3) + 'k'
+			} else if (profile.followers.toString().length === 4) {
+				const firstDigit = profile.followers.toString()[0]
+				const secondDigit = profile.followers.toString()[1]
+
+				if (secondDigit === '0') {
+					return firstDigit + 'k'
+				} else {
+					return firstDigit + '.' + secondDigit + 'k'
+				}
+			} else {
+				return profile.followers
 			}
-			return profile.followers
 		})
 
 		const floor10 = followers[9]
 		const floor100 = followers[99]
-		const floor200 = followers[199]
+		const floor500 = followers[499]
 
 		res.render('pages/index', {
 			profiles: profiles,
 			floor10: floor10,
 			floor100: floor100,
-			floor200: floor200,
+			floor500: floor500,
 		})
 	})
 })
@@ -59,11 +69,6 @@ app.get('/', async function (req, res) {
 const db = require('./database')
 const twitter = require('./twitter')
 
-setInterval(() => {
-	twitter.searchTwitterUsers(1)
-	twitter.updateTwitterLocation()
-	db.readData()
-}, 5 * 60 * 1000)
-
-db.readData()
-twitter.searchTwitterUsers(1)
+twitter.updateAllProfiles()
+setInterval(twitter.updateTwitterLocation, 2 * 60 * 1000)
+setInterval(twitter.updateAllProfiles, 30 * 60 * 1000)
