@@ -48,7 +48,7 @@
 						</svg>
 					</a>
 				</div>
-				<span class="hero__subtitle">The most followed accounts with <strong>.eth</strong> names on Twitter</span>
+				<span class="hero__subtitle">The most followed Twitter profiles with <strong>.eth</strong> names</span>
 				<div class="floor">
 					<div class="floor__section">
 						<span class="floor__number">> <%= floor10 %></span>
@@ -69,57 +69,63 @@
 						</span>
 					</div>
 				</div>
+				<input type="text" class="search" id="search" placeholder="Seach by ENS or Twitter name...">
 			</div>
 		</div>
 		<div class="table-wrapper">
 			<table class="profiles">
-				<tr>
-					<th>Rank</th>
-					<th>Name</th>
-					<th>Twitter</th>
-					<th>Followers</th>
-				</tr>
-				<% for(let i = 0; i < profiles.length; i++) {
-					const profile = profiles[i]
-
-					let number = i + 1
-					let handle = profile.handle
-					let name = profile.name
-					let pfp = profile.twitter_pfp
-					let ens = name.toLowerCase().match(/[\w]*[.]eth/)[0]
-					let ens_pfp = profile.ens_pfp
-					let followers = new Intl.NumberFormat().format(profile.followers)
-				%>
+				<thead>
 					<tr>
-						<td><%= number %></td>
-						<td>
-							<% if (ens == '.eth') { %>
-								<%= name %>
-							<% } else { %>
-								<a href="https://<%= ens %>.xyz" target="_blank">
-									<% if (ens_pfp) { %>
-										<img class="pfp" src="<%= ens_pfp %>" alt="" loading="lazy">
-									<% } %>
-									<%= name %>
-									<svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-										<path opacity="0.3" d="M7.95739 14.7955L15.1165 7.63636L7.95739 0.477273L6.30966 2.1179L10.6349 6.43608H0.5V8.83665H10.6349L6.30966 13.1619L7.95739 14.7955Z" fill="black"/>
-									</svg>										
-								</a>
-							<% } %>
-						</td>
-						<td><a href="https://twitter.com/<%= handle %>" target="_blank">
-							<% if (pfp) { %>
-								<img class="pfp" src="<%= pfp %>" alt="" loading="lazy">
-							<% }%>
-							@<%= handle %>
-							<svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<path opacity="0.3" d="M7.95739 14.7955L15.1165 7.63636L7.95739 0.477273L6.30966 2.1179L10.6349 6.43608H0.5V8.83665H10.6349L6.30966 13.1619L7.95739 14.7955Z" fill="black"/>
-							</svg>
-						</a></td>
-						<td><%= followers.toLocaleString() %></td>
+						<th>Rank</th>
+						<th>Name</th>
+						<th>Twitter</th>
+						<th>Followers</th>
 					</tr>
-				<% } %>
+				</thead>
+				<tbody>
+					<% for(let i = 0; i < profiles.length; i++) {
+						const profile = profiles[i]
+	
+						let number = i + 1
+						let handle = profile.handle
+						let name = profile.name
+						let pfp = profile.twitter_pfp
+						let ens = name.toLowerCase().match(/[\w]*[.]eth/)[0]
+						let ens_pfp = profile.ens_pfp
+						let followers = new Intl.NumberFormat().format(profile.followers)
+					%>
+						<tr>
+							<td><%= number %></td>
+							<td>
+								<% if (ens == '.eth') { %>
+									<%= name %>
+								<% } else { %>
+									<a href="https://<%= ens %>.xyz" target="_blank">
+										<% if (ens_pfp) { %>
+											<img class="pfp" src="<%= ens_pfp %>" alt="" loading="lazy">
+										<% } %>
+										<%= name %>
+										<svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path opacity="0.3" d="M7.95739 14.7955L15.1165 7.63636L7.95739 0.477273L6.30966 2.1179L10.6349 6.43608H0.5V8.83665H10.6349L6.30966 13.1619L7.95739 14.7955Z" fill="black"/>
+										</svg>										
+									</a>
+								<% } %>
+							</td>
+							<td><a href="https://twitter.com/<%= handle %>" target="_blank">
+								<% if (pfp) { %>
+									<img class="pfp" src="<%= pfp %>" alt="" loading="lazy">
+								<% }%>
+								@<%= handle %>
+								<svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path opacity="0.3" d="M7.95739 14.7955L15.1165 7.63636L7.95739 0.477273L6.30966 2.1179L10.6349 6.43608H0.5V8.83665H10.6349L6.30966 13.1619L7.95739 14.7955Z" fill="black"/>
+								</svg>
+							</a></td>
+							<td><%= followers.toLocaleString() %></td>
+						</tr>
+					<% } %>
+				</tbody>
 			</table>
+			<span class="no-results">No matches found.</span>
 		</div>
 
 	</main>
