@@ -1,6 +1,5 @@
 const axios = require('axios')
 const Twit = require('twit')
-const fs = require('fs')
 const db = require('./database')
 const utils = require('./utils')
 const sleep = (ms) => { return new Promise(resolve => setTimeout(resolve, ms)) }

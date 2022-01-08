@@ -5,7 +5,7 @@ const app = express()
 const path = require('path')
 
 app.use(express.json())
-app.use(express.static(path.resolve(__dirname, '/public')))
+app.use(express.static(path.join(__dirname, '/public')))
 app.use(express.urlencoded({ extended: true }))
 app.set('view engine', 'ejs')
 app.set('views', './views')
@@ -67,7 +67,6 @@ app.get('/', async function (req, res) {
     })
 })
 
-const db = require('./database')
 const twitter = require('./twitter')
 
 twitter.startTwitterMonitor()

@@ -24,12 +24,14 @@ function startDiscordBot () {
         // Ignore messages from bots, dms, and messages that don't start with a twitter url
         if (
             msg.author.bot ||
-		msg.channel.type === 'dm' ||
-		!message.startsWith('https://twitter.com/')
-        ) { return }
+            msg.channel.type === 'dm' ||
+            !message.startsWith('https://twitter.com/')
+        ) {
+            return
+        }
 
         if (msg.channel.id === leaderboardChannel || msg.channel.id === testChannel) {
-            const handle = message.split('https://twitter.com/')[1].split(/[?\/ ]/)[0]
+            const handle = message.split('https://twitter.com/')[1].split(/[?/ ]/)[0]
             const profile = await twitter.getTwitterProfile(handle)
 
             try {
@@ -87,11 +89,11 @@ function startDiscordBot () {
     })
 
     discord.on('messageReactionAdd', (reaction, user) => {
-    // Ignore reactions from bots, and emojis other than the green checkmark
+        // Ignore reactions from bots, and emojis other than the green checkmark
         if (
             user.bot ||
-			!reaction.message.author.bot ||
-			reaction.emoji.name !== '✅'
+            !reaction.message.author.bot ||
+            reaction.emoji.name !== '✅'
         ) { return }
 
         if (reaction.message.channel.id === leaderboardChannel) {

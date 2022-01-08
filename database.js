@@ -79,7 +79,7 @@ async function writeData (values) {
     const row = response.data.values.findIndex(row => row[0] === values[0][0])
 
     if (row === -1) {
-    // If the id does not exist in the database, add a new row
+        // If the id does not exist in the database, add a new row
         await sheets.spreadsheets.values.append({
             auth: jwtClient,
             spreadsheetId: spreadsheetId,
@@ -87,10 +87,10 @@ async function writeData (values) {
             resource: sheetResource,
             valueInputOption: 'USER_ENTERED'
         })
-        // .then(() => console.log('Added new row'))
+            // .then(() => console.log('Added new row'))
             .catch(err => console.log('Error adding row in Google Sheets.', err.errors[0].message))
     } else {
-    // If the id does exist in the database, update the row
+        // If the id does exist in the database, update the row
         await sheets.spreadsheets.values.update({
             auth: jwtClient,
             spreadsheetId,
@@ -98,7 +98,7 @@ async function writeData (values) {
             valueInputOption: 'USER_ENTERED',
             resource: sheetResource
         })
-        // .then(() => console.log('Updated row in Google Sheets'))
+            // .then(() => console.log('Updated row in Google Sheets'))
             .catch(err => console.log('Error updating data in Google Sheets.', err.response.statusText))
     }
 }
@@ -128,7 +128,7 @@ async function reorderData () {
                 ]
             }
         })
-    // .then(() => console.log('Reordered data in Google Sheets'))
+        // .then(() => console.log('Reordered data in Google Sheets'))
         .catch((err) =>
             console.log(
                 'Error reordering data in Google Sheets.',
@@ -159,7 +159,7 @@ async function reorderData () {
                     spreadsheetId,
                     range: `database!A${index + 2}:H${index + 2}`
                 })
-                // .then(() => console.log('Removed duplicate row from Google Sheets'))
+                    // .then(() => console.log('Removed duplicate row from Google Sheets'))
                     .catch((err) =>
                         console.log(
                             'Error removing duplicate row from Google Sheets.',
