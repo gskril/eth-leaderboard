@@ -1,7 +1,7 @@
 const axios = require('axios')
 const Twit = require('twit')
 const db = require('./database')
-const utils = require('./utils')
+const utils = require('./utils/helpers.js')
 
 const T = new Twit({
     consumer_key: process.env.consumer_key,

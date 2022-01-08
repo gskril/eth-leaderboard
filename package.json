@@ -4,7 +4,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node index",
-    "create-db": "node create-postgresql"
+    "create-db": "node utils/create-postgresql",
+    "populate-db": "node utils/sheets-to-postgresql"
   },
   "author": "Greg Skriloff",
   "license": "ISC",

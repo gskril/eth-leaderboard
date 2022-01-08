@@ -4,7 +4,7 @@ const discord = new Client({ fetchAllMembers: true })
 
 const db = require('./database')
 const twitter = require('./twitter')
-const utils = require('./utils')
+const utils = require('./utils/helpers.js')
 
 function startDiscordBot () {
     discord

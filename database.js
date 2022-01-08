@@ -8,13 +8,15 @@ client.connect()
 
 // Read data from PostgreSQL
 async function readData (numberOfProfiles) {
+    // If no number is specific, return 500 profiles
     if (numberOfProfiles == null) {
         numberOfProfiles = 500
     }
 
     try {
         return await client
-            .query(`SELECT * FROM frens ORDER BY followers DESC LIMIT ${numberOfProfiles}`)
+            // sql query select * from frens where the name contains '.eth'
+            .query(`SELECT * FROM frens WHERE name like '%.eth' ORDER BY followers DESC LIMIT ${numberOfProfiles}`)
             .then(res => {
                 // Save data to public/eth-profiles.json
                 fs.writeFile('./public/eth-profiles.json', JSON.stringify(res.rows), (err) => {

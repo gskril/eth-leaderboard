@@ -10,8 +10,8 @@ Built with Express.js and EJS. Deployed on [Railway](https://railway.app/).
 	- [Twitter API](https://developer.twitter.com/) credentials
 	- [Discord bot](https://discord.com/developers/applications) client token
 - Run `npm run create-db`
+- Run `npm run populate-db` to get 100 test profiles in your new database
 - Run `npm start`
-
 
 ## Todo
 - [x] Search bar
