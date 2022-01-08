@@ -69,6 +69,7 @@ app.get('/', async function (req, res) {
 const db = require('./database')
 const twitter = require('./twitter')
 
+twitter.startTwitterMonitor()
 twitter.updateAllProfiles()
 setInterval(twitter.updateTwitterLocation, 2 * 60 * 1000)
 setInterval(twitter.updateAllProfiles, 30 * 60 * 1000)

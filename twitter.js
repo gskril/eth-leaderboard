@@ -12,6 +12,56 @@ const T = new Twit({
 	access_token_secret: process.env.access_token_secret,
 })
 
+async function startTwitterMonitor() {
+	const stream = T.stream('statuses/filter', { track: '@ethleaderboard,ethleaderboard' })
+
+	stream.on('tweet', async function (tweet) {
+		const tweeter = { screen_name: tweet.user.screen_name }
+		const mentionedAccounts = tweet.entities.user_mentions
+		
+		// Add tweeter to array of tagged accounts
+		mentionedAccounts.push(tweeter)
+
+		// Ignore the tweet if doesn't mention anyone
+		if (mentionedAccounts.length === 0) return
+
+		for (let i = 0; i < mentionedAccounts.length; i++) {
+			const account = mentionedAccounts[i]
+
+			// Ignore tags of @ethleaderboard
+			if (account.screen_name === 'ethleaderboard') continue
+
+			// Add each mentioned user to the database
+			const handle = account.screen_name
+			const profile = await getTwitterProfile(handle)
+
+			try {
+				const ens = utils.extractEns(profile.name.toLowerCase())
+	
+				await db.writeData([
+					[
+						profile.id_str,
+						profile.name,
+						profile.screen_name,
+						profile.followers_count,
+						profile.created_at,
+						profile.verified,
+						profile.profile_image_url_https,
+						await db.getAvatar(ens),
+					]
+				])
+					.then(() => console.log(`Added @${handle} to the database.`))
+			} catch (err) {
+				if (profile.name.toLowerCase().includes('.eth')) {
+					console.log(`Error adding @${profile.name} to database from Twitter monitor.`, err)
+				} else {
+					// console.log(`${profile.name} does not have .eth in their display name`)
+				}
+			}
+		}
+	})
+}
+
 async function updateTwitterLocation() {
 	// Get number of registered ENS names from OpenSea
 	const ensNames = () => {
@@ -94,4 +144,4 @@ async function updateAllProfiles() {
 	}
 }
 
-module.exports = { updateTwitterLocation, getTwitterProfile, tweetNewProfile, updateAllProfiles }
+module.exports = { startTwitterMonitor, updateTwitterLocation, getTwitterProfile, tweetNewProfile, updateAllProfiles }
