@@ -28,7 +28,7 @@ async function startTwitterMonitor () {
             const account = mentionedAccounts[i]
 
             // Ignore tags of @ethleaderboard
-            if (account.screen_name === 'ethleaderboard') continue
+            if (account.screen_name === 'ethleaderboard' || account.screen_name === 'gregskril' || account.screen_name === 'BrantlyMillegan') continue
 
             // Add each mentioned user to the database
             const handle = account.screen_name
@@ -51,9 +51,11 @@ async function startTwitterMonitor () {
                 ])
                     .then(() => console.log(`Added @${handle} to the database.`))
             } catch (err) {
-                if (profile.name.toLowerCase().includes('.eth')) {
-                    console.log(`Error adding @${profile.name} to database from Twitter monitor.`, err)
-                } else {
+                try {
+                    if (profile.name.toLowerCase().includes('.eth')) {
+                        console.log(`Error adding @${profile.name} to database from Twitter monitor.`, err.response.statusText)
+                    }
+                } catch (err) {
                     // console.log(`${profile.name} does not have .eth in their display name`)
                 }
             }
