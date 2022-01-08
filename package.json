@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node index"
+    "start": "node index",
+    "create-db": "node create-postgresql"
   },
   "author": "Greg Skriloff",
   "license": "ISC",
