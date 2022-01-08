@@ -38,16 +38,14 @@ function startDiscordBot () {
                 const ens = utils.extractEns(profile.name.toLowerCase())
 
                 await db.writeData([
-                    [
-                        profile.id_str,
-                        profile.name,
-                        profile.screen_name,
-                        profile.followers_count,
-                        profile.created_at,
-                        profile.verified,
-                        profile.profile_image_url_https,
-                        await db.getAvatar(ens)
-                    ]
+                    profile.id_str,
+                    profile.name,
+                    profile.screen_name,
+                    profile.followers_count,
+                    profile.created_at,
+                    profile.verified,
+                    profile.profile_image_url_https,
+                    await db.getAvatar(ens)
                 ])
 
                 await db.readData()

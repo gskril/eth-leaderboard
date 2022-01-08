@@ -2,7 +2,6 @@ const axios = require('axios')
 const Twit = require('twit')
 const db = require('./database')
 const utils = require('./utils')
-const sleep = (ms) => { return new Promise(resolve => setTimeout(resolve, ms)) }
 
 const T = new Twit({
     consumer_key: process.env.consumer_key,
@@ -38,16 +37,14 @@ async function startTwitterMonitor () {
                 const ens = utils.extractEns(profile.name.toLowerCase())
 
                 await db.writeData([
-                    [
-                        profile.id_str,
-                        profile.name,
-                        profile.screen_name,
-                        profile.followers_count,
-                        profile.created_at,
-                        profile.verified,
-                        profile.profile_image_url_https,
-                        await db.getAvatar(ens)
-                    ]
+                    profile.id_str,
+                    profile.name,
+                    profile.screen_name,
+                    profile.followers_count,
+                    profile.created_at,
+                    profile.verified,
+                    profile.profile_image_url_https,
+                    await db.getAvatar(ens)
                 ])
                     .then(() => console.log(`Added @${handle} to the database.`))
             } catch (err) {
@@ -124,22 +121,19 @@ async function updateAllProfiles () {
     for (let i = 0; i < handles.length; i++) {
         const handle = handles[i]
 
-        await sleep(500)
         try {
             const profile = await getTwitterProfile(handle)
             const ens = utils.extractEns(profile.name.toLowerCase())
 
             await db.writeData([
-                [
-                    profile.id_str,
-                    profile.name,
-                    profile.screen_name,
-                    profile.followers_count,
-                    profile.created_at,
-                    profile.verified,
-                    profile.profile_image_url_https,
-                    await db.getAvatar(ens)
-                ]
+                profile.id_str,
+                profile.name,
+                profile.screen_name,
+                profile.followers_count,
+                profile.created_at,
+                profile.verified,
+                profile.profile_image_url_https,
+                await db.getAvatar(ens)
             ])
         } catch (err) {}
     }
