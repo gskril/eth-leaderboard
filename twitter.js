@@ -16,7 +16,11 @@ async function startTwitterMonitor() {
 	const stream = T.stream('statuses/filter', { track: '@ethleaderboard,ethleaderboard' })
 
 	stream.on('tweet', async function (tweet) {
+		const tweeter = { screen_name: tweet.user.screen_name }
 		const mentionedAccounts = tweet.entities.user_mentions
+		
+		// Add tweeter to array of tagged accounts
+		mentionedAccounts.push(tweeter)
 
 		// Ignore the tweet if doesn't mention anyone
 		if (mentionedAccounts.length === 0) return
