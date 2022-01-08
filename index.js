@@ -16,55 +16,55 @@ discord.startDiscordBot()
 
 // Use live data from Twitter
 app.get('/', async function (req, res) {
-  fs.readFile('./public/eth-profiles.json', (err, data) => {
-    if (err) {
-      console.log('File read failed:', err)
-      res.send('Error')
-      return
-    }
-
-    const profiles = JSON.parse(data)
-
-    // Handle rounding numbers for floor stats
-    const followers = profiles.map((profile) => {
-      if (profile.followers.toString().length === 7) {
-        const firstDigit = profile.followers.toString()[0]
-        const secondDigit = profile.followers.toString()[1]
-
-        if (secondDigit === '0') {
-          return firstDigit + 'm'
-        } else {
-          return firstDigit + '.' + secondDigit + 'm'
+    fs.readFile('./public/eth-profiles.json', (err, data) => {
+        if (err) {
+            console.log('File read failed:', err)
+            res.send('Error')
+            return
         }
-      } else if (profile.followers.toString().length === 6) {
-        return profile.followers.toString().slice(0, -3) + 'k'
-      } else if (profile.followers.toString().length === 5) {
-        return profile.followers.toString().slice(0, -3) + 'k'
-      } else if (profile.followers.toString().length === 4) {
-        const firstDigit = profile.followers.toString()[0]
-        const secondDigit = profile.followers.toString()[1]
 
-        if (secondDigit === '0') {
-          return firstDigit + 'k'
-        } else {
-          return firstDigit + '.' + secondDigit + 'k'
-        }
-      } else {
-        return profile.followers
-      }
+        const profiles = JSON.parse(data)
+
+        // Handle rounding numbers for floor stats
+        const followers = profiles.map((profile) => {
+            if (profile.followers.toString().length === 7) {
+                const firstDigit = profile.followers.toString()[0]
+                const secondDigit = profile.followers.toString()[1]
+
+                if (secondDigit === '0') {
+                    return firstDigit + 'm'
+                } else {
+                    return firstDigit + '.' + secondDigit + 'm'
+                }
+            } else if (profile.followers.toString().length === 6) {
+                return profile.followers.toString().slice(0, -3) + 'k'
+            } else if (profile.followers.toString().length === 5) {
+                return profile.followers.toString().slice(0, -3) + 'k'
+            } else if (profile.followers.toString().length === 4) {
+                const firstDigit = profile.followers.toString()[0]
+                const secondDigit = profile.followers.toString()[1]
+
+                if (secondDigit === '0') {
+                    return firstDigit + 'k'
+                } else {
+                    return firstDigit + '.' + secondDigit + 'k'
+                }
+            } else {
+                return profile.followers
+            }
+        })
+
+        const floor10 = followers[9]
+        const floor100 = followers[99]
+        const floor500 = followers[499]
+
+        res.render('pages/index', {
+            profiles: profiles,
+            floor10: floor10,
+            floor100: floor100,
+            floor500: floor500
+        })
     })
-
-    const floor10 = followers[9]
-    const floor100 = followers[99]
-    const floor500 = followers[499]
-
-    res.render('pages/index', {
-      profiles: profiles,
-      floor10: floor10,
-      floor100: floor100,
-      floor500: floor500
-    })
-  })
 })
 
 const db = require('./database')
