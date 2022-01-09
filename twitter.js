@@ -39,6 +39,7 @@ async function startTwitterMonitor () {
                 await db.writeData([
                     profile.id_str,
                     profile.name,
+                    ens,
                     profile.screen_name,
                     profile.followers_count,
                     profile.created_at,
@@ -93,7 +94,7 @@ async function getTwitterProfile (handle) {
             return res.data
         })
         .catch((err) => {
-            return console.log(`Error fetching @${handle} from Twitter API.`, err.allErrors[0].message)
+            return console.log(`Error fetching @${handle} from Twitter API.`, err)
         })
 }
 
@@ -128,6 +129,7 @@ async function updateAllProfiles () {
             await db.writeData([
                 profile.id_str,
                 profile.name,
+                ens,
                 profile.screen_name,
                 profile.followers_count,
                 profile.created_at,

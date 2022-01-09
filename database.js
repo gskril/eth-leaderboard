@@ -33,7 +33,7 @@ async function readData (numberOfProfiles) {
 async function writeData (data) {
     return client
         .query({
-            text: 'INSERT INTO frens (id, name, handle, followers, created, verified, twitter_pfp, ens_avatar) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) ON CONFLICT (id) DO UPDATE SET name = $2, handle = $3, followers = $4, created = $5, verified = $6, twitter_pfp = $7, ens_avatar = $8',
+            text: 'INSERT INTO frens (id, name, ens, handle, followers, created, verified, twitter_pfp, ens_avatar) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) ON CONFLICT (id) DO UPDATE SET name = $2, ens = $3, handle = $4, followers = $5, created = $6, verified = $7, twitter_pfp = $8, ens_avatar = $9',
             values: data
         })
         .then(res => {

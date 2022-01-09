@@ -40,6 +40,7 @@ function startDiscordBot () {
                 await db.writeData([
                     profile.id_str,
                     profile.name,
+                    ens,
                     profile.screen_name,
                     profile.followers_count,
                     profile.created_at,

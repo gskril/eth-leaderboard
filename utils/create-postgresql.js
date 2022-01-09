@@ -6,7 +6,7 @@ client.connect()
 ;(async () => {
     try {
         await client.query(`CREATE TABLE IF NOT EXISTS frens (
-            id bigint PRIMARY KEY,
+            id numeric PRIMARY KEY,
             name text NOT NULL,
             ens text,
             handle text NOT NULL,
