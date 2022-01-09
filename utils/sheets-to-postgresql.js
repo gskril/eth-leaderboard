@@ -32,7 +32,7 @@ if (process.env.GOOGLE_SHEET_ID == null) {
                     profile.created,
                     profile.verified,
                     profile.twitter_pfp,
-                    await db.getAvatar(ens)
+                    profile.ens_pfp
                 ])
                     .then(() => console.log(`Wrote ${profile.name} to database`))
             }
