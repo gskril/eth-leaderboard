@@ -16,7 +16,7 @@ async function readData (numberOfProfiles) {
     try {
         return await client
             // sql query select * from frens where the name contains '.eth'
-            .query(`SELECT * FROM frens WHERE name like '%.eth' ORDER BY followers DESC LIMIT ${numberOfProfiles}`)
+            .query(`SELECT * FROM frens WHERE LOWER(name) like '%.eth%' ORDER BY followers DESC LIMIT ${numberOfProfiles}`)
             .then(res => {
                 // Save data to public/eth-profiles.json
                 fs.writeFile('./public/eth-profiles.json', JSON.stringify(res.rows), (err) => {
@@ -43,7 +43,7 @@ async function writeData (data) {
 }
 
 async function getAvatar (ensName) {
-    if (!ensName) throw new Error()
+    if (!ensName) return null
 
     const nameBeforeDot = ensName.split('.eth')[0]
     const url = `https://metadata.ens.domains/mainnet/avatar/${ensName}`
