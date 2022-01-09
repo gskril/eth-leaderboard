@@ -3,6 +3,7 @@ const path = require('path')
 const sharp = require('sharp')
 const axios = require('axios')
 const { Client } = require('pg')
+const decache = require('decache')
 const client = new Client(process.env.DATABASE_URL)
 client.connect()
 
@@ -31,6 +32,7 @@ async function readData (numberOfProfiles) {
 
 // Write data to PostgreSQL
 async function writeData (data) {
+    decache('./public/eth-profiles.json')
     return client
         .query({
             text: 'INSERT INTO frens (id, name, ens, handle, followers, created, verified, twitter_pfp, ens_avatar) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) ON CONFLICT (id) DO UPDATE SET name = $2, ens = $3, handle = $4, followers = $5, created = $6, verified = $7, twitter_pfp = $8, ens_avatar = $9',
