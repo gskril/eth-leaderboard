@@ -133,7 +133,7 @@
 						let verified = profile.verified
 						let followers = new Intl.NumberFormat().format(profile.followers)
 					%>
-						<tr data-verified="<%= verified %>" data-avatar="<% if (ens_avatar.includes('default')) { %>FALSE<% } else { %>TRUE<% } %>">
+						<tr data-verified="<%= verified %>" data-avatar="<% if (ens_avatar.includes('default')) { %>false<% } else { %>true<% } %>">
 							<td><%= number %></td>
 							<td>
 								<% if (ens == '.eth') { %>

@@ -31,14 +31,14 @@ verifiedFilter.forEach(verifiedOption => {
         profiles.forEach(profile => {
             if (verifiedOption.value === 'yes') {
                 // If the selected filter is 'yes', hide profiles that are not verified
-                if (profile.getAttribute('data-verified') === 'FALSE') {
+                if (profile.getAttribute('data-verified') === 'false') {
                     profile.classList.add('hide')
                 } else {
                     profile.classList.remove('hide')
                 }
             } else if (verifiedOption.value === 'no') {
                 // If the selected filter is 'no', hide profiles that are verified
-                if (profile.getAttribute('data-verified') === 'TRUE') {
+                if (profile.getAttribute('data-verified') === 'true') {
                     profile.classList.add('hide')
                 } else {
                     profile.classList.remove('hide')
@@ -62,14 +62,14 @@ avatarFilter.forEach(avatarOption => {
         profiles.forEach(profile => {
             if (avatarOption.value === 'yes') {
                 // If the selected filter is 'yes', hide profiles that are not verified
-                if (profile.getAttribute('data-avatar') === 'FALSE') {
+                if (profile.getAttribute('data-avatar') === 'false') {
                     profile.classList.add('hide')
                 } else {
                     profile.classList.remove('hide')
                 }
             } else if (avatarOption.value === 'no') {
                 // If the selected filter is 'no', hide profiles that are verified
-                if (profile.getAttribute('data-avatar') === 'TRUE') {
+                if (profile.getAttribute('data-avatar') === 'true') {
                     profile.classList.add('hide')
                 } else {
                     profile.classList.remove('hide')
