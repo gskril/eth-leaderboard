@@ -1,0 +1,72 @@
+.filters {
+	display: block;
+	max-width: 28rem;
+	width: 100%;
+	margin-top: 2.5rem;
+}
+
+.filtersSearch {
+	border: none;
+	background-color: #EAEAEA;
+	padding: .5rem 1.5rem;
+	border-radius: 2.5rem;
+	font-weight: 500;
+	width: 100%;
+	height: max-content;
+	margin-bottom: 1rem;
+}
+
+.filtersSearch:focus {
+	outline-color: #7298F8;
+}
+
+.filtersCol {
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 2rem;
+}
+
+.filtersOptions {
+	display: flex;
+	justify-content: space-between;
+}
+
+.filtersOption {
+	width: 100%;
+	position: relative;
+	overflow: hidden;
+}
+
+.filtersOption:first-child {
+	border-radius: .25rem 0 0 .25rem;
+}
+
+.filtersOption:last-child {
+	border-radius: 0 .25rem .25rem 0;
+}
+
+.filtersOption input {
+	visibility: hidden;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.filtersOption label {
+	width: 100%;
+	margin: 0;
+	text-align: center;
+	background-color: #EAEAEA;
+	padding: .125rem;
+}
+
+.filtersOption > label:hover,
+.filtersOption > label:focus-visible {
+	cursor: pointer;
+	background-color: #e4e4e4;
+}
+
+.filtersOption > input[type="radio"]:checked ~ label {
+	background-color: #d8d8d8;
+}

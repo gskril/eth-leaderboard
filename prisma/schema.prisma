@@ -1,0 +1,21 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Fren {
+  id             String   @id @unique
+  name           String
+  ens            String?
+  handle         String
+  followers      Int
+  createdAt      DateTime @default(now()) @map("created")
+  verified       Boolean  @default(false)
+  twitterPicture String?  @map("twitter_pfp")
+  ensAvatar      String?  @map("ens_avatar")
+  tweeted        Boolean?
+}

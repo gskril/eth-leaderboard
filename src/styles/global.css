@@ -1,0 +1,89 @@
+/* ----- CSS Resets ----- */
+body {
+	background: radial-gradient(40.48% 67.6% at 50% 32.4%, #ECF4FF 0%, #F7F7FF 52.77%, #F7F7F7 100%), #FFFFFF;
+	margin: 0;
+	font-size: 100%;
+	font-family: 'Poppins', sans-serif;
+	font-weight: 500;
+	line-height: 1.4;
+	color: #3F3F3F;
+}
+
+*,
+*::after,
+*::before {
+	box-sizing: border-box;
+}
+
+button,
+input,
+select,
+textarea {
+	font-family: inherit;
+	font-size: 100%;
+	margin: 0;
+}
+
+/* ----- Global ----- */
+:root {
+	--radius: 0.75rem;
+	--color-background: #f0f1f5;
+	--color-outline: #e8e9ed;
+	--container-width: 75rem;
+}
+
+h1,
+h2,
+h3,
+h4 {
+	margin: 0 0 1em;
+	line-height: 1.2;
+	font-weight: 600;
+}
+
+h1 {
+	font-size: 2.35rem;
+	margin-bottom: 0.25em;
+}
+
+h2 {
+	font-size: 1.625rem;
+}
+
+h3 {
+	font-size: 1.375rem;
+}
+
+h4 {
+	font-size: 1.25rem;
+}
+
+small {
+	display: block;
+	font-size: 87.5%;
+	margin-bottom: 0.25em;
+}
+
+strong {
+	font-weight: 600;
+}
+
+a {
+	color: #7298F8;
+}
+
+label {
+	display: block;
+	opacity: 0.8;
+	margin-bottom: 0.25rem;
+}
+
+a:hover {
+	color: #5d80d6;
+}
+
+@media screen and (max-width: 45em) {
+	h1 {
+		font-size: 2rem;
+	}
+}
