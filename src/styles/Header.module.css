@@ -60,3 +60,56 @@
 	font-size: 2rem;
 	color: #0F0F0F;
 }
+
+@media screen and (min-width: 38.75em) {
+	.floorSection:nth-child(2) {
+		border-left: 1px solid rgba(0, 0, 0, 0.1);
+		border-right: 1px solid rgba(0, 0, 0, 0.1);
+	}
+}
+
+@media screen and (max-width: 50em) {
+	.floorSection {
+		padding: 1.125rem 1.5rem;
+	}
+}
+
+@media screen and (max-width: 38.75em) {
+	.floorFollowersLabel {
+		display: none;
+	}
+	.hero {
+		align-items: flex-start;
+		margin-bottom: 0.5rem;
+	}
+	.heroHighlight {
+		display: block;
+		font-size: 180%;
+	}
+	.floor {
+		margin-top: 0.5rem;
+		gap: 1rem;
+	}
+	.floorSection {
+		align-content: center;
+		padding: 1rem 0 0;
+	}
+	.floorSectionLabel {
+		font-size: .875rem;
+	}
+	.floorNumber {
+		font-size: 1.5rem;
+	}
+	.heroTitle {
+		align-items: flex-end;
+	}
+	.heroTitle a {
+		transform: translateY(-0.5rem);
+		width: 2.5rem;
+		height: 2.5rem;
+	}
+	.floorNumber {
+		font-size: 1.5rem;
+		margin-bottom: 0.25rem;
+	}
+}

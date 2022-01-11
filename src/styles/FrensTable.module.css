@@ -117,3 +117,17 @@
 .ensName {
 	margin-left: 0.3125rem;
 }
+
+@media screen and (max-width: 38.75em) {
+	.profiles tr > *:first-child,
+	.profiles tr > *:last-child {
+		padding-left: 1rem;
+		padding-right: 1.5rem;
+	}
+	.tableWrapper td svg {
+		display: none;
+	}
+	.no-results {
+		font-size: 2rem;
+	}
+}
