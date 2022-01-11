@@ -1,5 +1,5 @@
 import { Fragment, useState } from "react";
-import { useEffect } from "react/cjs/react.development";
+import { useEffect } from "react";
 import { useFrens } from "../api";
 import frensTableStyles from "../styles/FrensTable.module.css";
 import PageButtons from "./PageButtons";
@@ -14,6 +14,10 @@ export default function FrensTable({ verifiedFilter, searchInput }) {
   });
   const { frens, count } = frensData || {};
 
+  useEffect(() => {
+    setPage(0);
+  }, [searchInput]);
+
   if (error != null) return <div>Error loading todos...</div>;
   if (frens == null) return <div>Loading...</div>;
 
@@ -25,6 +29,7 @@ export default function FrensTable({ verifiedFilter, searchInput }) {
     <div className={frensTableStyles.tableWrapper}>
       {frens.length > 0 ? (
         <Fragment>
+          <PageButtons amntPerPage={100} {...{ count, page, setPage }} />
           <table className={frensTableStyles.profiles}>
             <thead>
               <tr>
@@ -96,7 +101,11 @@ export default function FrensTable({ verifiedFilter, searchInput }) {
                           width="34px"
                           height="34px"
                           className={frensTableStyles.pfp}
-                          src={"https://unavatar.now.sh/twitter/" + fren.handle}
+                          src={
+                            "https://unavatar.io/twitter/" +
+                            fren.handle +
+                            "?fallback=false"
+                          }
                           alt=""
                           priority={inx < 10}
                         />
