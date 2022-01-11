@@ -22,6 +22,19 @@ export default async (req, res) => {
           : Prisma.empty
       } ORDER BY followers DESC LIMIT ${count} OFFSET ${skip}`;
 
+    const frensCount =
+      await prisma.$queryRaw`SELECT COUNT(*) FROM (SELECT *, RANK () OVER (ORDER BY followers DESC) AS ranking FROM "Fren" WHERE LOWER(name) like '%.eth%') m1 WHERE true ${
+        verified !== undefined
+          ? verified === "true"
+            ? Prisma.sql`AND verified`
+            : Prisma.sql`AND NOT verified`
+          : Prisma.empty
+      } ${
+        q !== undefined
+          ? Prisma.sql`AND name ~~* ${`%${q}%`} OR ens ~~* ${`%${q}%`}`
+          : Prisma.empty
+      }`;
+
     const frens = allFrens.map((x) => ({
       id: x.id,
       name: x.name,
@@ -36,6 +49,6 @@ export default async (req, res) => {
       ranking: x.ranking,
     }));
     res.statusCode = 200;
-    res.json(frens);
+    res.json({ frens, count: frensCount[0].count });
   }
 };

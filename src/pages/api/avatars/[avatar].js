@@ -51,10 +51,9 @@ export default async (req, res) => {
 
       return sendData(res, imgToSave);
     } catch (err) {
-      const defaultImg = await readFile("./public/avatars/default.png");
       res.setHeader("Cache-Control", "s-maxage=43200");
       res.setHeader("content-type", "image/png");
-      return res.send(defaultImg);
+      return res.redirect("/img/av-default.png");
     }
   }
 };

@@ -62,6 +62,7 @@
 	width: 2.125rem;
 	margin-right: 0.3125rem;
 	vertical-align: middle;
+	background: linear-gradient(330.4deg, #44BCF0 4.54%, #628BF3 66.33%, #A099FF 148.85%);
 }
 
 .tableWrapper td svg {
@@ -105,4 +106,14 @@
 	display: none;
 	width: 100%;
 	line-height: 1;
+}
+
+.ensProfile {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+}
+
+.ensName {
+	margin-left: 0.3125rem;
 }

@@ -5,6 +5,7 @@ import Filters from "../components/Filters";
 import FrensTable from "../components/FrensTable";
 import Header from "../components/Header";
 import Layout from "../components/layout";
+import PageButtons from "../components/PageButtons";
 
 export default function Home({ frensMeta, fallback }) {
   const [verifiedFilter, setVerifiedFilter] = useState("All");

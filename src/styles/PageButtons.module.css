@@ -1,0 +1,47 @@
+.buttonWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+
+    min-width: 40px;
+    height: 40px;
+    
+    background: #EBEBEB;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 12px;
+    margin: 0 8px;
+
+    cursor: pointer;
+    transition: 0.15s all;
+}
+
+.button:first-child {
+    margin-left: 0;
+}
+
+.button:last-child {
+    margin-right: 0;
+}
+
+.button:hover {
+    background: #D8D8D8;
+}
+
+.button:active {
+    background: rgba(131, 131, 131, 0.3);
+}
+
+.activeButton {
+    background: rgba(131, 131, 131, 0.3);
+    cursor: default;
+}
