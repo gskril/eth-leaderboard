@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Fren" ALTER COLUMN "ens" DROP NOT NULL;

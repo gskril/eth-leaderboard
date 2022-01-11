@@ -1,21 +1,9 @@
 import { useEffect, useState } from "react";
 import { useMeta } from "../api";
 import headerStyles from "../styles/Header.module.css";
+import { nFormatter } from "../utils/format";
 
-export default function Header({ children }) {
-  const { data: _dbMeta } = useMeta();
-  const [dbMeta, setDbMeta] = useState({
-    top10: "...",
-    top100: "...",
-    top500: "...",
-  });
-
-  useEffect(() => {
-    setDbMeta(_dbMeta);
-  }, [_dbMeta]);
-
-  if (!dbMeta) return null;
-
+export default function Header({ top10, top100, top500, children }) {
   return (
     <div className={headerStyles.hero}>
       <div className={headerStyles.heroTitle}>
@@ -42,7 +30,7 @@ export default function Header({ children }) {
       <div className={headerStyles.floor}>
         <div className={headerStyles.floorSection}>
           <span className={headerStyles.floorNumber}>
-            {"> " + dbMeta.top10}
+            {"> " + nFormatter(top10)}
           </span>
           <span className={headerStyles.floorSectionLabel}>
             <span className={headerStyles.floorFollowersLabel}>Followers</span>{" "}
@@ -51,7 +39,7 @@ export default function Header({ children }) {
         </div>
         <div className={headerStyles.floorSection}>
           <span className={headerStyles.floorNumber}>
-            {"> " + dbMeta.top100}
+            {"> " + nFormatter(top100)}
           </span>
           <span className={headerStyles.floorSectionLabel}>
             <span className={headerStyles.floorFollowersLabel}>Followers</span>{" "}
@@ -60,7 +48,7 @@ export default function Header({ children }) {
         </div>
         <div className={headerStyles.floorSection}>
           <span className={headerStyles.floorNumber}>
-            {"> " + dbMeta.top500}
+            {"> " + nFormatter(top500)}
           </span>
           <span className={headerStyles.floorSectionLabel}>
             <span className={headerStyles.floorFollowersLabel}>Followers</span>{" "}

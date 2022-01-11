@@ -24,6 +24,8 @@ export default async (req, res) => {
       currentCached.timestamp > Date.now() - 12 * 60 * 60 * 1000
     ) {
       return sendData(res, currentCached);
+    } else {
+      throw new Error("Not cached");
     }
   } catch {
     const url = `https://metadata.ens.domains/mainnet/avatar/${ensName}`;

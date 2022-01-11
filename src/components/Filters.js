@@ -1,6 +1,36 @@
+import { useState } from "react";
+import { useEffect } from "react/cjs/react.development";
 import filtersStyles from "../styles/Filters.module.css";
 
-export default function Filters() {
+const FilterOption = ({ category, type, setType, currentType }) => (
+  <div className={filtersStyles.filtersOption}>
+    <input
+      type="radio"
+      name={category}
+      id={`${category}-${type}`}
+      value={type}
+      checked={type === currentType}
+      onChange={() => setType(type)}
+    />
+    <label htmlFor={`${category}-${type}`}>{type}</label>
+  </div>
+);
+
+export default function Filters({
+  verifiedFilter,
+  setVerifiedFilter,
+  searchInput,
+  setSearchInput,
+}) {
+  const [currentSearchInput, setCurrentSearchInput] = useState("");
+  const [timeout, setTimeoutVar] = useState(null);
+
+  useEffect(() => {
+    console.log("input changed", currentSearchInput);
+    clearTimeout(timeout);
+    setTimeoutVar(setTimeout(() => setSearchInput(currentSearchInput), 600));
+  }, [currentSearchInput]);
+
   return (
     <div className={filtersStyles.filters}>
       <input
@@ -8,58 +38,32 @@ export default function Filters() {
         className={filtersStyles.filtersSearch}
         id="search"
         placeholder="Search by ENS or Twitter name..."
-        autocomplete="off"
+        autoComplete="off"
+        value={currentSearchInput}
+        onChange={(e) => setCurrentSearchInput(e.target.value)}
       />
       <div className={filtersStyles.filtersCol}>
         <div>
           <label>Verified on Twitter</label>
           <div className={filtersStyles.filtersOptions}>
-            <div className={filtersStyles.filtersOption}>
-              <input
-                type="radio"
-                name="verified"
-                id="verified-all"
-                value="all"
-                checked
-              />
-              <label for="verified-all">All</label>
-            </div>
-            <div className={filtersStyles.filtersOption}>
-              <input
-                type="radio"
-                name="verified"
-                id="verified-yes"
-                value="yes"
-              />
-              <label for="verified-yes">Yes</label>
-            </div>
-            <div className={filtersStyles.filtersOption}>
-              <input type="radio" name="verified" id="verified-no" value="no" />
-              <label for="verified-no">No</label>
-            </div>
-          </div>
-        </div>
-        <div>
-          <label>ENS Avatar</label>
-          <div className={filtersStyles.filtersOptions}>
-            <div className={filtersStyles.filtersOption}>
-              <input
-                type="radio"
-                name="avatar"
-                id="avatar-all"
-                value="all"
-                checked
-              />
-              <label for="avatar-all">All</label>
-            </div>
-            <div className={filtersStyles.filtersOption}>
-              <input type="radio" name="avatar" id="avatar-yes" value="yes" />
-              <label for="avatar-yes">Yes</label>
-            </div>
-            <div className={filtersStyles.filtersOption}>
-              <input type="radio" name="avatar" id="avatar-no" value="no" />
-              <label for="avatar-no">No</label>
-            </div>
+            <FilterOption
+              category="verified"
+              type="All"
+              currentType={verifiedFilter}
+              setType={setVerifiedFilter}
+            />
+            <FilterOption
+              category="verified"
+              type="Yes"
+              currentType={verifiedFilter}
+              setType={setVerifiedFilter}
+            />
+            <FilterOption
+              category="verified"
+              type="No"
+              currentType={verifiedFilter}
+              setType={setVerifiedFilter}
+            />
           </div>
         </div>
       </div>

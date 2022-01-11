@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Fren" ADD COLUMN     "rank" INTEGER NOT NULL DEFAULT 0;

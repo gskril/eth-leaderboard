@@ -1,24 +1,44 @@
+import { useEffect, useState } from "react";
+import { SWRConfig } from "swr";
+import { initialFetchFrens, initialFetchMeta } from "../api";
 import Filters from "../components/Filters";
 import FrensTable from "../components/FrensTable";
 import Header from "../components/Header";
 import Layout from "../components/layout";
 
-export default function Home({ frensData }) {
+export default function Home({ frensMeta, fallback }) {
+  const [verifiedFilter, setVerifiedFilter] = useState("All");
+  const [searchInput, setSearchInput] = useState("");
+
   return (
-    <Layout>
-      <Header top10={"2.1"} top100={"3.4"} top500={"5.5"}>
-        <Filters />
-      </Header>
-      <FrensTable />
-    </Layout>
+    <SWRConfig value={{ fallback }}>
+      <Layout>
+        <Header {...frensMeta}>
+          <Filters
+            {...{
+              verifiedFilter,
+              setVerifiedFilter,
+              searchInput,
+              setSearchInput,
+            }}
+          />
+        </Header>
+        <FrensTable {...{ verifiedFilter, searchInput }} />
+      </Layout>
+    </SWRConfig>
   );
 }
 
 export async function getStaticProps() {
-  const frensData = "hello";
+  const frensData = await initialFetchFrens();
+  const frensMeta = await initialFetchMeta();
   return {
     props: {
-      frensData,
+      frensMeta,
+      fallback: {
+        "/api/frens?": frensData,
+      },
     },
+    revalidate: 300,
   };
 }

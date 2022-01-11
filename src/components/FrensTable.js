@@ -1,8 +1,8 @@
 import { useFrens } from "../api";
 import frensTableStyles from "../styles/FrensTable.module.css";
 
-export default function FrensTable({ frensData }) {
-  const { data: frens, error } = useFrens();
+export default function FrensTable({ verifiedFilter, searchInput }) {
+  const { data: frens, error } = useFrens({ verifiedFilter, searchInput });
 
   if (error != null) return <div>Error loading todos...</div>;
   if (frens == null) return <div>Loading...</div>;
@@ -26,6 +26,7 @@ export default function FrensTable({ frensData }) {
           <tbody>
             {frens.map((fren) => (
               <tr
+                key={fren.id}
                 data-verified={fren.verified}
                 data-avatar={
                   fren.ensAvatar && !fren.ensAvatar.includes("default")
