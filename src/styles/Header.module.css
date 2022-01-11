@@ -58,7 +58,11 @@
 	display: block;
 	font-weight: 600;
 	font-size: 2rem;
-	color: #0F0F0F;
+	color: #323232;
+}
+
+.floorFollowersLabel {
+	color: #717171;
 }
 
 @media screen and (min-width: 38.75em) {

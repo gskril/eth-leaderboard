@@ -3,6 +3,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    color: rgba(0, 0, 0, 0.23);
 }
 
 .button {
@@ -15,9 +16,9 @@
     min-width: 40px;
     height: 40px;
     
-    background: #EBEBEB;
+    background: none;
     box-sizing: border-box;
-    border: none;
+    border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 12px;
     margin: 0 8px;
 
@@ -34,14 +35,25 @@
 }
 
 .button:hover {
-    background: #D8D8D8;
+    background: rgba(0, 0, 0, 0.1);
+    border-color: rgba(0, 0, 0, 0);
 }
 
 .button:active {
-    background: rgba(131, 131, 131, 0.3);
+    background: rgba(0, 0, 0, 0.2);
+    border-color: rgba(0, 0, 0, 0);
 }
 
 .activeButton {
-    background: rgba(131, 131, 131, 0.3);
+    background: rgba(255, 255, 255, 1);
     cursor: default;
+}
+
+.activeButton:active, .activeButton:hover {
+    background: rgba(255, 255, 255, 1);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.dotsSpan {
+    margin: 0 4px;
 }

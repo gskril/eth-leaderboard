@@ -58,11 +58,10 @@
 }
 
 .pfp {
+	margin-left: -1rem;
 	border-radius: 50%;
-	width: 2.125rem;
-	margin-right: 0.3125rem;
-	vertical-align: middle;
 	background: linear-gradient(330.4deg, #44BCF0 4.54%, #628BF3 66.33%, #A099FF 148.85%);
+	background-size: 34px;
 }
 
 .tableWrapper td svg {

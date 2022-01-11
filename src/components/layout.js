@@ -59,7 +59,10 @@ export default function Layout({ children }) {
           href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap"
           rel="stylesheet"
         />
-        {/* Global Site Tag (gtag.js) - Google Analytics */}
+        <link href="/fonts/CircularXXWeb-Bold.woff2" rel="preload" as="font" />
+        <link href="/fonts/CircularXXWeb-Book.woff2" rel="preload" as="font" />
+        <link href="/fonts/CircularXXWeb-Medium.woff" rel="preload" as="font" />
+        <link href="/fonts/CircularXXWeb-Light.woff2" rel="preload" as="font" />
         <script
           async
           src={`https://www.googletagmanager.com/gtag/js?id=G-JFX7VQ8937`}
