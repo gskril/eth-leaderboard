@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useEffect } from "react/cjs/react.development";
+import { useEffect } from "react";
 import filtersStyles from "../styles/Filters.module.css";
 
 const FilterOption = ({ category, type, setType, currentType }) => (

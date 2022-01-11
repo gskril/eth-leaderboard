@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { SWRConfig } from "swr";
-import { initialFetchFrens, initialFetchMeta } from "../api";
+import { fetchInitialData, fetchInitialMetadata } from "../staticapi";
 import Filters from "../components/Filters";
 import FrensTable from "../components/FrensTable";
 import Header from "../components/Header";
@@ -36,8 +36,8 @@ export default function Home({ frensMeta, fallback }) {
 }
 
 export async function getStaticProps() {
-  const frensData = await initialFetchFrens();
-  const frensMeta = await initialFetchMeta();
+  const frensData = await fetchInitialData();
+  const frensMeta = await fetchInitialMetadata();
   return {
     props: {
       frensMeta,
