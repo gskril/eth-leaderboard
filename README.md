@@ -15,8 +15,8 @@ Built with Express.js and EJS. Deployed on [Railway](https://railway.app/).
 
 ## Todo
 
-- [ ] Re-implement buttons/search/filters
+- [x] Re-implement buttons/search/filters
 - [ ] Re-implement twitter monitor
 - [ ] Add to verification queue from website
-- [ ] Pagination
+- [x] Pagination
 - [ ] Daily/weekly snapshots of the leaderboard

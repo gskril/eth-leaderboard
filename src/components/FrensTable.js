@@ -63,10 +63,10 @@ export default function FrensTable({ verifiedFilter, searchInput }) {
                             fren.ens
                           }
                           alt=""
-                          priority={inx < 25}
+                          priority={inx < 10}
                         />
                         <span className={frensTableStyles.ensName}>
-                          {fren.name}
+                          {fren.ens}
                         </span>
                         <svg
                           width="16"
@@ -98,7 +98,7 @@ export default function FrensTable({ verifiedFilter, searchInput }) {
                           className={frensTableStyles.pfp}
                           src={"https://unavatar.now.sh/twitter/" + fren.handle}
                           alt=""
-                          priority={inx < 25}
+                          priority={inx < 10}
                         />
                       )}
                       <span className={frensTableStyles.ensName}>
