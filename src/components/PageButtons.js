@@ -2,10 +2,13 @@ import { Fragment } from "react";
 import pageButtonStyles from "../styles/PageButtons.module.css";
 import { usePrevious } from "../utils/hooks";
 
-const PageButton = ({ number, setPage, isActive }) => (
+const PageButton = ({ number, page, setPage, isActive }) => (
   <button
     className={`${pageButtonStyles.button} ${
       isActive && pageButtonStyles.activeButton
+    } ${
+      !(page + 2 > number && number > page - 2) &&
+      pageButtonStyles.excludeOnMobile
     }`}
     onClick={() => !isActive && setPage(number)}
   >
@@ -35,6 +38,7 @@ export default function PageButtons({ page, setPage, count, amntPerPage }) {
               number={number}
               setPage={setPage}
               isActive={number === page}
+              page={page}
             />
             {page > 2 && number === 0 && (
               <span

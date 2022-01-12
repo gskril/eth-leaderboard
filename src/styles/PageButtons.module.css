@@ -1,59 +1,77 @@
 .buttonWrapper {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    color: rgba(0, 0, 0, 0.23);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: rgba(0, 0, 0, 0.23);
 }
 
 .button {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
 
-    min-width: 40px;
-    height: 40px;
-    
-    background: none;
-    box-sizing: border-box;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 12px;
-    margin: 0 8px;
+  min-width: 40px;
+  height: 40px;
 
-    cursor: pointer;
-    transition: 0.15s all;
+  background: none;
+  box-sizing: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  margin: 0 8px;
+
+  cursor: pointer;
+  transition: 0.15s all;
 }
 
 .button:first-child {
-    margin-left: 0;
+  margin-left: 0;
 }
 
 .button:last-child {
-    margin-right: 0;
+  margin-right: 0;
 }
 
 .button:hover {
-    background: rgba(0, 0, 0, 0.1);
-    border-color: rgba(0, 0, 0, 0);
+  background: rgba(0, 0, 0, 0.1);
+  border-color: rgba(0, 0, 0, 0);
 }
 
 .button:active {
-    background: rgba(0, 0, 0, 0.2);
-    border-color: rgba(0, 0, 0, 0);
+  background: rgba(0, 0, 0, 0.2);
+  border-color: rgba(0, 0, 0, 0);
 }
 
 .activeButton {
-    background: rgba(255, 255, 255, 1);
-    cursor: default;
+  background: rgba(255, 255, 255, 1);
+  cursor: default;
 }
 
-.activeButton:active, .activeButton:hover {
-    background: rgba(255, 255, 255, 1);
-    border: 1px solid rgba(0, 0, 0, 0.1);
+.activeButton:active,
+.activeButton:hover {
+  background: rgba(255, 255, 255, 1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .dotsSpan {
+  margin: 0 4px;
+}
+
+@media screen and (max-width: 38.75em) {
+  .button {
     margin: 0 4px;
+  }
+
+  .dotsSpan {
+    display: none;
+  }
+  .button {
+    margin-right: 0;
+  }
+
+  .excludeOnMobile {
+    display: none;
+  }
 }

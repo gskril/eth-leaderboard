@@ -4,6 +4,7 @@ import { useFrens } from "../api";
 import filtersStyles from "../styles/Filters.module.css";
 import PageButtons from "./PageButtons";
 import { default as CancelIcon } from "../assets/icons/CancelIcon.svg";
+import { default as SearchIcon } from "../assets/icons/SearchIcon.svg";
 import { usePrevious } from "../utils/hooks";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -29,7 +30,9 @@ export default function Filters({
 }) {
   const [currentSearchInput, setCurrentSearchInput] = useState("");
   const [timeout, setTimeoutVar] = useState(null);
+  const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const searchRef = useRef();
+  const searchInputRef = useRef();
   const { data: frensData, error } = useFrens({
     searchInput,
     page,
@@ -44,9 +47,19 @@ export default function Filters({
     searchRef.current.blur();
   };
 
+  const openSearch = (e) => {
+    e.stopPropagation();
+    console.log("opening search...");
+    setMobileSearchOpen(true);
+  };
+
   useEffect(() => {
     setPage(0);
   }, [searchInput]);
+
+  useEffect(() => {
+    setTimeout(() => searchInputRef.current.focus(), 150);
+  }, [mobileSearchOpen]);
 
   useEffect(() => {
     console.log("input changed", currentSearchInput);
@@ -55,8 +68,18 @@ export default function Filters({
   }, [currentSearchInput]);
 
   return (
-    <div className={filtersStyles.filters}>
-      <div className={filtersStyles.searchWrapper}>
+    <div
+      className={`${filtersStyles.filters} ${
+        mobileSearchOpen ? filtersStyles.mobileSearchOpen : ""
+      } ${currentSearchInput !== "" ? filtersStyles.searchHasValue : ""}`}
+    >
+      <button onClick={openSearch} className={filtersStyles.mobileSearchButton}>
+        <SearchIcon />
+      </button>
+      <div
+        className={filtersStyles.searchWrapper}
+        onBlur={() => setMobileSearchOpen(false)}
+      >
         <input
           type="text"
           className={filtersStyles.filtersSearch}
@@ -65,6 +88,7 @@ export default function Filters({
           autoComplete="off"
           value={currentSearchInput}
           onChange={(e) => setCurrentSearchInput(e.target.value)}
+          ref={searchInputRef}
         />
         <button
           ref={searchRef}
@@ -78,7 +102,10 @@ export default function Filters({
       </div>
       <div className={filtersStyles.spacer}></div>
       <AnimatePresence>
-        <motion.div layout="position" className={filtersStyles.rightSide}>
+        <motion.div
+          layout={mobileSearchOpen ? false : "position"}
+          className={filtersStyles.rightSide}
+        >
           <div className={filtersStyles.frensCount}>
             <strong>{count.toLocaleString("en", { useGrouping: true })}</strong>{" "}
             <span>names</span>
