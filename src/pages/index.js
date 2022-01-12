@@ -7,8 +7,8 @@ import Header from "../components/Header";
 import Layout from "../components/layout";
 
 export default function Home({ frensMeta, fallback }) {
-  const [verifiedFilter, setVerifiedFilter] = useState("All");
   const [searchInput, setSearchInput] = useState("");
+  const [page, setPage] = useState(0);
 
   return (
     <SWRConfig
@@ -22,14 +22,14 @@ export default function Home({ frensMeta, fallback }) {
         <Header {...frensMeta}>
           <Filters
             {...{
-              verifiedFilter,
-              setVerifiedFilter,
+              page,
+              setPage,
               searchInput,
               setSearchInput,
             }}
           />
         </Header>
-        <FrensTable {...{ verifiedFilter, searchInput }} />
+        <FrensTable {...{ page, searchInput }} />
       </Layout>
     </SWRConfig>
   );

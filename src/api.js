@@ -13,7 +13,7 @@ export const initialFetchFrens = () =>
 
 export const useFrens = (params = {}) => {
   const searchParams = new URLSearchParams();
-  params.verifiedFilter !== "All" &&
+  params.verifiedFilter !== undefined &&
     searchParams.append(
       "verified",
       params.verifiedFilter === "Yes" ? "true" : "false"

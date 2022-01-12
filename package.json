@@ -14,11 +14,13 @@
   "license": "ISC",
   "dependencies": {
     "@prisma/client": "2.30.0",
+    "@svgr/webpack": "^6.2.0",
     "axios": "^0.24.0",
-    "next": "10.0.6",
+    "framer-motion": "^5.5.7",
+    "next": "12",
     "pg": "^8.5.1",
-    "react": "17.0.1",
-    "react-dom": "17.0.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "sharp": "^0.29.3",
     "swr": "^1.1.2"
   },
