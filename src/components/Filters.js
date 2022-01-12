@@ -58,7 +58,7 @@ export default function Filters({
   }, [searchInput]);
 
   useEffect(() => {
-    setTimeout(() => searchInputRef.current.focus(), 150);
+    if (mobileSearchOpen) setTimeout(() => searchInputRef.current.focus(), 150);
   }, [mobileSearchOpen]);
 
   useEffect(() => {
@@ -108,7 +108,7 @@ export default function Filters({
         >
           <div className={filtersStyles.frensCount}>
             <strong>{count.toLocaleString("en", { useGrouping: true })}</strong>{" "}
-            <span>names</span>
+            <span>name{count > 1 && "s"}</span>
           </div>
           <PageButtons {...{ page, setPage, count }} amntPerPage={100} />
         </motion.div>

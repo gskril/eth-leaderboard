@@ -96,14 +96,15 @@
   }
   .floor {
     margin-top: 0.5rem;
-    gap: 1rem;
+    justify-content: space-between;
   }
   .floorSection {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 0 2vw;
+    flex-grow: 1;
+    padding: 0;
   }
   .floorSectionLabel {
     font-size: 0.875rem;
