@@ -56,14 +56,20 @@ export const fetchInitialMetadata = async () => {
     },
   });
   const top500Query = await prisma.fren.findMany({
-    take: 501,
+    where: {
+      name: {
+        contains: ".eth",
+        mode: "insensitive",
+      },
+    },
+    take: 1000,
     orderBy: {
       followers: "desc",
     },
   });
-  const top500 = top500Query[500].followers;
-  const top100 = top500Query[100].followers;
-  const top10 = top500Query[10].followers;
+  const top500 = top500Query[999].followers;
+  const top100 = top500Query[99].followers;
+  const top10 = top500Query[9].followers;
   const response = {
     top10,
     top100,

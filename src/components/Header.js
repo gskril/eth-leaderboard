@@ -30,29 +30,35 @@ export default function Header({ top10, top100, top500, children }) {
       <div className={headerStyles.floor}>
         <div className={headerStyles.floorSection}>
           <span className={headerStyles.floorNumber}>
-            {"> " + nFormatter(top10)}
+            {"> " + nFormatter(top10, 1)}
           </span>
           <span className={headerStyles.floorSectionLabel}>
-            <span className={headerStyles.floorFollowersLabel}>Followers</span>{" "}
-            for <strong>Top 10</strong>
+            <span className={headerStyles.floorFollowersLabel}>
+              Followers for
+            </span>{" "}
+            <strong>Top 10</strong>
           </span>
         </div>
         <div className={headerStyles.floorSection}>
           <span className={headerStyles.floorNumber}>
-            {"> " + nFormatter(top100)}
+            {"> " + nFormatter(top100, 1)}
           </span>
           <span className={headerStyles.floorSectionLabel}>
-            <span className={headerStyles.floorFollowersLabel}>Followers</span>{" "}
-            for <strong>Top 100</strong>
+            <span className={headerStyles.floorFollowersLabel}>
+              Followers for
+            </span>{" "}
+            <strong>Top 100</strong>
           </span>
         </div>
         <div className={headerStyles.floorSection}>
           <span className={headerStyles.floorNumber}>
-            {"> " + nFormatter(top500)}
+            {"> " + nFormatter(top500, 1)}
           </span>
           <span className={headerStyles.floorSectionLabel}>
-            <span className={headerStyles.floorFollowersLabel}>Followers</span>{" "}
-            for <strong>Top 500</strong>
+            <span className={headerStyles.floorFollowersLabel}>
+              Followers for
+            </span>{" "}
+            <strong>Top 1000</strong>
           </span>
         </div>
       </div>
