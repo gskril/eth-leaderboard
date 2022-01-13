@@ -37,6 +37,7 @@ export default function Filters({
   const [timeout, setTimeoutVar] = useState(null);
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const searchRef = useRef();
+  const searchRefFixed = useRef();
   const searchInputRef = useRef();
   const searchInputRefFixed = useRef();
   const { data: frensData, error } = useFrens({
@@ -50,7 +51,7 @@ export default function Filters({
   const handleClear = (e) => {
     e.stopPropagation();
     setCurrentSearchInput("");
-    searchRef.current.blur();
+    showFixed ? searchRefFixed.current.blur() : searchRef.current.blur();
   };
 
   const openSearch = (e) => {
@@ -68,6 +69,10 @@ export default function Filters({
 
   useEffect(() => {
     setPage(0);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   }, [searchInput]);
 
   useEffect(() => {
@@ -217,7 +222,7 @@ export default function Filters({
                   ref={searchInputRefFixed}
                 />
                 <button
-                  ref={searchRef}
+                  ref={searchRefFixed}
                   className={`${filtersStyles.removeButton} ${
                     currentSearchInput === ""
                       ? filtersStyles.removeButtonHidden
@@ -231,9 +236,7 @@ export default function Filters({
               <div className={filtersStyles.spacer}></div>
               <button
                 onClick={scrollToTop}
-                className={`${headerStyles.scrollToTop} ${
-                  mobileSearchOpen && filtersStyles.scrollToTop
-                }`}
+                className={`${headerStyles.scrollToTop} ${filtersStyles.scrollToTop}`}
               >
                 <ChevronIcon />
                 <span>Scroll to top</span>

@@ -150,6 +150,11 @@
 }
 
 @media screen and (max-width: 38.75em) {
+  :not(.mobileSearchOpen).searchHasValue .searchWrapper {
+    visibility: visible;
+    width: 50%;
+  }
+
   .spacer {
     display: none;
   }
@@ -165,18 +170,16 @@
     margin: 0;
   }
 
-  .searchWrapper:focus-within {
-    width: 0;
-  }
-
   .filters {
     align-items: flex-end;
+    width: 100%;
   }
 
   .rightSide {
     flex-direction: column;
     align-items: flex-end;
   }
+
   .frensCount {
     margin-bottom: 10px;
   }
@@ -198,6 +201,8 @@
 
   .mobileSearchOpen .searchWrapper {
     visibility: visible;
+    transition: opacity 0.3s ease, visibility 0s ease 0ms, width 0s ease 0ms,
+      transform 0.3s ease, padding 0s ease 0ms, margin 0s ease 0ms;
     width: 100%;
   }
 
@@ -213,24 +218,38 @@
     border: 1px solid rgba(0, 0, 0, 0.1);
   }
 
-  .mobileSearchOpen .mobileSearchButton {
-    display: none;
-  }
-
-  .mobileSearchOpen .rightSide {
-    display: none;
-  }
-
-  .searchHasValue .mobileSearchButton {
-    display: none;
-  }
-
-  .mobileSearchOpen .scrollToTop {
-    display: none;
-  }
-
-  :not(.mobileSearchOpen).searchHasValue .searchWrapper {
+  .mobileSearchButton,
+  .rightSide,
+  .scrollToTop {
+    transition: opacity 0.31s ease 0.31s, visibility 0.31s ease 0.31s,
+      width 0s ease 0.301s, padding 0s ease 0.3s, margin 0s ease 0.3s !important;
     visibility: visible;
-    width: 50%;
+    opacity: initial;
+    width: initial;
+    margin: initial;
+    padding: initial;
+    margin-left: 0px;
+  }
+
+  .mobileSearchOpen .mobileSearchButton,
+  .mobileSearchOpen .rightSide,
+  .mobileSearchOpen .scrollToTop,
+  :not(.mobileSearchOpen).searchHasValue .mobileSearchButton {
+    transition: opacity 0s ease 0s, visibility 0s ease 0s, width 0s ease 0ms,
+      padding 0s ease 0ms, margin 0s ease 0ms !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none;
+    width: 0;
+    padding: 0;
+    margin: 0;
+  }
+
+  .mobileSearchOpen .mobileSearchButton {
+    margin-left: -40px;
+  }
+
+  :not(.mobileSearchOpen).searchHasValue .mobileSearchButton {
+    display: none;
   }
 }
