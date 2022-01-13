@@ -9,26 +9,17 @@
   height: 1.25rem;
   background-color: var(--color-background);
   margin-right: 0.325rem;
-  border: 0.0625rem solid var(--color-outline);
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .tableWrapper {
-  max-width: calc(var(--container-width) + max(10vw, 150px));
+  max-width: calc(var(--container-width) + min(10vw, 150px));
   width: 100%;
   margin: 0 auto;
-  padding: 0 max(5vw, 75px);
+  padding: 0 min(5vw, 75px);
   position: relative;
   overflow-x: auto;
   transition: 0.3s all;
-  background: linear-gradient(
-    180deg,
-    rgba(233, 234, 244, 1) 0%,
-    rgba(247, 247, 247, 0) 100%
-  );
-  background-size: 100vw 300px;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: 0 -300px;
 }
 
 .tableWrapper.noResultsWrapper {
@@ -46,6 +37,7 @@
 
 .profiles tr > td {
   font-size: 20px;
+  font-weight: 500;
 }
 
 .profiles tr > *:first-child {
@@ -143,10 +135,6 @@
   margin-left: 10px;
 }
 
-.tableWrapper.showFixed {
-  background-position: 0 0px;
-}
-
 @media screen and (max-width: 1024px) {
   .tableWrapper {
     padding: 0;
@@ -154,22 +142,6 @@
 }
 
 @media screen and (max-width: 38.75em) {
-  .tableWrapper {
-    background: linear-gradient(
-      0deg,
-      rgba(233, 234, 244, 1) 0%,
-      rgba(247, 247, 247, 0) 100%
-    );
-    background-size: 100vw 180px;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: 0 calc(100vh + 180px);
-    padding: 0;
-  }
-  .tableWrapper.showFixed {
-    background-position: 0 calc(100vh - 180px);
-  }
-
   .profiles tr > *:first-child,
   .profiles tr > *:last-child {
     padding-left: 1rem;

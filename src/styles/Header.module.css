@@ -156,6 +156,9 @@
 }
 
 @media screen and (max-width: 1024px) {
+  .mobHidden {
+    display: none !important;
+  }
   .fixedHeader .heroTitle {
     display: none;
   }
@@ -168,10 +171,6 @@
 }
 
 @media screen and (max-width: 38.75em) {
-  .mobHidden {
-    display: none !important;
-  }
-
   .floorFollowersLabel {
     display: none;
   }

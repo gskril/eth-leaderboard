@@ -57,7 +57,7 @@ const FrensTablePage = ({ frens, showFixed }) => {
     <div
       className={`${frensTableStyles.tableWrapper} ${
         frens.length > 0 ? "" : frensTableStyles.noResultsWrapper
-      } ${showFixed && frensTableStyles.showFixed}`}
+      }`}
     >
       {frens.length > 0 ? (
         <table className={frensTableStyles.profiles}>

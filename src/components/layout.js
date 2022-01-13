@@ -1,9 +1,32 @@
 import Head from "next/head";
 import Footer from "./Footer";
+import layoutStyles from "../styles/Layout.module.css";
+import { useRef, useState } from "react";
+import { useScrollPosition } from "@n8tb1t/use-scroll-position";
 
-export default function Layout({ children }) {
+export default function Layout({ children, showFixed }) {
+  const [reachedFooter, setReachedFooter] = useState(false);
+  const bodyRef = useRef();
+
+  useScrollPosition(
+    ({ _, currPos }) => {
+      if (
+        window.innerHeight >= bodyRef.current.getBoundingClientRect().bottom &&
+        !reachedFooter
+      )
+        setReachedFooter(true);
+      if (
+        window.innerHeight < bodyRef.current.getBoundingClientRect().bottom &&
+        reachedFooter
+      )
+        setReachedFooter(false);
+    },
+    [reachedFooter],
+    bodyRef
+  );
+
   return (
-    <div>
+    <div ref={bodyRef}>
       <Head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -82,6 +105,11 @@ export default function Layout({ children }) {
       </Head>
       <main>{children}</main>
       <Footer />
+      <div
+        className={`${layoutStyles.showFixedGradient} ${
+          showFixed && layoutStyles.showFixed
+        } ${reachedFooter && layoutStyles.reachedFooter}`}
+      ></div>
     </div>
   );
 }

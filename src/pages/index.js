@@ -30,7 +30,7 @@ export default function Home({ frensMeta, fallback }) {
         revalidateOnFocus: false,
       }}
     >
-      <Layout>
+      <Layout {...{ showFixed }}>
         <Header {...frensMeta}>
           <Filters
             {...{

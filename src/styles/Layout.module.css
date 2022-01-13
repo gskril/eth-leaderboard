@@ -1,0 +1,50 @@
+.showFixedGradient {
+  background: linear-gradient(
+    180deg,
+    rgba(233, 234, 244, 1) 0%,
+    rgba(247, 247, 247, 0) 95%
+  );
+  background-size: 100vw 180px;
+  background-repeat: no-repeat;
+  height: 180px;
+  max-width: var(--container-width);
+  width: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  position: fixed;
+  top: -180px;
+  opacity: 0;
+  z-index: -1;
+  visibility: hidden;
+  transition: all 0.2s ease;
+}
+
+.showFixedGradient.showFixed {
+  opacity: 1;
+  visibility: visible;
+  top: 120px;
+}
+
+@media screen and (max-width: 38.75em) {
+  .showFixedGradient {
+    background: linear-gradient(
+      0deg,
+      rgba(233, 234, 244, 1) 0%,
+      rgba(247, 247, 247, 0) 100%
+    );
+    background-size: 100vw 180px;
+    height: 180px;
+    top: unset !important;
+    bottom: -80px;
+  }
+
+  .showFixedGradient.showFixed {
+    bottom: 80px;
+  }
+
+  .showFixedGradient.reachedFooter {
+    bottom: -80px;
+    opacity: 0;
+    visibility: hidden;
+  }
+}

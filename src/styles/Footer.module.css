@@ -5,7 +5,14 @@
 .footerContainer {
   max-width: var(--container-width);
   margin: 0 auto;
-  padding: 0 1.5rem;
+  padding: 0 min(5vw, 75px);
+  font-weight: 400;
+  font-size: 18px;
+}
+
+@media screen and (max-width: 1024px) {
+  .footerContainer {
+  }
 }
 
 @media screen and (max-width: 38.75em) {
