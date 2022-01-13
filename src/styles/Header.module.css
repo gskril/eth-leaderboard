@@ -17,7 +17,7 @@
 .heroSubtitle {
   font-weight: 400;
   color: #717171;
-  font-size: 22px;
+  font-size: 18px;
   margin-bottom: 20px;
 }
 
@@ -48,7 +48,7 @@
   justify-content: center;
   width: 100%;
   max-width: 48rem;
-  margin-top: 2rem;
+  margin-top: 18px;
 }
 
 .floorSection {

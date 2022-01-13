@@ -139,19 +139,6 @@ const FrensTablePage = ({ frens }) => (
                   <span className={frensTableStyles.ensName}>
                     {"@" + fren.handle}
                   </span>
-                  <svg
-                    width="16"
-                    height="15"
-                    viewBox="0 0 16 15"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      opacity="0.3"
-                      d="M7.95739 14.7955L15.1165 7.63636L7.95739 0.477273L6.30966 2.1179L10.6349 6.43608H0.5V8.83665H10.6349L6.30966 13.1619L7.95739 14.7955Z"
-                      fill="black"
-                    />
-                  </svg>
                 </a>
               </td>
               <td>{fren.followers.toLocaleString()}</td>

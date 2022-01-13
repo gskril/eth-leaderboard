@@ -34,6 +34,10 @@
   border-style: hidden;
 }
 
+.profiles tr > td {
+  font-size: 20px;
+}
+
 .profiles tr > *:first-child {
   text-align: center;
   padding-left: 1.5rem;
@@ -78,7 +82,7 @@
 }
 
 .tableWrapper td svg {
-  margin-left: 0.125rem;
+  margin-left: 8px;
   transform: translateY(0.0625rem);
 }
 
@@ -126,7 +130,7 @@
 }
 
 .ensName {
-  margin-left: 0.3125rem;
+  margin-left: 10px;
 }
 
 @media screen and (max-width: 38.75em) {
