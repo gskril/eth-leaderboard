@@ -1,9 +1,15 @@
 .footer {
-	padding: 2rem 0;
+  padding: 2rem 0;
 }
 
 .footerContainer {
-	max-width: var(--container-width);
-	margin: 0 auto;
-	padding: 0 1.5rem;
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+@media screen and (max-width: 38.75em) {
+  .footer {
+    margin-bottom: 80px;
+  }
 }
