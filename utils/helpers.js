@@ -6,4 +6,13 @@ const extractEns = (string) => {
     }
 }
 
-module.exports = { extractEns }
+const chunkArray = (allData, numberInEachChunk) => {
+    const chunkedArray = []
+    const chunkSize = numberInEachChunk
+    for (let i = 0; i < allData.length; i += chunkSize) {
+        chunkedArray.push(allData.slice(i, i + chunkSize))
+    }
+    return chunkedArray
+}
+
+module.exports = { extractEns, chunkArray }

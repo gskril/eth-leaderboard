@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node index",
     "create-db": "node utils/create-postgresql",
-    "populate-db": "node utils/sheets-to-postgresql"
+    "populate-db": "node utils/sheets-to-postgresql",
+    "twitter": "node utils/twitter-bulk-checker"
   },
   "author": "Greg Skriloff",
   "license": "ISC",
@@ -17,6 +18,7 @@
     "dotenv": "^10.0.0",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
+    "node-cron": "^3.0.0",
     "pg": "^8.7.1",
     "sharp": "^0.29.3",
     "twit": "^2.2.11"
