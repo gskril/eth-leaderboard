@@ -1,7 +1,7 @@
 .filters {
   display: flex;
   max-width: var(--container-width);
-  width: 100%;
+  width: 95vw;
   margin-top: 2rem;
   flex-direction: row;
   justify-content: space-between;
@@ -222,6 +222,10 @@
   }
 
   .searchHasValue .mobileSearchButton {
+    display: none;
+  }
+
+  .mobileSearchOpen .scrollToTop {
     display: none;
   }
 

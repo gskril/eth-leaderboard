@@ -75,6 +75,92 @@
   color: #717171;
 }
 
+/* fixed header */
+
+.hideFixed {
+  visibility: hidden;
+  height: 0;
+}
+
+.fixedHeaderWrapper {
+  width: 100%;
+  height: 120px;
+  background: radial-gradient(
+      40.48% 67.6% at 50% 32.4%,
+      #ecf4ff 0%,
+      #f7f7ff 52.77%,
+      #f7f7f7 100%
+    ),
+    #ffffff;
+  background-size: 100vw 200%;
+  background-attachment: scroll;
+  display: flex;
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  align-items: center;
+  justify-content: center;
+}
+
+.fixedHeader {
+  max-width: calc(var(--container-width) + 100px);
+  width: 95vw;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.fixedHeader .heroTitle {
+  flex-direction: row;
+  align-items: center;
+}
+
+.fixedHeader .heroTitle {
+  margin-bottom: 0;
+}
+
+.fixedHeader .heroTitle h1 {
+  font-size: 24px;
+  margin-bottom: 0;
+}
+
+.fixedHeader .heroTitle a {
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.fixedHeader .scrollToTop {
+  background: none;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #000000;
+  opacity: 0.3;
+  font-weight: 400;
+  position: absolute;
+  cursor: pointer;
+  transition: 0.15s all;
+  padding: 10px;
+}
+
+.fixedHeader .scrollToTop svg {
+  margin-bottom: 4px;
+  opacity: 0.66;
+}
+
+.fixedHeader .scrollToTop:hover {
+  opacity: 0.6;
+}
+
+@media screen and (max-width: 1024px) {
+  .fixedHeader .heroTitle {
+    display: none;
+  }
+}
+
 @media screen and (max-width: 50em) {
   .floorSection {
     padding: 1.125rem 1.5rem;
@@ -82,6 +168,10 @@
 }
 
 @media screen and (max-width: 38.75em) {
+  .mobHidden {
+    display: none !important;
+  }
+
   .floorFollowersLabel {
     display: none;
   }
@@ -123,5 +213,32 @@
   .floorNumber {
     font-size: 1.5rem;
     margin-bottom: 0.25rem;
+  }
+
+  /* fixed header */
+
+  .fixedHeaderWrapper {
+    height: 80px;
+    left: 0;
+    bottom: 0;
+    top: initial;
+  }
+
+  .fixedHeader {
+    width: 90%;
+    justify-content: flex-start;
+  }
+
+  .fixedHeader .heroTitle {
+    display: none;
+  }
+
+  .fixedHeader > button {
+    margin-right: 16px;
+  }
+
+  .fixedHeader .scrollToTop {
+    position: fixed;
+    right: 20px;
   }
 }
