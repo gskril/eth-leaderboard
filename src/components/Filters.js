@@ -106,13 +106,16 @@ export default function Filters({
         } ${currentSearchInput !== "" ? filtersStyles.searchHasValue : ""}`}
         ref={filterDivRef}
       >
+        {showFixed && <div className={headerStyles.headerPlaceholder}></div>}
         {!showFixed && (
           <Fragment>
             <button
               onClick={openSearch}
-              className={filtersStyles.mobileSearchButton}
+              className={filtersStyles.mobileSearchButtonWrapper}
             >
-              <SearchIcon />
+              <div className={filtersStyles.mobileSearchButton}>
+                <SearchIcon />
+              </div>
             </button>
             <div
               className={filtersStyles.searchWrapper}
@@ -203,9 +206,11 @@ export default function Filters({
               </div>
               <button
                 onClick={openSearch}
-                className={filtersStyles.mobileSearchButton}
+                className={filtersStyles.mobileSearchButtonWrapper}
               >
-                <SearchIcon />
+                <div className={filtersStyles.mobileSearchButton}>
+                  <SearchIcon />
+                </div>
               </button>
               <div
                 className={filtersStyles.searchWrapper}

@@ -1,3 +1,7 @@
+.layout.removeMargin > footer {
+  margin-bottom: 0px;
+}
+
 .showFixedGradient {
   background: linear-gradient(
     180deg,

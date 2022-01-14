@@ -26,7 +26,12 @@ export default function Layout({ children, showFixed }) {
   );
 
   return (
-    <div ref={bodyRef}>
+    <div
+      ref={bodyRef}
+      className={`${layoutStyles.layout} ${
+        !showFixed && layoutStyles.removeMargin
+      }`}
+    >
       <Head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />

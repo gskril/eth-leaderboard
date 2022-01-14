@@ -90,8 +90,8 @@
   border-radius: 100%;
   background: none;
   border: none;
-  width: 35px;
-  height: 35px;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -99,6 +99,7 @@
   visibility: visible;
   transition: opacity 0.3s ease, visibility 0s ease 0ms, width 0s ease 0ms;
   cursor: pointer;
+  padding: 5px;
 }
 
 .removeButton > svg {
@@ -145,7 +146,8 @@
   justify-content: flex-end;
 }
 
-.mobileSearchButton {
+.mobileSearchButton,
+.mobileSearchButtonWrapper {
   display: none;
 }
 
@@ -206,6 +208,15 @@
     width: 100%;
   }
 
+  .mobileSearchButtonWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    background: none;
+    border: none;
+  }
+
   .mobileSearchButton {
     display: flex;
     align-items: center;
@@ -218,7 +229,7 @@
     border: 1px solid rgba(0, 0, 0, 0.1);
   }
 
-  .mobileSearchButton,
+  .mobileSearchButtonWrapper,
   .rightSide,
   .scrollToTop {
     transition: opacity 0.31s ease 0.31s, visibility 0.31s ease 0.31s,
@@ -231,10 +242,10 @@
     margin-left: 0px;
   }
 
-  .mobileSearchOpen .mobileSearchButton,
+  .mobileSearchOpen .mobileSearchButtonWrapper,
   .mobileSearchOpen .rightSide,
   .mobileSearchOpen .scrollToTop,
-  :not(.mobileSearchOpen).searchHasValue .mobileSearchButton {
+  :not(.mobileSearchOpen).searchHasValue .mobileSearchButtonWrapper {
     transition: opacity 0s ease 0s, visibility 0s ease 0s, width 0s ease 0ms,
       padding 0s ease 0ms, margin 0s ease 0ms !important;
     opacity: 0 !important;
@@ -245,11 +256,11 @@
     margin: 0;
   }
 
-  .mobileSearchOpen .mobileSearchButton {
-    margin-left: -40px;
+  .mobileSearchOpen .mobileSearchButtonWrapper {
+    margin-right: 0px;
   }
 
-  :not(.mobileSearchOpen).searchHasValue .mobileSearchButton {
+  :not(.mobileSearchOpen).searchHasValue .mobileSearchButtonWrapper {
     display: none;
   }
 }

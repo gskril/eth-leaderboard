@@ -23,9 +23,12 @@
 }
 
 .tableWrapper.noResultsWrapper {
-  height: 20vh;
+  height: 30vh;
   overflow: visible;
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .profiles {
@@ -120,9 +123,7 @@
   color: rgba(0, 0, 0, 0.2);
   font-size: 3.125rem;
   text-align: center;
-  padding: 4rem 1rem;
-  width: 100%;
-  line-height: 1;
+  display: block;
 }
 
 .ensProfile {
@@ -150,7 +151,7 @@
   .tableWrapper td svg {
     display: none;
   }
-  .no-results {
+  .noResults {
     font-size: 2rem;
   }
 }
