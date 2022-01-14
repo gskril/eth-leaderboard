@@ -6,7 +6,8 @@
     "start": "node index",
     "create-db": "node utils/create-postgresql",
     "populate-db": "node utils/sheets-to-postgresql",
-    "twitter": "node utils/twitter-bulk-checker"
+    "twitter": "node utils/twitter-bulk-checker",
+    "discord": "node discord"
   },
   "author": "Greg Skriloff",
   "license": "ISC",

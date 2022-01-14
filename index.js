@@ -10,9 +10,6 @@ app.set('view engine', 'ejs')
 app.set('views', './views')
 app.listen(process.env.PORT || 8080)
 
-const discord = require('./discord.js')
-discord.startDiscordBot()
-
 // Use live data from Twitter
 app.get('/', async function (req, res) {
     let profiles
