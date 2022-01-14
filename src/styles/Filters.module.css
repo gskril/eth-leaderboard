@@ -151,6 +151,10 @@
   display: none;
 }
 
+.hide {
+  opacity: 0.3;
+}
+
 @media screen and (max-width: 38.75em) {
   :not(.mobileSearchOpen).searchHasValue .searchWrapper {
     visibility: visible;

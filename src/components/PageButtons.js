@@ -16,9 +16,19 @@ const PageButton = ({ number, page, setPage, isActive }) => (
   </button>
 );
 
-export default function PageButtons({ page, setPage, count, amntPerPage }) {
+export default function PageButtons({
+  page,
+  setPage,
+  count,
+  amntPerPage,
+  hide,
+}) {
   return (
-    <div className={pageButtonStyles.buttonWrapper}>
+    <div
+      className={`${pageButtonStyles.buttonWrapper} ${
+        hide && pageButtonStyles.hide
+      }`}
+    >
       {[...Array(Math.ceil(count / amntPerPage)).keys()].map((number, _, arr) =>
         arr.length > 1 &&
         ((number <= page + 1 && number >= page - 1) ||

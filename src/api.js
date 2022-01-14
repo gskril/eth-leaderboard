@@ -21,7 +21,6 @@ export const useFrens = (params = {}) => {
   params.count && searchParams.append("count", params.count);
   params.page &&
     searchParams.append("skip", params.page * (params.count || 100));
-  console.log(params.searchInput);
   params.searchInput && searchParams.append("q", params.searchInput);
 
   return useSWR(frensPath + searchParams.toString(), fetcher);

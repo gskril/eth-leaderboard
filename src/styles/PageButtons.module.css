@@ -59,6 +59,11 @@
   margin: 0 4px;
 }
 
+.hide {
+  pointer-events: none;
+  opacity: 0.3;
+}
+
 @media screen and (max-width: 38.75em) {
   .button {
     margin: 0 4px;

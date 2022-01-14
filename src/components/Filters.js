@@ -32,7 +32,9 @@ export default function Filters({
   setSearchInput,
   filterDivRef,
   showFixed,
+  initialQuery,
 }) {
+  const [isInitial, setIsInitial] = useState(true);
   const [currentSearchInput, setCurrentSearchInput] = useState("");
   const [timeout, setTimeoutVar] = useState(null);
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
@@ -40,13 +42,17 @@ export default function Filters({
   const searchRefFixed = useRef();
   const searchInputRef = useRef();
   const searchInputRefFixed = useRef();
-  const { data: frensData, error } = useFrens({
+  const {
+    data: frensData,
+    error,
+    isValidating,
+  } = useFrens({
     searchInput,
     page,
   });
   const { count: _count } = frensData || { count: undefined };
   const prevCount = usePrevious(_count);
-  const count = _count || prevCount || 0;
+  const count = _count !== undefined ? _count : prevCount || 0;
 
   const handleClear = (e) => {
     e.stopPropagation();
@@ -68,7 +74,6 @@ export default function Filters({
   };
 
   useEffect(() => {
-    setPage(0);
     window.scrollTo({
       top: 0,
       behavior: "smooth",
@@ -94,9 +99,22 @@ export default function Filters({
   }, [mobileSearchOpen]);
 
   useEffect(() => {
+    if (isInitial) return;
     clearTimeout(timeout);
-    setTimeoutVar(setTimeout(() => setSearchInput(currentSearchInput), 600));
+    searchInput !== currentSearchInput &&
+      setTimeoutVar(setTimeout(() => setSearchInput(currentSearchInput), 600));
   }, [currentSearchInput]);
+
+  useEffect(() => {
+    if (
+      initialQuery.current &&
+      initialQuery.current.q &&
+      initialQuery.current.q !== currentSearchInput
+    ) {
+      setCurrentSearchInput(initialQuery.current.q);
+    }
+    setIsInitial(false);
+  }, [initialQuery]);
 
   return (
     <Fragment>
@@ -149,13 +167,21 @@ export default function Filters({
                 layout={mobileSearchOpen ? false : "position"}
                 className={filtersStyles.rightSide}
               >
-                <div className={filtersStyles.frensCount}>
+                <div
+                  className={`${filtersStyles.frensCount} ${
+                    isValidating && !frensData && filtersStyles.hide
+                  }`}
+                >
                   <strong>
                     {count.toLocaleString("en", { useGrouping: true })}
                   </strong>{" "}
-                  <span>name{count > 1 && "s"}</span>
+                  <span>name{count !== 1 && "s"}</span>
                 </div>
-                <PageButtons {...{ page, setPage, count }} amntPerPage={100} />
+                <PageButtons
+                  {...{ page, setPage, count }}
+                  hide={isValidating && !frensData}
+                  amntPerPage={100}
+                />
               </motion.div>
             </AnimatePresence>
           </Fragment>
@@ -253,15 +279,18 @@ export default function Filters({
                   className={filtersStyles.rightSide}
                 >
                   <div
-                    className={`${filtersStyles.frensCount} ${headerStyles.mobHidden}`}
+                    className={`${
+                      isValidating && !frensData && filtersStyles.hide
+                    } ${filtersStyles.frensCount} ${headerStyles.mobHidden}`}
                   >
                     <strong>
                       {count.toLocaleString("en", { useGrouping: true })}
                     </strong>{" "}
-                    <span>name{count > 1 && "s"}</span>
+                    <span>name{count !== 1 && "s"}</span>
                   </div>
                   <PageButtons
                     {...{ page, setPage, count }}
+                    hide={isValidating && !frensData}
                     amntPerPage={100}
                   />
                 </motion.div>
