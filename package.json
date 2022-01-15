@@ -9,7 +9,8 @@
     "migrate:deploy": "prisma migrate deploy --preview-feature",
     "migrate:status": "prisma migrate status --preview-feature",
     "generate": "prisma generate",
-    "discord": "node backend/discord-bot"
+    "discord": "node backend/discord-bot",
+    "twitter": "node backend/twitter-monitor"
   },
   "author": "Greg Skriloff",
   "license": "ISC",

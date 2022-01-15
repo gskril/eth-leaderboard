@@ -49,6 +49,36 @@ async function addFren(fren) {
 		})
 }
 
+async function updateFren (fren) {
+	return await prisma.fren.update({
+		where: {
+			id: fren.id,
+		},
+		data: {
+			name: fren.name,
+			ens: fren.ens,
+			handle: fren.handle,
+			followers: fren.followers,
+			verified: fren.verified,
+			twitterPicture: fren.twitterPicture,
+		},
+	})
+}
+
+async function getAllFrens() {
+	return await prisma.fren.findMany({
+		orderBy: { followers: 'desc' },
+		where: {
+			ens: {
+				contains: '.eth',
+			},
+		},
+		select: {
+			id: true,
+		},
+	})
+}
+
 async function getTwitterProfileByHandle(handle) {
 	return T.get('users/show', { screen_name: handle })
 		.then(async (res) => {
@@ -70,6 +100,9 @@ async function getTwitterProfilesById(ids) {
                 const ens = utils.extractEns(profile.name.toLowerCase())
             }
         })
+		.catch((err) => {
+			return console.log(err)
+		})
 }
 
 async function tweetNewProfile (msg, name, handle, rank) {
@@ -97,4 +130,13 @@ const extractEns = (name) => {
     }
 }
 
-module.exports = { addFren, getTwitterProfileByHandle, getTwitterProfilesById, tweetNewProfile, extractEns }
+const chunkArray = (allData, numberInEachChunk) => {
+    const chunkedArray = []
+    const chunkSize = numberInEachChunk
+    for (let i = 0; i < allData.length; i += chunkSize) {
+        chunkedArray.push(allData.slice(i, i + chunkSize))
+    }
+	return chunkedArray
+}
+   
+module.exports = { addFren, updateFren, getAllFrens, getTwitterProfileByHandle, getTwitterProfilesById, tweetNewProfile, extractEns, chunkArray }
