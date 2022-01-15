@@ -125,21 +125,17 @@ const FrensTablePage = ({ frens, showFixed }) => {
                     href={"https://twitter.com/" + fren.handle}
                     target="_blank"
                   >
-                    {fren.twitterPicture && (
-                      <Image
-                        layout="fixed"
-                        width="34px"
-                        height="34px"
-                        className={frensTableStyles.pfp}
-                        src={
-                          "https://unavatar.io/twitter/" +
-                          fren.handle +
-                          "?fallback=false"
-                        }
-                        alt=""
-                        priority={inx < 10}
-                      />
-                    )}
+                    <Image
+                      layout="fixed"
+                      width="34px"
+                      height="34px"
+                      className={frensTableStyles.pfp}
+                      src={fren.twitterPicture || "https://unavatar.io/twitter/" +
+                      fren.handle +
+                      "?fallback=false"}
+                      alt=""
+                      priority={inx < 10}
+                    />
                     <span className={frensTableStyles.ensName}>
                       {"@" + fren.handle}
                     </span>
