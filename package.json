@@ -1,6 +1,10 @@
 {
   "name": "eth-leaderboard",
   "version": "0.2.0",
+  "private": true,
+  "workspaces": [
+    "backend"
+  ],
   "scripts": {
     "dev": "next dev",
     "build": "yarn migrate:deploy && next build",
@@ -9,8 +13,7 @@
     "migrate:deploy": "prisma migrate deploy --preview-feature",
     "migrate:status": "prisma migrate status --preview-feature",
     "generate": "prisma generate",
-    "discord": "node backend/discord-bot",
-    "twitter": "node backend/twitter-monitor"
+    "start:backend": "yarn workspaces backend start"
   },
   "author": "Greg Skriloff",
   "license": "ISC",
@@ -18,9 +21,6 @@
     "@n8tb1t/use-scroll-position": "^2.0.3",
     "@prisma/client": "2.30.0",
     "@svgr/webpack": "^6.2.0",
-    "axios": "^0.24.0",
-    "discord-reply": "^0.1.2",
-    "discord.js": "12.5.3",
     "dotenv": "^11.0.0",
     "framer-motion": "^5.5.7",
     "next": "12",
@@ -28,8 +28,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "sharp": "^0.29.3",
-    "swr": "^1.1.2",
-    "twit": "^2.2.11"
+    "swr": "^1.1.2"
   },
   "devDependencies": {
     "prisma": "2.30.0"
