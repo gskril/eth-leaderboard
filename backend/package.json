@@ -1,0 +1,20 @@
+{
+  "name": "backend",
+  "private": true,
+  "type": "module",
+  "version": "0.1.0",
+  "scripts": {
+    "start": "node --experimental-specifier-resolution=node ./index.js"
+  },
+  "author": "Greg Skriloff",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "2.30.0",
+    "discord.js": "12.5.3",
+    "dotenv": "^11.0.0",
+    "twit": "^2.2.11"
+  },
+  "devDependencies": {
+    "prisma": "2.30.0"
+  }
+}
