@@ -15,7 +15,7 @@ export const fetchInitialData = async (q, count = 100, skip = 0, verified) => {
       offset: skip,
       limit: count,
     });
-    const allFrensCount = await tx.fren_ranks.count(criteria);
+    const allFrensCount = parseInt(await tx.fren_ranks.count(criteria));
     return [allFrensReq, allFrensCount];
   });
 
@@ -39,7 +39,7 @@ export const fetchInitialData = async (q, count = 100, skip = 0, verified) => {
 export const fetchInitialMetadata = async () => {
   const db = await getDb();
   const [countAll, top1000] = await db.withConnection(async (tx) => {
-    const countAllReq = await tx.fren_ranks.count();
+    const countAllReq = parseInt(await tx.fren_ranks.count());
     const top1000Req = await tx.fren_ranks.find(
       {},
       {
