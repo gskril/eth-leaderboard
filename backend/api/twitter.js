@@ -27,7 +27,7 @@ export async function tweetNewProfile(msg, name, handle, rank) {
     .then((res) => {
       const tweetLink = `https://twitter.com/${res.data.user.screen_name}/status/${res.data.id_str}`;
       console.log("Posted tweet:", tweetLink);
-      msg.lineReply(`Posted tweet: ${tweetLink}`);
+      msg.reply(`Posted tweet: ${tweetLink}`);
     })
     .catch((err) =>
       console.log("Error posting tweet.", err.allErrors[0].message)

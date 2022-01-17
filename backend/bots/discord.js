@@ -59,9 +59,9 @@ export function start() {
             .addField("Handle", profile.screen_name, true)
             .addField("Rank", rank, true);
 
-          msg.lineReply(embed).then((msg) => msg.react("✅"));
+          msg.reply(embed).then((msg) => msg.react("✅"));
         } else {
-          msg.lineReply(
+          msg.reply(
             `${profile.screen_name} has been added to the database, but is not eligible for a tweet`
           );
         }
