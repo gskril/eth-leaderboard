@@ -1,6 +1,10 @@
 export const extractEns = (name) => {
   try {
-    return name.match(/[a-zA-Z0-9][a-zA-Z0-9.-]+(.eth)/)[0];
+    const regex = new RegExp(
+      /[a-zA-Z0-9\p{Emoji}][a-zA-Z0-9\p{Emoji}.-]+(.eth)/,
+      "gui"
+    );
+    return name.match(regex)[0];
   } catch (error) {
     return null;
   }
