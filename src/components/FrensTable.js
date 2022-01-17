@@ -147,7 +147,16 @@ const FrensTablePage = ({ frens, showFixed }) => {
           </tbody>
         </table>
       ) : (
-        <span className={frensTableStyles.noResults}>No matches found.</span>
+        <div className={frensTableStyles.noResults}>
+          No matches found.
+          <span>Looking for someone with a .eth name on Twitter? <br />
+          <a
+            href="https://twitter.com/intent/tweet?text=%40ethleaderboard%20add%20%40"
+            target="_blank"
+          >
+            Tweet at @ethleaderboard
+          </a> and they'll be added shortly.</span>
+        </div>
       )}
     </div>
   );

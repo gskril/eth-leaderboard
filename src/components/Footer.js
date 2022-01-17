@@ -8,6 +8,9 @@ export default function Footer() {
           Website by{" "}
           <a href="https://twitter.com/gregskril" target="_blank">
             @gregskril
+          </a> and{" "}
+          <a href="https://twitter.com/taytemss" target="_blank">
+            @taytemss
           </a>
         </small>
         <small>

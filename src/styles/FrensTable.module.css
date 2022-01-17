@@ -126,6 +126,12 @@
   display: block;
 }
 
+.noResults > span {
+  display: block;
+  margin-top: 1rem;
+  font-size: 1.25rem;
+}
+
 .ensProfile {
   display: flex;
   align-items: center;

@@ -125,14 +125,14 @@
   background-color: #eaeaea;
   padding: 11px 10px 10px 16px;
   border-radius: 40px;
-  width: 175px;
+  width: 225px;
   height: 45px;
   transition: 0.3s all;
 }
 
 .searchWrapper:focus-within {
   background-color: #e0e0e0;
-  width: 250px;
+  width: 275px;
 }
 
 .searchWrapper:focus-within .filtersSearch {
