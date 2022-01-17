@@ -42,7 +42,7 @@ export function start() {
         ens: ens,
         handle: profile.screen_name,
         followers: profile.followers_count,
-        createdAt: profile.created_at,
+        created: profile.created_at,
         verified: profile.verified,
         twitter_pfp: profile.profile_image_url_https,
       }).then(async (rank) => {
@@ -65,7 +65,7 @@ export function start() {
             `${profile.screen_name} has been added to the database, but is not eligible for a tweet`
           );
         }
-      });
+      })
     }
   });
 
