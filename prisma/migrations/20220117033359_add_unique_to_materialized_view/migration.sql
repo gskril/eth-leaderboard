@@ -1,0 +1,1 @@
+CREATE UNIQUE INDEX on fren_ranks (id);

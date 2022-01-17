@@ -65,7 +65,7 @@ const updateByChunks = async (chunkOfChunks) => {
 export async function refreshDatabase() {
   const startTime = new Date();
   return getAllFrens()
-    .then((allFrens) => chunkArray(allFrens, 1000))
+    .then((allFrens) => chunkArray(allFrens, 10000))
     .then((chunkArrays) =>
       processArray(chunkArrays, (chunk) =>
         updateByChunks(chunk).then(() => console.log("Updated chunk"))
