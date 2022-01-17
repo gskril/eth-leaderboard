@@ -7,7 +7,7 @@ export const fetchEnsStats = () =>
   })
     .then((res) => res.json())
     .then((res) => {
-      return new Intl.NumberFormat().format(res.data.stats.count);
+      return new Intl.NumberFormat().format(res.stats.count);
     })
     .catch((err) => {
       console.log(

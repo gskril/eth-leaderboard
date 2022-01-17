@@ -1,6 +1,7 @@
 import { getAllFrens, updateFrens } from ".";
 import { T, T2 } from "../index.js";
 import { chunkArray, extractEns, processArray } from "../utils";
+import { fetchEnsStats } from "./external.js";
 
 export async function updateTwitterLocation() {
   // Get number of registered ENS names from OpenSea
