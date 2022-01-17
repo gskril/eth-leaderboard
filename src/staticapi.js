@@ -9,6 +9,7 @@ export const fetchInitialData = async (q, count = 100, skip = 0, verified) => {
 
   const [allFrens, frensCount] = await db.withConnection(async (tx) => {
     const allFrensReq = await tx.fren_ranks.find(criteria, {
+      order: [{ field: "followers", direction: "desc", nulls: "last" }],
       offset: skip,
       limit: count,
     });
@@ -36,7 +37,14 @@ export const fetchInitialData = async (q, count = 100, skip = 0, verified) => {
 export const fetchInitialMetadata = async () => {
   const [countAll, top1000] = await db.withConnection(async (tx) => {
     const countAllReq = await tx.fren_ranks.count();
-    const top1000Req = await tx.fren_ranks.find({}, { offset: 0, limit: 1000 });
+    const top1000Req = await tx.fren_ranks.find(
+      {},
+      {
+        order: [{ field: "followers", direction: "desc", nulls: "last" }],
+        offset: 0,
+        limit: 1000,
+      }
+    );
     return [countAllReq, top1000Req];
   });
   const top500 = top1000[999].followers;

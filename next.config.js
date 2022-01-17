@@ -1,6 +1,11 @@
 module.exports = {
   images: {
-    domains: ["metadata.ens.domains", "pbs.twimg.com", "abs.twimg.com"],
+    domains: [
+      "metadata.ens.domains",
+      "unavatar.io",
+      "pbs.twimg.com",
+      "abs.twimg.com",
+    ],
     minimumCacheTTL: 86400,
   },
   webpack(config) {
