@@ -1,6 +1,6 @@
 import { getAllFrens, updateFrens } from ".";
-import { T } from "../index.js";
-import { chunkArray, extractEns } from "../utils";
+import { T, T2 } from "../index.js";
+import { chunkArray, extractEns, processArray } from "../utils";
 
 export async function updateTwitterLocation() {
   // Get number of registered ENS names from OpenSea
@@ -34,35 +34,49 @@ export async function tweetNewProfile(msg, name, handle, rank) {
     );
 }
 
-const updateByChunk = async (formattedChunk) =>
-  T.get("2/users/lookup", { user_id: formattedChunk })
-    .then((res) =>
-      res.data.map((profile) => ({
-        id: profile.id_str,
-        name: profile.name,
-        ens: extractEns(profile.name.toLowerCase()),
-        handle: profile.screen_name,
-        followers: profile.followers_count,
-        verified: profile.verified,
-        twitterPicture: profile.profile_image_url_https,
-      }))
-    )
+const fetchChunk = async (chunk) => {
+  console.log(chunk.split(",").length);
+  return T2.get("users", {
+    ids: chunk,
+    "user.fields": "id,name,username,public_metrics,verified,profile_image_url",
+  }).then((res) =>
+    res.data.map((profile) => ({
+      id: profile.id,
+      name: profile.name,
+      ens: extractEns(profile.name.toLowerCase()),
+      handle: profile.username,
+      followers: profile.public_metrics.followers_count,
+      verified: profile.verified,
+      twitter_pfp: profile.profile_image_url,
+    }))
+  );
+};
+
+const updateByChunks = async (chunkOfChunks) => {
+  return Promise.all(
+    chunkArray(chunkOfChunks, 100)
+      .map((chunk) => chunk.map((fren) => fren.id).join(","))
+      .map(fetchChunk)
+  )
+    .then((profilesArrays) => profilesArrays.flat())
     .then((profiles) => updateFrens(profiles));
+};
 
 export async function refreshDatabase() {
+  const startTime = new Date();
   return getAllFrens()
-    .then((allFrens) => chunkArray(allFrens, 100))
-    .then((chunks) =>
-      chunks.map((chunk) => chunk.map((fren) => fren.id).join(","))
-    )
-    .then((formattedChunks) =>
-      Promise.all(
-        formattedChunks.map((chunk, inx) =>
-          updateByChunk(chunk).then(() => console.log(`Updated chunk ${inx}`))
-        )
+    .then((allFrens) => chunkArray(allFrens, 1000))
+    .then((chunkArrays) =>
+      processArray(chunkArrays, (chunk) =>
+        updateByChunks(chunk).then(() => console.log("Updated chunk"))
       )
     )
-    .then(() => console.log(`Finished refreshing database at ${new Date()}`))
+    .then(() => (new Date().getTime() - startTime.getTime()) / 1000)
+    .then((timeTaken) =>
+      console.log(
+        `Finished refreshing database (took ${timeTaken}s) at ${new Date()}`
+      )
+    )
     .catch((err) =>
       console.log(`ERROR refreshing database at ${new Date()}:`, err)
     );

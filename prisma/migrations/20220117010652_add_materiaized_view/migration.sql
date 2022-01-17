@@ -1,0 +1,1 @@
+CREATE MATERIALIZED VIEW fren_ranks AS SELECT *, RANK () OVER (ORDER BY followers DESC) AS ranking FROM "Fren" WHERE LOWER(name) like '%.eth%';

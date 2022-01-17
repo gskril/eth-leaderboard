@@ -14,3 +14,11 @@ export const chunkArray = (allData, numberInEachChunk) => {
   }
   return chunkedArray;
 };
+
+export function processArray(array, fn) {
+  return array.reduce(function (p, item) {
+    return p.then(function () {
+      return fn(item);
+    });
+  }, Promise.resolve());
+}

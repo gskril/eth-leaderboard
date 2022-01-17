@@ -9,12 +9,11 @@
   "author": "Greg Skriloff",
   "license": "ISC",
   "dependencies": {
-    "@prisma/client": "2.30.0",
     "discord.js": "12.5.3",
     "dotenv": "^11.0.0",
-    "twit": "^2.2.11"
-  },
-  "devDependencies": {
-    "prisma": "2.30.0"
+    "massive": "^6.10.2",
+    "pg-promise": "^10.11.1",
+    "twit": "^2.2.11",
+    "twitter-v2": "^1.1.0"
   }
 }

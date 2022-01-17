@@ -13,7 +13,7 @@
     "migrate:deploy": "prisma migrate deploy --preview-feature",
     "migrate:status": "prisma migrate status --preview-feature",
     "generate": "prisma generate",
-    "start:backend": "yarn workspaces backend start"
+    "start:backend": "yarn workspaces run start"
   },
   "author": "Greg Skriloff",
   "license": "ISC",
@@ -28,7 +28,8 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "sharp": "^0.29.3",
-    "swr": "^1.1.2"
+    "swr": "^1.1.2",
+    "massive": "^6.10.2"
   },
   "devDependencies": {
     "prisma": "2.30.0"

@@ -1,6 +1,6 @@
 module.exports = {
   images: {
-    domains: ["metadata.ens.domains", "unavatar.io", "pbs.twimg.com"],
+    domains: ["metadata.ens.domains", "pbs.twimg.com", "abs.twimg.com"],
     minimumCacheTTL: 86400,
   },
   webpack(config) {
@@ -8,6 +8,7 @@ module.exports = {
       test: /\.svg$/,
       use: ["@svgr/webpack"],
     });
+    config.experiments.topLevelAwait = true;
     return config;
   },
 };

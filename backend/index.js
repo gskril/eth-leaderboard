@@ -1,13 +1,27 @@
-import Prisma from "@prisma/client";
 import { Client } from "discord.js";
+import massive from "massive";
 import Twit from "twit";
+import Twitter from "twitter-v2";
 import { refreshDatabase, updateTwitterLocation } from "./api";
 import { start as startDiscord } from "./bots/discord";
 import { start as startTwitter } from "./bots/twitter";
-const { PrismaClient } = Prisma;
+(await import("dotenv")).config({ path: "../.env" });
 
-export const prisma = new PrismaClient();
+export const db = await massive({
+  host: process.env.DATABASE_HOST,
+  port: process.env.DATABASE_PORT,
+  database: process.env.DATABASE_DB,
+  user: process.env.DATABASE_USER,
+  password: process.env.DATABASE_PASS,
+  poolSize: 10,
+});
 export const discord = new Client();
+export const T2 = new Twitter({
+  consumer_key: process.env.consumer_key,
+  consumer_secret: process.env.consumer_secret,
+  access_token_key: process.env.access_token,
+  access_token_secret: process.env.access_token_secret,
+});
 export const T = new Twit({
   consumer_key: process.env.consumer_key,
   consumer_secret: process.env.consumer_secret,

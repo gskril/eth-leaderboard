@@ -1,93 +1,43 @@
-import { prisma } from "../index.js";
+import Pgp from "pg-promise";
+import { db } from "../index.js";
+
+const pgp = Pgp();
 
 export async function addFren(fren) {
-  return await prisma.fren
-    .upsert({
-      where: {
-        id: fren.id,
-      },
-      update: {
-        name: fren.name,
-        ens: fren.ens,
-        handle: fren.handle,
-        followers: fren.followers,
-        verified: fren.verified,
-        twitterPicture: fren.twitterPicture,
-      },
-      create: {
-        id: fren.id,
-        name: fren.name,
-        ens: fren.ens,
-        handle: fren.handle,
-        followers: fren.followers,
-        createdAt: new Date(),
-        verified: fren.verified,
-        twitterPicture: fren.twitterPicture,
-      },
-    })
-    .then(async (fren) => {
-      // check the 100 most followed accounts in the database
-      const frens = await prisma.fren.findMany({
-        orderBy: { followers: "desc" },
-        where: {
-          ens: {
-            contains: "eth",
-            mode: "insensitive",
-          },
-        },
-        take: 100,
-      });
-      // get rank within the top 100
-      const rank = frens.findIndex((f) => f.id === fren.id);
-      return rank;
-    });
+  return await db.Fren.insert(fren, {
+    onConflict: {
+      target: "id",
+      action: "update",
+      exclude: ["createdAt"],
+    },
+  })
+    .then(() => db.fren_ranks.refresh(true))
+    .then(() => db.fren_ranks.findOne({ id: fren.id }, { fields: ["ranking"] }))
+    .then((rank) => (rank > 100 ? -1 : rank));
 }
 
 export async function updateFren(fren) {
-  return await prisma.fren.update({
-    where: {
-      id: fren.id,
-    },
-    data: {
-      name: fren.name,
-      ens: fren.ens,
-      handle: fren.handle,
-      followers: fren.followers,
-      verified: fren.verified,
-      twitterPicture: fren.twitterPicture,
-    },
-  });
+  return await db.Fren.update(fren.id, fren).then(() =>
+    db.fren_ranks.refresh(true)
+  );
 }
 
 export async function updateFrens(frens) {
-  return await prisma.$transaction([
-    ...frens.map((fren) =>
-      prisma.fren.update({
-        where: { id: fren.id },
-        data: {
-          name: fren.name,
-          ens: fren.ens,
-          handle: fren.handle,
-          followers: fren.followers,
-          verified: fren.verified,
-          twitterPicture: fren.twitterPicture,
-        },
-      })
-    ),
-  ]);
+  const cs = new pgp.helpers.ColumnSet(
+    ["id", "name", "ens", "handle", "followers", "verified", "twitter_pfp"],
+    { table: "Fren" }
+  );
+  const update = pgp.helpers.update(frens, cs) + " WHERE v.id = t.id";
+  await db.query(update);
+  return db.fren_ranks.refresh(true);
 }
 
 export async function getAllFrens() {
-  return await prisma.fren.findMany({
-    orderBy: { followers: "desc" },
-    where: {
-      ens: {
-        contains: ".eth",
-        mode: "insensitive",
-      },
-    },
-    select: {
-      id: true,
-    },
-  });
+  return await db.Fren.find(
+    {},
+    {
+      fields: ["id"],
+      order: [{ field: "followers", direction: "desc", nulls: "last" }],
+    }
+  );
 }
