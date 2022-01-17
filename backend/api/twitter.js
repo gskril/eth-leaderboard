@@ -39,8 +39,8 @@ const fetchChunk = async (chunk) => {
   return T2.get("users", {
     ids: chunk,
     "user.fields": "id,name,username,public_metrics,verified,profile_image_url",
-  }).then((res) =>
-    res.data.map((profile) => ({
+  }).then((res) => [
+    ...res.data.map((profile) => ({
       id: profile.id,
       name: profile.name,
       ens: extractEns(profile.name.toLowerCase()),
@@ -48,8 +48,16 @@ const fetchChunk = async (chunk) => {
       followers: profile.public_metrics.followers_count,
       verified: profile.verified,
       twitter_pfp: profile.profile_image_url,
-    }))
-  );
+    })),
+    ...(res.errors
+      ? res.errors
+          .filter((error) => error.detail.includes("suspended"))
+          .map((suspendedProfile) => ({
+            id: suspendedProfile.value,
+            suspended: true,
+          }))
+      : []),
+  ]);
 };
 
 const updateByChunks = async (chunkOfChunks) => {

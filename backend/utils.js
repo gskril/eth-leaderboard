@@ -1,6 +1,6 @@
 export const extractEns = (name) => {
   try {
-    return name.match(/[\w]*[.]eth/)[0];
+    return name.match(/[a-zA-Z0-9][a-zA-Z0-9.-]+(.eth)/)[0];
   } catch (error) {
     return null;
   }

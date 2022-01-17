@@ -23,13 +23,22 @@ export async function updateFren(fren) {
 }
 
 export async function updateFrens(frens) {
+  const toUpdate = frens.filter((fren) => !fren.suspended);
+  const toDelete = frens.filter((fren) => fren.suspended);
   const cs = new pgp.helpers.ColumnSet(
     ["id", "name", "ens", "handle", "followers", "verified", "twitter_pfp"],
     { table: "Fren" }
   );
-  const update = pgp.helpers.update(frens, cs) + " WHERE v.id = t.id";
+  const update = pgp.helpers.update(toUpdate, cs) + " WHERE v.id = t.id";
   await db.query(update);
+  toDelete.length > 0 && (await deleteFrens(toDelete));
   return db.fren_ranks.refresh(true);
+}
+
+export async function deleteFrens(frens) {
+  return await db.Fren.destroy({
+    "id in": frens.map((fren) => fren.id),
+  });
 }
 
 export async function getAllFrens() {
