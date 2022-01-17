@@ -33,7 +33,7 @@ export function start() {
           ens: ens,
           handle: profile.screen_name,
           followers: profile.followers_count,
-          createdAt: new Date(),
+          created: new Date(),
           verified: profile.verified,
           twitter_pfp: profile.profile_image_url_https,
         }).then(() => console.log(`Added @${handle} to the database`));

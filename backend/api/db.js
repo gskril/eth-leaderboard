@@ -8,7 +8,7 @@ export async function addFren(fren) {
     onConflict: {
       target: "id",
       action: "update",
-      exclude: ["createdAt"],
+      exclude: ["created"],
     },
   })
     .then(() => db.fren_ranks.refresh(true))
