@@ -1,6 +1,8 @@
-import { db } from "./db";
+import getDb from "./db";
 
 export const fetchInitialData = async (q, count = 100, skip = 0, verified) => {
+  const db = await getDb();
+
   if (count > 500) count = 500;
 
   const criteria = {};
@@ -35,6 +37,7 @@ export const fetchInitialData = async (q, count = 100, skip = 0, verified) => {
 };
 
 export const fetchInitialMetadata = async () => {
+  const db = await getDb();
   const [countAll, top1000] = await db.withConnection(async (tx) => {
     const countAllReq = await tx.fren_ranks.count();
     const top1000Req = await tx.fren_ranks.find(

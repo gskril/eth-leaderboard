@@ -8,11 +8,11 @@ import { start as startTwitter } from "./bots/twitter";
 (await import("dotenv")).config({ path: "../.env" });
 
 export const db = await massive({
-  host: process.env.DATABASE_HOST,
-  port: process.env.DATABASE_PORT,
-  database: process.env.DATABASE_DB,
-  user: process.env.DATABASE_USER,
-  password: process.env.DATABASE_PASS,
+  host: process.env.PGHOST,
+  port: process.env.PGPORT,
+  database: process.env.PGDATABASE,
+  user: process.env.PGUSER,
+  password: process.env.PGPASSWORD,
   poolSize: 10,
 });
 export const discord = new Client();

@@ -1,10 +1,21 @@
 import massive from "massive";
 
-export const db = await massive({
-  host: process.env.DATABASE_HOST,
-  port: process.env.DATABASE_PORT,
-  database: process.env.DATABASE_DB,
-  user: process.env.DATABASE_USER,
-  password: process.env.DATABASE_PASS,
-  poolSize: 10,
-});
+let db;
+
+export default async () => {
+  if (db) {
+    return db;
+  }
+
+  return massive({
+    host: process.env.PGHOST,
+    port: process.env.PGPORT,
+    database: process.env.PGDATABASE,
+    user: process.env.PGUSER,
+    password: process.env.PGPASSWORD,
+    poolSize: 10,
+  }).then((instance) => {
+    db = instance;
+    return Promise.resolve(db);
+  });
+};
