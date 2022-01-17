@@ -44,7 +44,7 @@ export function start() {
         followers: profile.followers_count,
         createdAt: profile.created_at,
         verified: profile.verified,
-        twitterPicture: profile.profile_image_url_https,
+        twitter_pfp: profile.profile_image_url_https,
       }).then(async (rank) => {
         rank = rank + 1;
         const top100 = rank > 0 && rank <= 100;

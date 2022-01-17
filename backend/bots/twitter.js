@@ -35,7 +35,7 @@ export function start() {
           followers: profile.followers_count,
           createdAt: new Date(),
           verified: profile.verified,
-          twitterPicture: profile.profile_image_url_https,
+          twitter_pfp: profile.profile_image_url_https,
         }).then(() => console.log(`Added @${handle} to the database`));
       } catch (err) {
         console.log("Error writing to database from Twitter monitor", err);
