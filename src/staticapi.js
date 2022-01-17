@@ -7,7 +7,7 @@ export const fetchInitialData = async (q, count = 100, skip = 0, verified) => {
 
   const criteria = {};
   if (q !== undefined)
-    criteria.or = [{ "name ilike": `%${q}%`, "ens ilike": `%${q}%` }];
+    criteria.or = [{ "handle ilike": `%${q}%` }, { "ens ilike": `%${q}%` }];
 
   const [allFrens, frensCount] = await db.withConnection(async (tx) => {
     const allFrensReq = await tx.fren_ranks.find(criteria, {
