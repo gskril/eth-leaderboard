@@ -1,12 +1,8 @@
-import { useRef, useState } from "react";
-import { useEffect } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import Image from "next/image";
 import { useFrens } from "../api";
 import frensTableStyles from "../styles/FrensTable.module.css";
-import PageButtons from "./PageButtons";
-import Image from "next/image";
 import { usePrevious } from "../utils/hooks";
-import { AnimatePresence, motion, useAnimation } from "framer-motion";
-import { useScrollPosition } from "@n8tb1t/use-scroll-position";
 
 export default function FrensTable({ searchInput, page, showFixed }) {
   const {
@@ -78,7 +74,9 @@ const FrensTablePage = ({ frens, showFixed }) => {
                   fren.ensAvatar && !fren.ensAvatar.includes("default")
                 }
               >
-                <td>{fren.ranking}</td>
+                <td>
+                  {fren.ranking.toLocaleString("en", { useGrouping: true })}
+                </td>
                 <td>
                   {fren.ens === ".eth" ? (
                     fren.name
@@ -130,9 +128,12 @@ const FrensTablePage = ({ frens, showFixed }) => {
                       width="34px"
                       height="34px"
                       className={frensTableStyles.pfp}
-                      src={fren.twitterPicture || "https://unavatar.io/twitter/" +
-                      fren.handle +
-                      "?fallback=false"}
+                      src={
+                        fren.twitterPicture ||
+                        "https://unavatar.io/twitter/" +
+                          fren.handle +
+                          "?fallback=false"
+                      }
                       alt=""
                       priority={inx < 10}
                     />
@@ -149,13 +150,16 @@ const FrensTablePage = ({ frens, showFixed }) => {
       ) : (
         <div className={frensTableStyles.noResults}>
           No matches found.
-          <span>Looking for someone with a .eth name on Twitter? <br />
-          <a
-            href="https://twitter.com/intent/tweet?text=%40ethleaderboard%20add%20%40"
-            target="_blank"
-          >
-            Tweet at @ethleaderboard
-          </a> and they'll be added shortly.</span>
+          <span>
+            Looking for someone with a .eth name on Twitter? <br />
+            <a
+              href="https://twitter.com/intent/tweet?text=%40ethleaderboard%20add%20%40"
+              target="_blank"
+            >
+              Tweet at @ethleaderboard
+            </a>{" "}
+            and they'll be added shortly.
+          </span>
         </div>
       )}
     </div>

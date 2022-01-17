@@ -30,7 +30,7 @@ export const fetchInitialData = async (q, count = 100, skip = 0, verified) => {
     created: x.created.toISOString(),
     ensAvatar: x.ens_avatar,
     twitterPicture: x.twitter_pfp,
-    ranking: x.ranking,
+    ranking: parseInt(x.ranking),
   }));
 
   return { frens, count: frensCount };

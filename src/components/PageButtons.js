@@ -1,6 +1,5 @@
 import { Fragment } from "react";
 import pageButtonStyles from "../styles/PageButtons.module.css";
-import { usePrevious } from "../utils/hooks";
 
 const PageButton = ({ number, page, setPage, isActive }) => (
   <button
@@ -34,7 +33,7 @@ export default function PageButtons({
         ((number <= page + 1 && number >= page - 1) ||
           (arr.length === number + 1 && arr.length > 2) ||
           (page > 1 && number === 0)) ? (
-          <Fragment>
+          <Fragment key={number}>
             {arr.length === number + 1 && arr.length > 2 && number - page > 2 && (
               <span
                 key={`${number}-dots`}
