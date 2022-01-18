@@ -46,10 +46,9 @@ export function start() {
         verified: profile.verified,
         twitter_pfp: profile.profile_image_url_https,
       }).then(async (rank) => {
-        rank = rank + 1;
         const top100 = rank > 0 && rank <= 100;
 
-        // If they haven't been tweeted and they rank in the top 100, offer to tweet them
+        // If they rank in the top 100, offer to tweet
         if (top100) {
           const embed = new MessageEmbed()
             .setDescription(

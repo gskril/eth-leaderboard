@@ -13,7 +13,7 @@ export async function addFren(fren) {
   })
     .then(() => db.fren_ranks.refresh(true))
     .then(() => db.fren_ranks.findOne({ id: fren.id }, { fields: ["ranking"] }))
-    .then((rank) => (rank > 100 ? -1 : rank));
+    .then((rank) => parseInt(rank.ranking) > 100 || rank == null ? -1 : parseInt(rank.ranking));
 }
 
 export async function updateFren(fren) {
