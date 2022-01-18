@@ -36,7 +36,7 @@ export async function tweetNewProfile(msg, name, handle, rank) {
 }
 
 const fetchChunk = async (chunk) => {
-  console.log(chunk.split(",").length);
+  // console.log(chunk.split(",").length);
   return T2.get("users", {
     ids: chunk,
     "user.fields": "id,name,username,public_metrics,verified,profile_image_url",

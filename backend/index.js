@@ -33,7 +33,7 @@ startTwitter();
 startDiscord();
 
 // Refresh all Twitter accounts in the database every hour
-setInterval(() => refreshDatabase(), 12 * 60 * 60 * 1000);
+setInterval(() => refreshDatabase(), 60 * 60 * 1000);
 
 // Refresh Twitter location every 5 minutes
 setInterval(() => updateTwitterLocation(), 5 * 60 * 1000);
