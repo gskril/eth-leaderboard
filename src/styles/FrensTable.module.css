@@ -159,6 +159,10 @@
   }
   .noResults {
     font-size: 2rem;
+    padding: 0 1rem;
+  }
+  .noResults > span {
+    font-size: 1rem;
   }
 }
 

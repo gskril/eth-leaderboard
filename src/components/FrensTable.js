@@ -153,7 +153,7 @@ const FrensTablePage = ({ frens, showFixed }) => {
           <span>
             Looking for someone with a .eth name on Twitter? <br />
             <a
-              href="https://twitter.com/intent/tweet?text=%40ethleaderboard%20add%20%40"
+              href="https://twitter.com/intent/tweet?text=%40ethleaderboard%20add"
               target="_blank"
             >
               Tweet at @ethleaderboard

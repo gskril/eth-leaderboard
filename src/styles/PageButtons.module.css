@@ -20,7 +20,7 @@
   box-sizing: border-box;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 12px;
-  margin: 0 8px;
+  margin: 0 4px;
 
   cursor: pointer;
   transition: 0.15s all;
