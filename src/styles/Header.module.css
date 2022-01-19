@@ -14,6 +14,18 @@
   margin-bottom: 0.5rem;
 }
 
+.heroTitleLink {
+  text-decoration: none;
+  color: inherit;
+  opacity: 1;
+}
+
+.heroTitleLink:hover,
+.heroTitleLink:focus-visible {
+  color: inherit;
+  opacity: 0.85;
+}
+
 .heroSubtitle {
   font-weight: 400;
   color: #717171;
@@ -25,7 +37,7 @@
   color: #7298f8;
 }
 
-.heroTitle a {
+.heroTwitter {
   background-color: #ffffff;
   border-radius: 50%;
   padding: 0.25rem;
@@ -39,6 +51,11 @@
   text-decoration: none;
   color: currentColor;
   fill: #1da1f2;
+}
+
+.heroTwitter:hover,
+.heroTwitter:focus-visible {
+  opacity: 0.85;
 }
 
 .floor {
@@ -125,7 +142,7 @@
   margin-bottom: 0;
 }
 
-.fixedHeader .heroTitle a {
+.fixedHeader .heroTwitter {
   margin-left: 8px;
   margin-right: 8px;
 }
@@ -208,7 +225,7 @@
   .heroTitle {
     align-items: flex-end;
   }
-  .heroTitle a {
+  .heroTwitter {
     transform: translateY(-0.5rem);
     width: 2.5rem;
     height: 2.5rem;

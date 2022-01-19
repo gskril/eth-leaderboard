@@ -8,9 +8,11 @@ export default function Header({ top10, top100, top500, children }) {
     <div className={headerStyles.hero}>
       <div className={headerStyles.heroTitle}>
         <h1>
-          <span className={headerStyles.heroHighlight}>.eth</span> Leaderboard
+          <a className={headerStyles.heroTitleLink} href="/">
+            <span className={headerStyles.heroHighlight}>.eth</span> Leaderboard
+          </a>
         </h1>
-        <a href="https://twitter.com/ethleaderboard" target="_blank">
+        <a className={headerStyles.heroTwitter} href="https://twitter.com/ethleaderboard" target="_blank">
           <svg
             width="22"
             height="22"

@@ -213,10 +213,12 @@ export default function Filters({
             <div className={headerStyles.fixedHeader}>
               <div className={headerStyles.heroTitle}>
                 <h1>
-                  <span className={headerStyles.heroHighlight}>.eth</span>{" "}
-                  Leaderboard
+                  <a className={headerStyles.heroTitleLink} href="/">
+                    <span className={headerStyles.heroHighlight}>.eth</span>{" "}
+                    Leaderboard
+                  </a>
                 </h1>
-                <a href="https://twitter.com/ethleaderboard" target="_blank">
+                <a class={headerStyles.heroTwitter} href="https://twitter.com/ethleaderboard" target="_blank">
                   <svg
                     width="22"
                     height="22"
