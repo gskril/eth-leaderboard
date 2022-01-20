@@ -10,9 +10,16 @@ export const fetchEnsStats = () =>
       return new Intl.NumberFormat().format(res.stats.count);
     })
     .catch((err) => {
-      console.log(
-        "Error fetching data from OpenSea API.",
-        err.response.statusText
-      );
+      try {
+        console.log(
+          "Error fetching data from OpenSea API.",
+          err.response.statusText
+        );
+      } catch (error) {
+        console.log(
+          "Error fetching data from OpenSea API.",
+          err
+        );
+      }
       return 0;
     });
