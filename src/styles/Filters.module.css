@@ -43,22 +43,22 @@
   width: 100%;
   margin: 0;
   text-align: center;
-  background-color: #eaeaea;
+  background-color: var(--background-accent);
   padding: 0.125rem;
 }
 
 .filtersOption > label:hover,
 .filtersOption > label:focus-visible {
   cursor: pointer;
-  background-color: #e4e4e4;
+  background-color: var(--background-accent);
 }
 
 .filtersOption > input[type="radio"]:checked ~ label {
-  background-color: #d8d8d8;
+  background-color: var(--background-accent-light);
 }
 
 .frensCount {
-  color: #717171;
+  color: var(--text-color-light);
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -83,7 +83,7 @@
   outline: none;
   transition: 0.3s all;
   width: 100%;
-  color: #575757;
+  color: var(--text-color-light);
 }
 
 .removeButton {
@@ -103,7 +103,7 @@
 }
 
 .removeButton > svg {
-  fill: #000000;
+  fill: var(--text-color);
 }
 
 .removeButton:hover {
@@ -122,21 +122,18 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  background-color: #eaeaea;
+  background-color: var(--background-accent);
   padding: 11px 10px 10px 16px;
   border-radius: 40px;
   width: 225px;
   height: 45px;
   transition: 0.3s all;
+  border: 1px solid var(--color-outline);
 }
 
 .searchWrapper:focus-within {
-  background-color: #e0e0e0;
+  background-color: var(--background-accent-light);
   width: 275px;
-}
-
-.searchWrapper:focus-within .filtersSearch {
-  color: #323232;
 }
 
 .rightSide {
@@ -229,8 +226,8 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 1);
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    background: var(--background-accent-light);
+    border: 1px solid var(--color-outline);
   }
 
   .mobileSearchButtonWrapper,

@@ -3,11 +3,7 @@
 }
 
 .showFixedGradient {
-  background: linear-gradient(
-    180deg,
-    rgba(233, 234, 244, 1) 0%,
-    rgba(247, 247, 247, 0) 95%
-  );
+  background: var(--table-gradient);
   background-size: 100vw 180px;
   background-repeat: no-repeat;
   height: 180px;
@@ -31,11 +27,7 @@
 
 @media screen and (max-width: 38.75em) {
   .showFixedGradient {
-    background: linear-gradient(
-      0deg,
-      rgba(233, 234, 244, 1) 0%,
-      rgba(247, 247, 247, 0) 100%
-    );
+    background: var(--table-gradient);
     background-size: 100vw 180px;
     height: 180px;
     top: unset !important;

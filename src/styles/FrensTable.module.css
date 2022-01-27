@@ -7,9 +7,9 @@
 .legendColor {
   width: 1.5rem;
   height: 1.25rem;
-  background-color: var(--color-background);
+  background-color: var(--background-base);
   margin-right: 0.325rem;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--color-outline);
 }
 
 .tableWrapper {
@@ -51,7 +51,7 @@
 }
 
 .profiles tr > td:first-child {
-  color: #717171;
+  color: var(--text-color-light);
 }
 
 .profiles tr > *:nth-child(2) {
@@ -70,7 +70,8 @@
 }
 
 .tableWrapper th {
-  color: rgba(113, 113, 113, 0.5);
+  color: var(--text-color-light);
+  opacity: 0.5;
 }
 
 .pfp {
@@ -99,7 +100,7 @@
 }
 
 .profiles .topAccount td {
-  background: var(--color-background);
+  background: var(--background-base);
 }
 
 .profiles a {
@@ -120,7 +121,7 @@
 }
 
 .noResults {
-  color: rgba(0, 0, 0, 0.2);
+  color: var(--color-outline);
   font-size: 3.125rem;
   text-align: center;
   display: block;

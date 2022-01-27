@@ -18,13 +18,7 @@
 
 /* ----- CSS Resets ----- */
 body {
-  background: radial-gradient(
-      40.48% 67.6% at 50% 32.4%,
-      #ecf4ff 0%,
-      #f7f7ff 52.77%,
-      #f7f7f7 100%
-    ),
-    #ffffff;
+  background: var(--background-gradient);
   margin: 0;
   font-size: 100%;
   font-family: "CircularXX", -apple-system, BlinkMacSystemFont, "Segoe UI",
@@ -32,7 +26,7 @@ body {
   font-weight: 700;
   letter-spacing: -0.01em;
   line-height: 1.4;
-  color: #3f3f3f;
+  color: var(--text-color);
 }
 
 *,
@@ -53,9 +47,32 @@ textarea {
 /* ----- Global ----- */
 :root {
   --radius: 0.75rem;
-  --color-background: #f0f1f5;
-  --color-outline: #e8e9ed;
   --container-width: 75em;
+  --color-outline: #e8e9ed;
+
+  --background-gradient: radial-gradient(
+      40.48% 67.6% at 50% 32.4%,
+      #ecf4ff 0%,
+      #f7f7ff 52.77%,
+      #f7f7f7 100%
+    ),
+    #ffffff;
+  --background-accent: #EAEAEA;
+  --background-accent-light: #e0e0e0;
+  --background-base: #ffffff;
+
+  --table-gradient: linear-gradient(
+    0deg,
+    rgba(233, 234, 244, 1) 0%,
+    rgba(247, 247, 247, 0) 100%
+  );
+
+  --text-color: #3F3F3F;
+  --text-color-light: #717171;
+  --text-color-lighter: rgba(0, 0, 0, 0.23);
+  --text-color-accent: #7298f8;
+  --text-color-accent-200: #5d80d6;
+}
 }
 
 h1,
@@ -95,7 +112,7 @@ strong {
 }
 
 a {
-  color: #7298f8;
+  color: var(--text-color-accent);
 }
 
 label {
@@ -105,7 +122,7 @@ label {
 }
 
 a:hover {
-  color: #5d80d6;
+  color: var(--text-color-accent-200);
 }
 
 @media screen and (max-width: 45em) {

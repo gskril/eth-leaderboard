@@ -111,7 +111,7 @@ const FrensTablePage = ({ frens, showFixed }) => {
                         <path
                           opacity="0.3"
                           d="M7.95739 14.7955L15.1165 7.63636L7.95739 0.477273L6.30966 2.1179L10.6349 6.43608H0.5V8.83665H10.6349L6.30966 13.1619L7.95739 14.7955Z"
-                          fill="black"
+                          fill="var(--text-color)"
                         />
                       </svg>
                     </a>
