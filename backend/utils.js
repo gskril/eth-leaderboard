@@ -1,10 +1,13 @@
 export const extractEns = (name) => {
   try {
-    const regex = new RegExp(
-      /[a-zA-Z0-9\p{Emoji}][a-zA-Z0-9\p{Emoji}.-]+(.eth)/,
-      "gui"
-    );
-    return name.match(regex)[0];
+    const regex = new RegExp(/[^\s(｜|]+(.eth)/i);
+    // Transform to lowercase
+    let ensName = name.match(regex)[0].toLowerCase()
+
+    // Replace Ξ with e
+    ensName = ensName.replace(/ξ/g, "e");
+
+    return (ensName);
   } catch (error) {
     return null;
   }

@@ -78,8 +78,24 @@ const FrensTablePage = ({ frens, showFixed }) => {
                   {fren.ranking.toLocaleString("en", { useGrouping: true })}
                 </td>
                 <td>
-                  {fren.ens === ".eth" ? (
-                    fren.name
+                  {!fren.ens.match((/^[a-z0-9.-]+(.eth)/g)) ? (
+                    // Don't link to eth.xyz if the name has special characters
+                    <div className={frensTableStyles.ensProfile}>
+                      <Image
+                        layout="fixed"
+                        width="34px"
+                        height="34px"
+                        className={frensTableStyles.pfp}
+                        src={
+                          "/public/img/av-default.png"
+                        }
+                        alt=""
+                        priority={inx < 10}
+                      />
+                      <span className={frensTableStyles.ensName}>
+                        {fren.ens}
+                      </span>
+                    </div>
                   ) : (
                     <a
                       className={frensTableStyles.ensProfile}
