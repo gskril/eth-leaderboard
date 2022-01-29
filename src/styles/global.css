@@ -62,7 +62,7 @@ textarea {
   --background-base: #ffffff;
 
   --table-gradient: linear-gradient(
-    0deg,
+    180deg,
     rgba(233, 234, 244, 1) 0%,
     rgba(247, 247, 247, 0) 100%
   );
