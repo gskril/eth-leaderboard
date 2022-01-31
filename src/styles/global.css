@@ -66,6 +66,11 @@ textarea {
     rgba(233, 234, 244, 1) 0%,
     rgba(247, 247, 247, 0) 100%
   );
+  --table-gradient-mobile: linear-gradient(
+    0deg,
+    rgba(233, 234, 244, 1) 0%,
+    rgba(247, 247, 247, 0) 100%
+  );
 
   --text-color: #3F3F3F;
   --text-color-light: #717171;
@@ -91,6 +96,11 @@ textarea {
 
     --table-gradient: linear-gradient(
       0deg,
+      rgba(20, 20, 20, 0),
+      rgb(17, 17, 17)
+    );
+    --table-gradient-mobile: linear-gradient(
+      180deg,
       rgba(20, 20, 20, 0),
       rgb(17, 17, 17)
     );

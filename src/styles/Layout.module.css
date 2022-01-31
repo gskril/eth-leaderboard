@@ -27,7 +27,7 @@
 
 @media screen and (max-width: 38.75em) {
   .showFixedGradient {
-    background: var(--table-gradient);
+    background: var(--table-gradient-mobile);
     background-size: 100vw 180px;
     height: 180px;
     top: unset !important;
