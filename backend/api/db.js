@@ -56,3 +56,14 @@ export async function getAllFrens() {
     }
   );
 }
+
+export async function getTop500Frens() {
+  return await db.fren_ranks.find(
+    {},
+    {
+      fields: ["name", "ens", "handle", "followers"],
+      order: [{ field: "followers", direction: "desc", nulls: "last"}],
+      limit: 500,
+    }
+  );
+}

@@ -4,7 +4,8 @@
   "type": "module",
   "version": "0.1.0",
   "scripts": {
-    "start": "node --experimental-specifier-resolution=node ./index.js"
+    "start": "node --experimental-specifier-resolution=node ./index.js",
+    "snapshot": "node --experimental-specifier-resolution=node ./snapshot.js"
   },
   "author": "Greg Skriloff",
   "license": "ISC",
