@@ -42,7 +42,7 @@ export function start() {
         ens: ens,
         handle: profile.screen_name,
         followers: profile.followers_count,
-        created: profile.created_at,
+        created: new Date(),
         verified: profile.verified,
         twitter_pfp: profile.profile_image_url_https,
       }).then(async (rank) => {
