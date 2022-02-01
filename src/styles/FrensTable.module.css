@@ -39,6 +39,7 @@
 }
 
 .profiles tr > td {
+  position: relative;
   font-size: 20px;
   font-weight: 500;
 }
@@ -72,6 +73,29 @@
 .tableWrapper th {
   color: var(--text-color-light);
   opacity: 0.5;
+}
+
+.newProfile {
+  position: absolute;
+  right: 0.65rem;
+}
+
+.newProfile:hover {
+  cursor: pointer;
+}
+
+.newProfile:hover::after {
+  content: "This name was added in the last 24 hours.";
+  position: absolute;
+  bottom: 1rem;
+  display: block;
+  width: 15rem;
+  background-color: var(--background-base);
+  border: 1px solid var(--color-outline);
+  border-radius: .625rem;
+  font-size: 1.125rem;
+  padding: .65rem;
+  z-index: 100;
 }
 
 .pfp {
@@ -143,7 +167,7 @@
   margin-left: 10px;
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 64em) {
   .tableWrapper {
     padding: 0;
   }
@@ -154,6 +178,9 @@
   .profiles tr > *:last-child {
     padding-left: 1rem;
     padding-right: 1.5rem;
+  }
+  .newProfile {
+    display: none;
   }
   .tableWrapper td svg {
     display: none;

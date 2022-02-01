@@ -76,6 +76,20 @@ const FrensTablePage = ({ frens, showFixed }) => {
               >
                 <td>
                   {fren.ranking.toLocaleString("en", { useGrouping: true })}
+                  {new Date(fren.created).getTime() >
+										new Date(
+											new Date(
+												new Date()
+													.toString()
+													.split('GMT')[0] + ' UTC'
+											).toISOString()
+										).getTime() -
+											86400000
+                    ? (
+                      <span className={frensTableStyles.newProfile}>🎉</span>
+                    )
+                    : ""
+                  }
                 </td>
                 <td>
                   {!fren.ens.match((/^[a-z0-9.-]+(.eth)/g)) ? (
