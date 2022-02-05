@@ -5,7 +5,8 @@
   "version": "0.1.0",
   "scripts": {
     "start": "node --experimental-specifier-resolution=node ./index.js",
-    "snapshot": "node --experimental-specifier-resolution=node ./snapshot.js"
+    "snapshot": "node --experimental-specifier-resolution=node ./snapshot.js",
+    "dump": "node --experimental-specifier-resolution=node db-dump.js"
   },
   "author": "Greg Skriloff",
   "license": "ISC",

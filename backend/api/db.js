@@ -41,6 +41,15 @@ export async function updateFrens(frens) {
   return db.fren_ranks.refresh(true);
 }
 
+export async function addFrens(frens) {
+  const cs = new pgp.helpers.ColumnSet(
+    ["id", "name", "ens", "handle", "followers", "created", "verified", "twitter_pfp"],
+    { table: "Fren" }
+  );
+  const insert = pgp.helpers.insert(frens, cs) + " ON CONFLICT (id) DO NOTHING";
+  await db.query(insert);
+}
+
 export async function deleteFrens(frens) {
   return await db.Fren.destroy({
     "id in": frens.map((fren) => fren.id),
