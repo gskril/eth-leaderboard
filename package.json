@@ -23,13 +23,13 @@
     "@svgr/webpack": "^6.2.0",
     "dotenv": "^11.0.0",
     "framer-motion": "^5.5.7",
+    "massive": "^6.10.2",
     "next": "12.1.0",
     "pg": "^8.5.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "sharp": "^0.29.3",
-    "swr": "^1.1.2",
-    "massive": "^6.10.2"
+    "swr": "^1.1.2"
   },
   "devDependencies": {
     "prisma": "2.30.0"
