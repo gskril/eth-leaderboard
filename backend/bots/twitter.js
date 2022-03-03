@@ -1,5 +1,5 @@
 import { addFren, addFrens, getTwitterProfileByHandle } from "../api";
-import { T } from "../index.js";
+import { db, T } from "../index.js";
 import { extractEns } from "../utils";
 
 export function start() {
@@ -78,7 +78,13 @@ export function searchTwitterUsers(page) {
 					}
 				}
       } else {
-        return console.log('No more profiles to add')
+        try {
+          db.fren_ranks.refresh(true);
+          console.log('Refreshed fren_ranks database view');
+        } catch (err) {
+          console.log('Unable to refresh fren_ranks database view', err);
+        }
+        return console.log('No more profiles to add. ')
       }
       
       await addFrens(allProfiles)
@@ -88,6 +94,13 @@ export function searchTwitterUsers(page) {
       searchTwitterUsers(page)
     })
     .catch(err => {
-      console.log('Error fetching data from Twitter API', err)
+      try {
+        db.fren_ranks.refresh(true);
+        console.log('Refreshed fren_ranks database view');
+      } catch (err) {
+        console.log('Unable to refresh fren_ranks database view', err);
+      }
+      
+      return console.log('Error fetching data from Twitter API', err)
     })
 }
