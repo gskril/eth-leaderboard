@@ -4,7 +4,7 @@ import Twit from "twit";
 import Twitter from "twitter-v2";
 import { refreshDatabase, updateTwitterLocation } from "./api";
 import { start as startDiscord } from "./bots/discord";
-import { start as startTwitter } from "./bots/twitter";
+import { start as startTwitter, searchTwitterUsers } from "./bots/twitter";
 (await import("dotenv")).config({ path: "../.env" });
 
 export const db = await massive({
@@ -31,6 +31,7 @@ export const T = new Twit({
 
 startTwitter();
 startDiscord();
+// searchTwitterUsers(1);
 
 // Refresh all Twitter accounts in the database every hour
 setInterval(() => refreshDatabase(), 60 * 60 * 1000);

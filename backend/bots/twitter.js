@@ -1,4 +1,4 @@
-import { addFren, getTwitterProfileByHandle } from "../api";
+import { addFren, addFrens, getTwitterProfileByHandle } from "../api";
 import { T } from "../index.js";
 import { extractEns } from "../utils";
 
@@ -42,4 +42,52 @@ export function start() {
       }
     }
   });
+}
+
+export function searchTwitterUsers(page) {
+  T.get('users/search', {
+    q: '.eth',
+    count: 20,
+    include_entities: false,
+    page: page,
+  })
+    .then(async (res) => {
+      const data = res.data
+      const allProfiles = []
+
+      if (data.length >= 1) {
+        for (let i = 0; i < data.length; i++) {
+          const profile = data[i];
+          const ens = extractEns(profile.name.toLowerCase());
+
+					if (profile.name.includes('.eth')) {
+						try {
+              allProfiles.push({
+                id: profile.id_str,
+                name: profile.name,
+                ens: ens,
+                handle: profile.screen_name,
+                followers: profile.followers_count,
+                created: new Date(),
+                verified: profile.verified,
+                twitter_pfp: profile.profile_image_url_https,
+              })
+            } catch (err) {
+              console.log("Error writing to database from Twitter monitor", err);
+            }
+					}
+				}
+      } else {
+        return console.log('No more profiles to add')
+      }
+      
+      await addFrens(allProfiles)
+        .then(console.log(`Added/updated ${allProfiles.length} profiles in the database on page ${page}`))
+      
+      page = page + 1
+      searchTwitterUsers(page)
+    })
+    .catch(err => {
+      console.log('Error fetching data from Twitter API', err)
+    })
 }

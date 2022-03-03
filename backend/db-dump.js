@@ -1,4 +1,4 @@
-import { addFrens } from "./api/db.js";
+import { addFrens } from "./api";
 import { chunkArray, extractEns } from "./utils";
 import { T } from "./index.js";
 

@@ -1,4 +1,4 @@
-export { addFren, getAllFrens, updateFren, updateFrens } from "./db";
+export { addFren, addFrens, getAllFrens, updateFren, updateFrens } from "./db";
 export { fetchEnsStats } from "./external";
 export {
   getTwitterProfileByHandle,
