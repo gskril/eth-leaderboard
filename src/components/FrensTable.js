@@ -92,7 +92,7 @@ const FrensTablePage = ({ frens, showFixed }) => {
                   }
                 </td>
                 <td>
-                  {!fren.ens.match((/^[a-z0-9.-]+(.eth)/g)) ? (
+                  {fren.ens && !fren.ens.match((/^[a-z0-9.-]+(.eth)/g)) ? (
                     // Don't link to eth.xyz if the name has special characters
                     <div className={frensTableStyles.ensProfile}>
                       <Image
