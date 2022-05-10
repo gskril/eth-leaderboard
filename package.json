@@ -6,7 +6,7 @@
     "backend"
   ],
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --port ${PORT-3000}",
     "build": "next build",
     "start": "next start --port ${PORT-3000}",
     "migrate:dev": "prisma migrate dev --preview-feature",
