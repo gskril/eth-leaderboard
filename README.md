@@ -15,8 +15,6 @@ CREATE TABLE "Fren" (
     "created" timestamp NOT NULL,
     "verified" bool NOT NULL,
     "twitter_pfp" text,
-    "ens_avatar" text,
-    "tweeted" bool,
     PRIMARY KEY ("id")
 );
 ```
@@ -31,8 +29,6 @@ SELECT "Fren".id,
     "Fren".created,
     "Fren".verified,
     "Fren".twitter_pfp,
-    "Fren".ens_avatar,
-    "Fren".tweeted,
     rank() OVER (ORDER BY "Fren".followers DESC) AS ranking
 FROM "Fren"
 WHERE lower("Fren".name) ~~ '%.eth%'::text AND "Fren".ens IS NOT NULL;

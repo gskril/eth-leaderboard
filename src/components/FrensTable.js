@@ -70,9 +70,6 @@ const FrensTablePage = ({ frens, showFixed }) => {
               <tr
                 key={fren.id}
                 data-verified={fren.verified}
-                data-avatar={
-                  fren.ensAvatar && !fren.ensAvatar.includes("default")
-                }
               >
                 <td>
                   {fren.ranking.toLocaleString("en", { useGrouping: true })}
@@ -101,7 +98,7 @@ const FrensTablePage = ({ frens, showFixed }) => {
                         height="34px"
                         className={frensTableStyles.pfp}
                         src={
-                          "/public/img/av-default.png"
+                          "/img/av-default.png"
                         }
                         alt=""
                         priority={inx < 10}

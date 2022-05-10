@@ -26,9 +26,7 @@ export const fetchInitialData = async (q, count = 100, skip = 0, verified) => {
     handle: x.handle,
     followers: x.followers,
     verified: x.verified,
-    tweeted: x.tweeted,
     created: x.created.toISOString(),
-    ensAvatar: x.ens_avatar,
     twitterPicture: x.twitter_pfp,
     ranking: parseInt(x.ranking),
   }));
