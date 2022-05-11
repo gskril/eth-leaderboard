@@ -10,25 +10,27 @@ export const fetchInitialData = async (q, count = 100, skip = 0, verified) => {
     criteria.or = [{ "handle ilike": `%${q}%` }, { "ens ilike": `%${q}%` }];
 
   const [allFrens, frensCount] = await db.withConnection(async (tx) => {
-    const allFrensReq = await tx.fren_ranks.find(criteria, {
+    const allFrensReq = await tx.eth.find(criteria, {
       order: [{ field: "followers", direction: "desc", nulls: "last" }],
       offset: skip,
       limit: count,
     });
-    const allFrensCount = parseInt(await tx.fren_ranks.count(criteria));
+    const allFrensCount = parseInt(await tx.eth.count(criteria));
     return [allFrensReq, allFrensCount];
   });
 
   const frens = allFrens.map((x) => ({
     id: x.id,
     name: x.name,
-    ens: x.ens,
+    ens: x.ens.split('.eth')[0] + '.eth',
     handle: x.handle,
+    location: x.location,
     followers: x.followers,
     verified: x.verified,
-    created: x.created.toISOString(),
-    twitterPicture: x.twitter_pfp,
-    ranking: parseInt(x.ranking),
+    added: x.added.toISOString(),
+    updated: x.updated.toISOString(),
+    twitterPicture: x.avatar,
+    ranking: parseInt(x.rank),
   }));
 
   return { frens, count: frensCount };
@@ -37,8 +39,8 @@ export const fetchInitialData = async (q, count = 100, skip = 0, verified) => {
 export const fetchInitialMetadata = async () => {
   const db = await getDb();
   const [countAll, top1000] = await db.withConnection(async (tx) => {
-    const countAllReq = parseInt(await tx.fren_ranks.count());
-    const top1000Req = await tx.fren_ranks.find(
+    const countAllReq = parseInt(await tx.eth.count());
+    const top1000Req = await tx.eth.find(
       {},
       {
         order: [{ field: "followers", direction: "desc", nulls: "last" }],
