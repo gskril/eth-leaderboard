@@ -178,14 +178,14 @@ const FrensTablePage = ({ frens, showFixed }) => {
         <div className={frensTableStyles.noResults}>
           No matches found.
           <span>
-            Looking for someone with a .eth name on Twitter? <br />
+            Do you have .eth in your Twitter name? <br />
             <a
-              href="https://twitter.com/intent/tweet?text=%40ethleaderboard%20add"
+              href="https://twitter.com/intent/tweet?text=%40ethleaderboard%20add%20me%20pls%20:)"
               target="_blank"
             >
               Tweet at @ethleaderboard
             </a>{" "}
-            and they'll be added shortly.
+            to get added shortly
           </span>
         </div>
       )}
