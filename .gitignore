@@ -9,6 +9,7 @@ node_modules
 
 
 # next.js
+.vercel
 /.next/
 /out/
 
