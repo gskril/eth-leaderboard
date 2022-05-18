@@ -4,7 +4,7 @@ The most followed accounts with .eth names on Twitter
 
 ## Run locally
 
-Create a PostgreSQL container with the following table structure:
+Create a PostgreSQL database with the following table:
 ```sql
 CREATE TABLE "Profile" (
     "id" text NOT NULL,
@@ -21,22 +21,27 @@ CREATE TABLE "Profile" (
 );
 ```
 
-Create a materialized view called `eth` with the following structure:
+Create a materialized view based on the above table:
 ```sql
-SELECT "Profile".id,
-    "Profile".name,
-    lower(regexp_replace("Profile".name, '^((?![^\s(｜|]+(.eth)).)*'::text, ''::text)) AS ens,
-    "Profile".handle,
-    "Profile".location,
-    "Profile".description,
-    "Profile".followers,
-    "Profile".verified,
-    "Profile".avatar,
-    "Profile".added,
-    "Profile".updated,
-    rank() OVER (ORDER BY "Profile".followers DESC) AS rank
-FROM "Profile"
-WHERE "Profile".name ~~ '%.eth%'::text;
+CREATE MATERIALIZED VIEW eth AS (
+    SELECT 
+        id,
+        name,
+        REGEXP_REPLACE(LOWER(name), '^((?![^\s(｜|]+(.eth)).)*', '') AS ens,
+        handle,
+        location,
+        description,
+        followers,
+        verified,
+        avatar,
+        added,
+        updated,
+        rank() OVER (ORDER BY followers DESC) AS rank
+    FROM "Profile"
+    WHERE LOWER(name) like '%.eth%'
+);
+
+CREATE UNIQUE INDEX ON eth (id);
 ```
 
 Rename `.env.example` to `.env` and configure the variables:

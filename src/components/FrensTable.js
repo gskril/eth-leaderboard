@@ -156,7 +156,7 @@ const FrensTablePage = ({ frens, showFixed }) => {
                       height="34px"
                       className={frensTableStyles.pfp}
                       src={
-                        fren.twitterPicture ||
+                        fren.pfp ||
                         "https://unavatar.io/twitter/" +
                           fren.handle +
                           "?fallback=false"

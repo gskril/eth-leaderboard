@@ -29,7 +29,7 @@ export const fetchInitialData = async (q, count = 100, skip = 0, verified) => {
     verified: x.verified,
     added: x.added.toISOString(),
     updated: x.updated ? x.updated.toISOString() : null,
-    twitterPicture: x.avatar,
+    pfp: x.avatar,
     ranking: parseInt(x.rank),
   }));
 
