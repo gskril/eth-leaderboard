@@ -3,11 +3,14 @@ import getDb from "./db";
 export const fetchInitialData = async (q, count = 100, skip = 0, verified) => {
   const db = await getDb();
 
-  if (count > 500) count = 500;
+  if (count > 100) count = 100;
 
   const criteria = {};
   if (q !== undefined)
     criteria.or = [{ "handle ilike": `%${q}%` }, { "ens ilike": `%${q}%` }];
+  
+  if (verified !== undefined)
+    criteria.verified = verified;
 
   const [allFrens, frensCount] = await db.withConnection(async (tx) => {
     const allFrensReq = await tx.eth.find(criteria, {
@@ -24,7 +27,6 @@ export const fetchInitialData = async (q, count = 100, skip = 0, verified) => {
     name: x.name,
     ens: x.ens.split('.eth')[0] + '.eth',
     handle: x.handle,
-    location: x.location,
     followers: x.followers,
     verified: x.verified,
     added: x.added.toISOString(),
