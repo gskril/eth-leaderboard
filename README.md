@@ -4,15 +4,60 @@ The most followed accounts with .eth names on Twitter
 
 ## Run locally
 
-- Provision a Postgres container on [Railway](https://railway.app/)
-- Connect to railway project `railway link`
-- Migrate the database `railway run yarn migrate:dev` ([**Follow this article for info on adding to an existing DB**](https://www.prisma.io/docs/guides/database/developing-with-prisma-migrate/baselining))
-- Run the NextJS app `railway run yarn dev`
+Create a PostgreSQL database with the following table:
+```sql
+CREATE TABLE "Profile" (
+    "id" text NOT NULL,
+    "name" text,
+    "handle" text,
+    "location" text,
+    "description" text,
+    "followers" int4,
+    "verified" bool,
+    "avatar" text,
+    "added" timestamp(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated" timestamp(3),
+    PRIMARY KEY ("id")
+);
+```
 
-## Todo
+Create a materialized view based on the above table:
+```sql
+CREATE MATERIALIZED VIEW eth AS (
+    SELECT 
+        id,
+        name,
+        REGEXP_REPLACE(LOWER(name), '^((?![^\s(｜|]+(.eth)).)*', '') AS ens,
+        handle,
+        location,
+        description,
+        followers,
+        verified,
+        avatar,
+        added,
+        updated,
+        rank() OVER (ORDER BY followers DESC) AS rank
+    FROM "Profile"
+    WHERE LOWER(name) like '%.eth%'
+);
 
-- [x] Re-implement buttons/search/filters
-- [x] Re-implement twitter monitor
-- [x] Pagination
-- [ ] Add to verification queue from website
-- [ ] Daily/weekly snapshots of the leaderboard
+CREATE UNIQUE INDEX ON eth (id);
+```
+
+Rename `.env.example` to `.env` and configure the variables:
+
+```bash
+PGDATABASE = ''
+PGPORT = ''
+PGPASSWORD = ''
+PGHOST = ''
+PGUSER = ''
+```
+
+Run the NextJS development server 
+
+```bash
+yarn dev
+```
+
+Open [http://localhost:3000](http://localhost:3000)

@@ -70,9 +70,6 @@ const FrensTablePage = ({ frens, showFixed }) => {
               <tr
                 key={fren.id}
                 data-verified={fren.verified}
-                data-avatar={
-                  fren.ensAvatar && !fren.ensAvatar.includes("default")
-                }
               >
                 <td>
                   {fren.ranking.toLocaleString("en", { useGrouping: true })}
@@ -101,7 +98,7 @@ const FrensTablePage = ({ frens, showFixed }) => {
                         height="34px"
                         className={frensTableStyles.pfp}
                         src={
-                          "/public/img/av-default.png"
+                          "/img/av-default.png"
                         }
                         alt=""
                         priority={inx < 10}
@@ -159,7 +156,7 @@ const FrensTablePage = ({ frens, showFixed }) => {
                       height="34px"
                       className={frensTableStyles.pfp}
                       src={
-                        fren.twitterPicture ||
+                        fren.pfp ||
                         "https://unavatar.io/twitter/" +
                           fren.handle +
                           "?fallback=false"
@@ -181,14 +178,14 @@ const FrensTablePage = ({ frens, showFixed }) => {
         <div className={frensTableStyles.noResults}>
           No matches found.
           <span>
-            Looking for someone with a .eth name on Twitter? <br />
+            Do you have .eth in your Twitter name? <br />
             <a
-              href="https://twitter.com/intent/tweet?text=%40ethleaderboard%20add"
+              href="https://twitter.com/intent/tweet?text=%40ethleaderboard%20add%20me%20pls%20:)"
               target="_blank"
             >
               Tweet at @ethleaderboard
             </a>{" "}
-            and they'll be added shortly.
+            to get added shortly
           </span>
         </div>
       )}
