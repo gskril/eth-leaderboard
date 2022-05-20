@@ -150,7 +150,7 @@ const FrensTablePage = ({ frens, showFixed }) => {
                     href={"https://twitter.com/" + fren.handle}
                     target="_blank"
                   >
-                    <Image
+                    <img
                       layout="fixed"
                       width="34px"
                       height="34px"
@@ -162,7 +162,7 @@ const FrensTablePage = ({ frens, showFixed }) => {
                           "?fallback=false"
                       }
                       alt=""
-                      priority={inx < 10}
+                      loading="lazy"
                     />
                     <span className={frensTableStyles.ensName}>
                       {"@" + fren.handle}
