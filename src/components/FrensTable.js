@@ -1,8 +1,10 @@
+import { useState } from 'react'
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import { useFrens } from "../api";
 import frensTableStyles from "../styles/FrensTable.module.css";
 import { usePrevious } from "../utils/hooks";
+import ProfileModal from "./Modal";
 
 export default function FrensTable({ searchInput, page, showFixed }) {
   const {
@@ -49,12 +51,19 @@ export default function FrensTable({ searchInput, page, showFixed }) {
 }
 
 const FrensTablePage = ({ frens, showFixed }) => {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [selectedFren, setSelectedFren] = useState(null);
+  
   return (
     <div
       className={`${frensTableStyles.tableWrapper} ${
         frens.length > 0 ? "" : frensTableStyles.noResultsWrapper
       }`}
     >
+      {modalIsOpen && (
+        <ProfileModal setIsOpen={setModalIsOpen} fren={selectedFren}/>
+      )}
+      
       {frens.length > 0 ? (
         <table className={frensTableStyles.profiles}>
           <thead>
@@ -74,14 +83,14 @@ const FrensTablePage = ({ frens, showFixed }) => {
                 <td>
                   {fren.ranking.toLocaleString("en", { useGrouping: true })}
                   {new Date(fren.created).getTime() >
-										new Date(
-											new Date(
-												new Date()
-													.toString()
-													.split('GMT')[0] + ' UTC'
-											).toISOString()
-										).getTime() -
-											86400000
+                    new Date(
+                      new Date(
+                        new Date()
+                          .toString()
+                          .split('GMT')[0] + ' UTC'
+                      ).toISOString()
+                    ).getTime() -
+                      86400000
                     ? (
                       <span className={frensTableStyles.newProfile}>🎉</span>
                     )
@@ -111,6 +120,11 @@ const FrensTablePage = ({ frens, showFixed }) => {
                     <a
                       className={frensTableStyles.ensProfile}
                       href={`https://${fren.ens}.xyz`}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setSelectedFren(fren);
+                        setModalIsOpen(true);
+                      }}
                       target="_blank"
                     >
                       <Image

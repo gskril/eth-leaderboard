@@ -1,0 +1,21 @@
+.modal {
+  /* position: absolute; */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--text-color-lighter);
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalContent {
+  width: 100%;
+  max-width: 35rem;
+  background-color: var(--background-base);
+  min-height: 15rem;
+  padding: 2.5rem;
+  border-radius: 1rem;
+}
