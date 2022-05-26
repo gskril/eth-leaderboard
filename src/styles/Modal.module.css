@@ -81,9 +81,8 @@
 
 .headerLinks {
   display: flex;
-  justify-content: space-between;
   flex-wrap: wrap;
-  gap: 0.5rem 1rem;
+  gap: 0.5rem 1.25rem;
   font-weight: 500;
 }
 

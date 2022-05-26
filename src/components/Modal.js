@@ -36,8 +36,6 @@ export default function Modal({ setIsOpen, fren }) {
 					</button>
 					{error ? (
 						<div>Error</div>
-					) : !data ? (
-						<div>Loading...</div>
 					) : (
 						<>
 							<div className={ModalStyles.header}>
@@ -53,18 +51,26 @@ export default function Modal({ setIsOpen, fren }) {
 									</span>
 									<div className={ModalStyles.headerLinks}>
 										<a
-											href={`https://twitter.com/${fren.twitter}`}
+											href={`https://twitter.com/${
+												data && data.twitter
+													? data.twitter
+													: fren.handle
+											}`}
 											target="_blank"
 										>
 											Twitter
 										</a>
 										<a
-											href={`https://opensea.io/${data.address}`}
+											href={`https://opensea.io/${
+												data && data.address
+													? data.address
+													: fren.ens
+											}`}
 											target="_blank"
 										>
 											OpenSea
 										</a>
-										{data.github ? (
+										{data && data.github ? (
 											<a
 												href={`https://github.com/${data.github}`}
 												target="_blank"
@@ -72,7 +78,7 @@ export default function Modal({ setIsOpen, fren }) {
 												GitHub
 											</a>
 										) : null}
-										{data.url ? (
+										{data && data.url ? (
 											<a href={data.url} target="_blank">
 												Website
 											</a>
@@ -80,7 +86,7 @@ export default function Modal({ setIsOpen, fren }) {
 									</div>
 								</div>
 							</div>
-							{data.description ? (
+							{data && data.description ? (
 								<p className={ModalStyles.description}>
 									{data.description}
 								</p>
