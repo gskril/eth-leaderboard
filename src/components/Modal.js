@@ -2,83 +2,89 @@ import Image from 'next/image'
 import useSWR from 'swr'
 import ModalStyles from './../styles/Modal.module.css'
 
-export default function ProfileModal({ setIsOpen, fren }) {
+export default function Modal({ setIsOpen, fren }) {
 	const fetcher = (...args) => fetch(...args).then((res) => res.json())
 	const { data, error } = useSWR(
-		`https://ens-records.vercel.app/${fren.name}`,
+		`https://ens-records.vercel.app/${fren.ens}`,
 		fetcher
 	)
 
 	return (
 		<>
 			<div className={ModalStyles.modal}>
-				<div className={ModalStyles.modalBackground}></div>
-				<div className={ModalStyles.modalContent}>
+				<div
+					className={ModalStyles.background}
+					onClick={() => setIsOpen(false)}
+				></div>
+				<div className={ModalStyles.content}>
+					<button
+						className={ModalStyles.close}
+						onClick={() => setIsOpen(false)}
+					>
+						<svg
+							width="12"
+							height="12"
+							viewBox="0 0 12 12"
+							fill="none"
+							xmlns="http://www.w3.org/2000/svg"
+						>
+							<path
+								d="M12 1.05L10.95 0L6 4.95L1.05 0L0 1.05L4.95 6L0 10.95L1.05 12L6 7.05L10.95 12L12 10.95L7.05 6L12 1.05Z"
+								fill="var(--text-color-light)"
+							/>
+						</svg>
+					</button>
 					{error ? (
 						<div>Error</div>
 					) : !data ? (
 						<div>Loading...</div>
 					) : (
 						<>
-							<div className="modalHeader">
+							<div className={ModalStyles.header}>
 								<Image
+									className={ModalStyles.headerAvatar}
 									src={`https://metadata.ens.domains/mainnet/avatar/${fren.name}`}
 									width={100}
 									height={100}
 								/>
-							</div>
-							<div>
-								<p>{fren.name}</p>
-								{data.description ? (
-									<p>{data.description}</p>
-								) : (
-									''
-								)}
-								<p>
-									OpenSea:{' '}
-									<a
-										href={`https://opensea.io/${data.address}`}
-										target="_blank"
-									>
-										OpenSea
-									</a>
-								</p>
-								<p>
-									Twitter:{' '}
-									<a
-										href={`https://twitter.com/${fren.handle}`}
-										target="_blank"
-									>
-										@{fren.handle}
-									</a>
-								</p>
-								{data.url ? (
-									<p>
-										Website:{' '}
-										<a href={data.url} target="_blank">
-											{data.url}
-										</a>
-									</p>
-								) : (
-									''
-								)}
-								{data.github ? (
-									<p>
-										Github:{' '}
+								<div className={ModalStyles.headerContent}>
+									<span className={ModalStyles.headerName}>
+										{fren.ens}
+									</span>
+									<div className={ModalStyles.headerLinks}>
 										<a
-											href={`https://github.com/${data.github}`}
+											href={`https://twitter.com/${fren.twitter}`}
 											target="_blank"
 										>
-											{data.github}
+											Twitter
 										</a>
-									</p>
-								) : (
-									''
-								)}
+										<a
+											href={`https://opensea.io/${data.address}`}
+											target="_blank"
+										>
+											OpenSea
+										</a>
+										{data.github ? (
+											<a
+												href={`https://github.com/${data.github}`}
+												target="_blank"
+											>
+												GitHub
+											</a>
+										) : null}
+										{data.url ? (
+											<a href={data.url} target="_blank">
+												Website
+											</a>
+										) : null}
+									</div>
+								</div>
 							</div>
-							<button onClick={() => setIsOpen(false)}>
-								Close
-							</button>
+							{data.description ? (
+								<p className={ModalStyles.description}>
+									{data.description}
+								</p>
+							) : null}
 						</>
 					)}
 				</div>

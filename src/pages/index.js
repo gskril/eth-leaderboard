@@ -7,6 +7,7 @@ import Header from "../components/Header";
 import Layout from "../components/layout";
 import { useScrollPosition } from "@n8tb1t/use-scroll-position";
 import { useRouter } from "next/router";
+import Modal from "../components/Modal";
 
 export default function Home({ frensMeta, fallback }) {
   const router = useRouter();
@@ -64,6 +65,9 @@ export default function Home({ frensMeta, fallback }) {
     }
   }, []);
 
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [selectedFren, setSelectedFren] = useState(null);
+
   return (
     <SWRConfig
       value={{
@@ -86,7 +90,10 @@ export default function Home({ frensMeta, fallback }) {
             }}
           />
         </Header>
-        <FrensTable {...{ page, searchInput, showFixed }} />
+        {modalIsOpen && (
+          <Modal setIsOpen={setModalIsOpen} fren={selectedFren}/>
+        )}
+        <FrensTable {...{ page, searchInput, showFixed, setModalIsOpen, setSelectedFren }} />
       </Layout>
     </SWRConfig>
   );

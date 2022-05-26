@@ -101,12 +101,7 @@
 .pfp {
   margin-left: -1rem;
   border-radius: 50%;
-  background: linear-gradient(
-    330.4deg,
-    #44bcf0 4.54%,
-    #628bf3 66.33%,
-    #a099ff 148.85%
-  );
+  background: var(--avatar-gradient);
   background-size: 34px;
   transition: 0.3s all;
 }

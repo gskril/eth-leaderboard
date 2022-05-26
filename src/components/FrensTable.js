@@ -4,9 +4,15 @@ import Image from "next/image";
 import { useFrens } from "../api";
 import frensTableStyles from "../styles/FrensTable.module.css";
 import { usePrevious } from "../utils/hooks";
-import ProfileModal from "./Modal";
+import Modal from "./Modal";
 
-export default function FrensTable({ searchInput, page, showFixed }) {
+export default function FrensTable({
+  searchInput,
+  page,
+  showFixed,
+  setModalIsOpen,
+  setSelectedFren
+}) {
   const {
     data: frensData,
     error,
@@ -44,26 +50,32 @@ export default function FrensTable({ searchInput, page, showFixed }) {
           },
         }}
       >
-        <FrensTablePage frens={frens} showFixed={showFixed} />
+        <FrensTablePage
+          frens={frens}
+          showFixed={showFixed}
+          modalIsOpen
+          setModalIsOpen={setModalIsOpen}
+          selectedFren
+          setSelectedFren={setSelectedFren}
+        />
       </motion.div>
     </AnimatePresence>
   );
 }
 
-const FrensTablePage = ({ frens, showFixed }) => {
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [selectedFren, setSelectedFren] = useState(null);
-  
+
+const FrensTablePage = ({
+  frens,
+  showFixed,
+  setModalIsOpen,
+  setSelectedFren
+}) => {
   return (
     <div
       className={`${frensTableStyles.tableWrapper} ${
         frens.length > 0 ? "" : frensTableStyles.noResultsWrapper
       }`}
     >
-      {modalIsOpen && (
-        <ProfileModal setIsOpen={setModalIsOpen} fren={selectedFren}/>
-      )}
-      
       {frens.length > 0 ? (
         <table className={frensTableStyles.profiles}>
           <thead>
