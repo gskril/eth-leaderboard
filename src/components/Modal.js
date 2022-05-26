@@ -122,7 +122,16 @@ export default function Modal({ setIsOpen, fren }) {
 							{data && allNfts.length > 0 ? (
 								<div className={ModalStyles.nfts}>
 									{allNfts.map((nft) => {
-										if (!nft.image_preview_url) return
+										if (
+											!nft.image_preview_url ||
+											nft.image_preview_url.includes(
+												'.webm'
+											) ||
+											nft.image_preview_url.includes(
+												'.mp4'
+											)
+										)
+											return
 										return (
 											<a
 												href={nft.permalink}
@@ -156,6 +165,14 @@ export default function Modal({ setIsOpen, fren }) {
 					)}
 				</div>
 			</div>
+			
+			<style global jsx>
+				{`
+					body {
+						overflow: hidden;
+					}
+				`}
+			</style>
 		</>
 	)
 }
