@@ -41,7 +41,7 @@ export default function Modal({ setIsOpen, fren }) {
 							<div className={ModalStyles.header}>
 								<Image
 									className={ModalStyles.headerAvatar}
-									src={`https://metadata.ens.domains/mainnet/avatar/${fren.name}`}
+									src={`https://metadata.ens.domains/mainnet/avatar/${fren.ens}`}
 									width={100}
 									height={100}
 								/>
