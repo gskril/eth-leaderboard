@@ -42,6 +42,14 @@ export const fetchInitialData = async (q, count, skip = 0, verified, location) =
       { 'location like': `%SF%` },
       { 'location ilike': `%los angeles%` },
     ]
+  } else if (location === 'texas') {
+    criteria.or = [
+      { 'location ilike': `%texas%` },
+      { 'location ilike': `%, TX%` },
+      { 'location ilike': `%houston%` },
+      { 'location ilike': `%dallas%` },
+      { 'location ilike': `%austin%` },
+    ]
   } else if (location === 'toronto') {
     criteria.or = [
       { 'location ilike': `%toronto%` },
