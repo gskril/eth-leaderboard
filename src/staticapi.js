@@ -1,6 +1,6 @@
 import getDb from "./db";
 
-export const fetchInitialData = async (q, count, skip = 0, verified, location) => {
+export const fetchInitialData = async (q, count = 100, skip = 0, verified, location) => {
   const db = await getDb();
 
   const criteria = {};
