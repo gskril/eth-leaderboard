@@ -1,0 +1,38 @@
+.nfts {
+  margin-top: 2.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1.25rem;
+  margin-bottom: calc(-1 * var(--spacing));
+  padding-bottom: var(--spacing);
+}
+
+.nftLink {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 150ms ease-in-out;
+}
+
+.nftLink:hover,
+.nftLink:focus-visible {
+  opacity: 0.8;
+  transform: translateY(-.25rem);
+}
+
+.nftDiv {
+  aspect-ratio: 1/1;
+  width: 100%;
+  min-height: 8rem;
+  background-position: center !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  border-radius: .5rem;
+}
+
+@media screen and (max-width: 35em) {
+  .nfts {
+    gap: 1rem;
+    margin-top: 2rem;
+    grid-template-columns: 1fr 1fr;
+  }
+}

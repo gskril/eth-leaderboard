@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import useSWR from 'swr'
 import ModalStyles from './../styles/Modal.module.css'
-import { useState, useEffect } from 'react'
+import NftGrid from './NftGrid'
 
 export default function Modal({ setIsOpen, fren }) {
 	const fetcher = (...args) => fetch(...args).then((res) => res.json())
@@ -10,28 +10,6 @@ export default function Modal({ setIsOpen, fren }) {
 		fetcher
 	)
 
-	const [allNfts, setAllNfts] = useState([])
-
-	const loadNfts = async (address) => {
-		const nfts = await fetch(
-			`https://api.opensea.io/api/v1/assets?owner=${address}&order_direction=desc&limit=18&include_orders=false`
-		)
-			.then((res) => res.json())
-			.then((res) => res.assets)
-			.catch((err) => console.log(err))
-
-		return nfts
-	}
-
-	useEffect(async () => {
-		if (data && data.address) {
-			const nfts = await loadNfts(data.address)
-			setAllNfts(nfts)
-		}
-	}, [data])
-
-	const [scrollPosition, setScrollPosition] = useState(0)
-
 	return (
 		<>
 			<div className={ModalStyles.modal}>
@@ -39,12 +17,7 @@ export default function Modal({ setIsOpen, fren }) {
 					className={ModalStyles.background}
 					onClick={() => setIsOpen(false)}
 				></div>
-				<div
-					className={ModalStyles.content}
-					onScroll={(e) => {
-						setScrollPosition(e.target.scrollTop)
-					}}
-				>
+				<div className={ModalStyles.content}>
 					<button
 						className={ModalStyles.close}
 						onClick={() => setIsOpen(false)}
@@ -119,53 +92,20 @@ export default function Modal({ setIsOpen, fren }) {
 									{data.description}
 								</p>
 							) : null}
-							{data && allNfts.length > 0 ? (
-								<div className={ModalStyles.nfts}>
-									{allNfts.map((nft) => {
-										if (
-											!nft.image_preview_url ||
-											nft.image_preview_url.includes(
-												'.webm'
-											) ||
-											nft.image_preview_url.includes(
-												'.mp4'
-											)
-										)
-											return
-										return (
-											<a
-												href={nft.permalink}
-												className={ModalStyles.nftLink}
-												target="_blank"
-												rel="noreferrer"
-											>
-												<div
-													style={{
-														backgroundImage: `url(${nft.image_preview_url})`,
-													}}
-													className={
-														ModalStyles.nftDiv
-													}
-													key={nft.id}
-												></div>
-											</a>
-										)
-									})}
-								</div>
-							) : null}
-							{allNfts.length > 0 ? (
-								<div
-									className={ModalStyles.bottomGradient}
-									style={{
-										bottom: -scrollPosition,
-									}}
-								></div>
-							) : null}
 						</>
 					)}
+					<NftGrid
+						address={
+							data
+								? data.address
+									? data.address
+									: null
+								: 'loading'
+						}
+					/>
 				</div>
 			</div>
-			
+
 			<style global jsx>
 				{`
 					body {
