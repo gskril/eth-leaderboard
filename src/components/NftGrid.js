@@ -26,9 +26,22 @@ export default function NftGrid({ address }) {
 		return null
 	}
 
+	// empty array of 0 items for loading state
+	const loadingItems = Array.from({ length: 9 }, () => ({}))
+
 	return (
 		<div className={Styles.nfts}>
-			{isLoading && <p>Loading...</p>}
+			{isLoading &&
+				loadingItems.map((item) => {
+					return (
+						// add 'loading' class if isLoading is true
+						<div
+							className={[Styles.nftDiv, Styles.loading].join(
+								' '
+							)}
+						/>
+					)
+				})}
 
 			{nfts &&
 				nfts.length > 0 &&

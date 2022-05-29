@@ -48,6 +48,7 @@
   right: 1rem;
   width: 2rem;
   height: 2rem;
+  padding: .25rem;
   border-radius: 1rem;
   background-color: var(--color-outline);
   box-shadow: 0 0 0 1px var(--background-accent);
@@ -69,6 +70,10 @@
   align-items: center;
 }
 
+.headerContent {
+  width: 100%;
+}
+
 .headerAvatar {
   width: 6.25rem;
   height: 6.25rem;
@@ -81,6 +86,7 @@
 .headerName {
   display: block;
   font-size: 1.75rem;
+  word-wrap: break-word;
   margin-bottom: .375rem;
 }
 
@@ -99,12 +105,16 @@
   font-size: 1.125rem;
   color: var(--text-color-light);
   font-weight: 400;
-  margin-top: 2rem;
+  margin-top: 1.5rem;
 }
 
 @media screen and (max-width: 35em) {
   .header {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .content {
+    --spacing: 1.5rem;
   }
 }
