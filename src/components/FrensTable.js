@@ -111,7 +111,7 @@ const FrensTablePage = ({
                 </td>
                 <td>
                   {fren.ens && !fren.ens.match((/^[a-z0-9.-]+(.eth)/g)) ? (
-                    // Don't link to eth.xyz if the name has special characters
+                    // Don't show profile modal if the name has special characters
                     <div className={frensTableStyles.ensProfile}>
                       <Image
                         layout="fixed"
@@ -129,15 +129,12 @@ const FrensTablePage = ({
                       </span>
                     </div>
                   ) : (
-                    <a
-                      className={frensTableStyles.ensProfile}
-                      href={`https://${fren.ens}.xyz`}
-                      onClick={(e) => {
-                        e.preventDefault();
+                    <div
+                      className={[frensTableStyles.ensProfile, frensTableStyles.link].join(" ")}
+                      onClick={() => {
                         setSelectedFren(fren);
                         setModalIsOpen(true);
                       }}
-                      target="_blank"
                     >
                       <Image
                         layout="fixed"
@@ -167,7 +164,7 @@ const FrensTablePage = ({
                           fill="var(--text-color)"
                         />
                       </svg>
-                    </a>
+                    </div>
                   )}
                 </td>
                 <td>

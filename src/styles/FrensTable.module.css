@@ -158,6 +158,17 @@
   justify-content: flex-start;
 }
 
+.link {
+  opacity: 1;
+  transition: opacity 0.15s ease-in-out;
+}
+
+.link:hover,
+.link:focus-visible {
+  cursor: pointer;
+  opacity: 0.75;
+}
+
 .ensName {
   margin-left: 10px;
 }
