@@ -1,10 +1,18 @@
+import { useState } from 'react'
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import { useFrens } from "../api";
 import frensTableStyles from "../styles/FrensTable.module.css";
 import { usePrevious } from "../utils/hooks";
+import Modal from "./Modal";
 
-export default function FrensTable({ searchInput, page, showFixed }) {
+export default function FrensTable({
+  searchInput,
+  page,
+  showFixed,
+  setModalIsOpen,
+  setSelectedFren
+}) {
   const {
     data: frensData,
     error,
@@ -42,13 +50,26 @@ export default function FrensTable({ searchInput, page, showFixed }) {
           },
         }}
       >
-        <FrensTablePage frens={frens} showFixed={showFixed} />
+        <FrensTablePage
+          frens={frens}
+          showFixed={showFixed}
+          modalIsOpen
+          setModalIsOpen={setModalIsOpen}
+          selectedFren
+          setSelectedFren={setSelectedFren}
+        />
       </motion.div>
     </AnimatePresence>
   );
 }
 
-const FrensTablePage = ({ frens, showFixed }) => {
+
+const FrensTablePage = ({
+  frens,
+  showFixed,
+  setModalIsOpen,
+  setSelectedFren
+}) => {
   return (
     <div
       className={`${frensTableStyles.tableWrapper} ${
@@ -74,14 +95,14 @@ const FrensTablePage = ({ frens, showFixed }) => {
                 <td>
                   {fren.ranking.toLocaleString("en", { useGrouping: true })}
                   {new Date(fren.created).getTime() >
-										new Date(
-											new Date(
-												new Date()
-													.toString()
-													.split('GMT')[0] + ' UTC'
-											).toISOString()
-										).getTime() -
-											86400000
+                    new Date(
+                      new Date(
+                        new Date()
+                          .toString()
+                          .split('GMT')[0] + ' UTC'
+                      ).toISOString()
+                    ).getTime() -
+                      86400000
                     ? (
                       <span className={frensTableStyles.newProfile}>🎉</span>
                     )
@@ -111,6 +132,11 @@ const FrensTablePage = ({ frens, showFixed }) => {
                     <a
                       className={frensTableStyles.ensProfile}
                       href={`https://${fren.ens}.xyz`}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setSelectedFren(fren);
+                        setModalIsOpen(true);
+                      }}
                       target="_blank"
                     >
                       <Image

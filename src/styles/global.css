@@ -58,8 +58,10 @@ textarea {
     ),
     #ffffff;
   --background-accent: #EAEAEA;
+  --background-accent-rgb: 234, 234, 234;
   --background-accent-light: #e0e0e0;
   --background-base: #ffffff;
+  --modal-shadow: 188, 190, 195;
 
   --table-gradient: linear-gradient(
     180deg,
@@ -70,6 +72,12 @@ textarea {
     0deg,
     rgba(233, 234, 244, 1) 0%,
     rgba(247, 247, 247, 0) 100%
+  );
+  --avatar-gradient: linear-gradient(
+    330.4deg,
+    #44bcf0 4.54%,
+    #628bf3 66.33%,
+    #a099ff 148.85%
   );
 
   --text-color: #3F3F3F;
@@ -91,8 +99,10 @@ textarea {
     ),
     #141414;
     --background-accent: #101010;
+    --background-accent-rgb: 16, 16, 16;
     --background-accent-light: #0D0D0D;
     --background-base: #000000;
+    --modal-shadow: 32, 33, 35;
 
     --table-gradient: linear-gradient(
       0deg,
@@ -135,6 +145,14 @@ h3 {
 
 h4 {
   font-size: 1.25rem;
+}
+
+p {
+  margin: 0;
+}
+
+p:not(:last-of-type) {
+  margin-bottom: 1em;
 }
 
 small {

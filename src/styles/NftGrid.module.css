@@ -1,0 +1,68 @@
+.nfts {
+  margin-top: 2.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1.25rem;
+  margin-bottom: calc(-1 * var(--spacing));
+  padding-bottom: var(--spacing);
+}
+
+.nftLink {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 150ms ease-in-out;
+}
+
+.nftLink:hover,
+.nftLink:focus-visible {
+  opacity: 0.8;
+  transform: translateY(-.25rem);
+}
+
+.nftDiv {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1/1;
+  width: 100%;
+  background-position: center !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  border-radius: .5rem;
+  background-color: var(--color-outline);
+}
+
+.nftDiv.loading:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  transform: translateX(-100px);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  animation: loading 2s infinite ease-in-out;
+}
+
+@keyframes loading {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@supports not (aspect-ratio: 1/1) {
+  .nftDiv {
+    min-height: 8rem;
+  }
+}
+
+@media screen and (max-width: 35em) {
+  .nfts {
+    gap: 1rem;
+    margin-top: 2rem;
+    grid-template-columns: 1fr 1fr;
+  }
+}
