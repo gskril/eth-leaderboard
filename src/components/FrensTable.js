@@ -1,10 +1,9 @@
-import { useState } from 'react'
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import { useFrens } from "../api";
 import frensTableStyles from "../styles/FrensTable.module.css";
 import { usePrevious } from "../utils/hooks";
-import Modal from "./Modal";
+import Avatar from './Avatar';
 
 export default function FrensTable({
   searchInput,
@@ -136,7 +135,7 @@ const FrensTablePage = ({
                         setModalIsOpen(true);
                       }}
                     >
-                      <Image
+                      <Avatar
                         layout="fixed"
                         width="34px"
                         height="34px"
@@ -145,6 +144,7 @@ const FrensTablePage = ({
                           "https://metadata.ens.domains/mainnet/avatar/" +
                           fren.ens
                         }
+                        fallbackSrc="/img/av-default.png"
                         alt=""
                         priority={inx < 10}
                       />
@@ -173,7 +173,7 @@ const FrensTablePage = ({
                     href={"https://twitter.com/" + fren.handle}
                     target="_blank"
                   >
-                    <img
+                    <Image
                       layout="fixed"
                       width="34px"
                       height="34px"
@@ -185,7 +185,6 @@ const FrensTablePage = ({
                           "?fallback=false"
                       }
                       alt=""
-                      loading="lazy"
                     />
                     <span className={frensTableStyles.ensName}>
                       {"@" + fren.handle}

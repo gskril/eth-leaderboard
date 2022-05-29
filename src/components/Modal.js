@@ -2,6 +2,7 @@ import Image from 'next/image'
 import useSWR from 'swr'
 import ModalStyles from './../styles/Modal.module.css'
 import NftGrid from './NftGrid'
+import Avatar from './Avatar';
 
 export default function Modal({ setIsOpen, fren }) {
 	const fetcher = (...args) => fetch(...args).then((res) => res.json())
@@ -40,9 +41,10 @@ export default function Modal({ setIsOpen, fren }) {
 					) : (
 						<>
 							<div className={ModalStyles.header}>
-								<Image
+								<Avatar
 									className={ModalStyles.headerAvatar}
 									src={`https://metadata.ens.domains/mainnet/avatar/${fren.ens}`}
+									fallbackSrc="/img/av-default.svg"
 									width={100}
 									height={100}
 								/>
