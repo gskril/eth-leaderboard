@@ -1,0 +1,241 @@
+<!-- Manually push this live when needed -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>.eth Leaderboard</title>
+  <link rel="stylesheet" href="/style.css">
+
+  <style>
+    /* ----- Fonts ----- */
+
+    @font-face {
+      font-family: "CircularXX";
+      src: url("fonts/CircularXXWeb-Bold.woff2");
+      font-style: normal;
+      font-weight: 700;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "CircularXX";
+      src: url("fonts/CircularXXWeb-Book.woff2");
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+    }
+
+    /* ----- CSS Resets ----- */
+    body {
+      background: var(--background-gradient);
+      min-height: 100vh;
+      margin: 0;
+      font-size: 100%;
+      font-family: "CircularXX", -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      line-height: 1.4;
+      color: var(--text-color);
+    }
+
+    *,
+    *::after,
+    *::before {
+      box-sizing: border-box;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font-family: inherit;
+      font-size: 100%;
+      margin: 0;
+    }
+
+    /* ----- Global ----- */
+    :root {
+      --radius: 0.75rem;
+      --container-width: 75em;
+      --color-outline: #e8e9ed;
+
+      --background-gradient: radial-gradient(
+          40.48% 67.6% at 50% 32.4%,
+          #ecf4ff 0%,
+          #f7f7ff 52.77%,
+          #f7f7f7 100%
+        ),
+        #ffffff;
+      --background-accent: #EAEAEA;
+      --background-accent-rgb: 234, 234, 234;
+      --background-accent-light: #e0e0e0;
+      --background-base: #ffffff;
+      --modal-shadow: 188, 190, 195;
+
+      --table-gradient: linear-gradient(
+        180deg,
+        rgba(233, 234, 244, 1) 0%,
+        rgba(247, 247, 247, 0) 100%
+      );
+      --table-gradient-mobile: linear-gradient(
+        0deg,
+        rgba(233, 234, 244, 1) 0%,
+        rgba(247, 247, 247, 0) 100%
+      );
+      --avatar-gradient: linear-gradient(
+        330.4deg,
+        #44bcf0 4.54%,
+        #628bf3 66.33%,
+        #a099ff 148.85%
+      );
+
+      --text-color: #3F3F3F;
+      --text-color-light: #717171;
+      --text-color-lighter: rgba(0, 0, 0, 0.23);
+      --text-color-accent: #7298f8;
+      --text-color-accent-200: #5d80d6;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --color-outline: rgba(73, 73, 73, 0.4);
+
+        --background-gradient: radial-gradient(
+          40.48% 67.6% at 50% 32.4%,
+          #161A20 0%,
+          #151617 52.77%,
+          #151617 100%
+        ),
+        #141414;
+        --background-accent: #101010;
+        --background-accent-rgb: 16, 16, 16;
+        --background-accent-light: #0D0D0D;
+        --background-base: #000000;
+        --modal-shadow: 32, 33, 35;
+
+        --table-gradient: linear-gradient(
+          0deg,
+          rgba(20, 20, 20, 0),
+          rgb(17, 17, 17)
+        );
+        --table-gradient-mobile: linear-gradient(
+          180deg,
+          rgba(20, 20, 20, 0),
+          rgb(17, 17, 17)
+        );
+
+        --text-color: #E7E7E7;
+        --text-color-light: #A1A1A1;
+        --text-color-lighter: #6C6C6C;
+      }
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      margin: 0 0 1em;
+      line-height: 1.2;
+      font-weight: 600;
+    }
+
+    h1 {
+      font-size: 2.35rem;
+      margin-bottom: 0.25em;
+    }
+
+    p {
+      font-weight: 400;
+      margin: 0;
+    }
+
+    @media screen and (max-width: 45em) {
+      h1 {
+        font-size: 2rem;
+      }
+    }
+
+    .container {
+      max-width: 75rem;
+      margin: 0 auto;
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+
+    /* ----- Hero ----- */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 3rem 0 2rem;
+      border-radius: var(--radius);
+      margin-bottom: 1rem;
+    }
+
+    .heroTitle {
+      display: flex;
+      align-items: baseline;
+      margin-bottom: 0.5rem;
+    }
+
+    .heroSubtitle {
+      font-weight: 400;
+      color: var(--text-color-light);
+      font-size: 18px;
+      margin-bottom: 2rem;
+    }
+
+    .heroHighlight {
+      color: var(--text-color-accent);
+    }
+
+    .heroTwitter {
+      background-color: var(--background-base);
+      border-radius: 50%;
+      padding: 0.25rem;
+      width: 2.875rem;
+      height: 2.875rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 0.0625rem solid var(--color-outline);
+      margin-left: 1rem;
+      text-decoration: none;
+      color: currentColor;
+      fill: #1da1f2;
+    }
+
+    .heroTwitter:hover,
+    .heroTwitter:focus-visible {
+      opacity: 0.85;
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <div class="hero">
+      <div class="heroTitle">
+        <h1><span class="heroHighlight">.eth</span> Leaderboard</h1>
+        <a href="https://twitter.com/ethleaderboard" class="heroTwitter" target="_blank">
+          <svg
+            width="22"
+            height="22"
+            role="img"
+            viewBox="0 0 24 24"
+            color="#000"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <title>Twitter icon</title>
+            <path d="M23.954 4.569c-.885.389-1.83.654-2.825.775 1.014-.611 1.794-1.574 2.163-2.723-.951.555-2.005.959-3.127 1.184-.896-.959-2.173-1.559-3.591-1.559-2.717 0-4.92 2.203-4.92 4.917 0 .39.045.765.127 1.124C7.691 8.094 4.066 6.13 1.64 3.161c-.427.722-.666 1.561-.666 2.475 0 1.71.87 3.213 2.188 4.096-.807-.026-1.566-.248-2.228-.616v.061c0 2.385 1.693 4.374 3.946 4.827-.413.111-.849.171-1.296.171-.314 0-.615-.03-.916-.086.631 1.953 2.445 3.377 4.604 3.417-1.68 1.319-3.809 2.105-6.102 2.105-.39 0-.779-.023-1.17-.067 2.189 1.394 4.768 2.209 7.557 2.209 9.054 0 13.999-7.496 13.999-13.986 0-.209 0-.42-.015-.63.961-.689 1.8-1.56 2.46-2.548l-.047-.02z"></path>
+          </svg>
+        </a>
+      </div>
+      <p class="heroSubtitle">The most followed Twitter accounts with <strong>.eth</strong> names</p>
+      <p>Temporarily down for maintenance. Thanks for your patience.</p>
+    </div>
+  </main>
+</body>
+</html>
