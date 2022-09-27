@@ -83,7 +83,6 @@ export const fetchInitialData = async (q, count = 100, skip = 0, verified, locat
     handle: x.handle,
     followers: x.followers,
     verified: x.verified,
-    added: x.added.toISOString(),
     updated: x.updated ? x.updated.toISOString() : null,
     pfp: x.avatar,
     ranking: i + 1 + skip,
