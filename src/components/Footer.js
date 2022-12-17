@@ -5,18 +5,17 @@ export default function Footer() {
     <footer className={footerStyles.footer}>
       <div className={footerStyles.footerContainer}>
         <small>
+          <a href="https://gregskril.notion.site/ETH-Leaderboard-API-9cb07e49bfe04905bdc1608de48943dd">
+            API Docs
+          </a>
+        </small>
+        <small>
           Website by{" "}
           <a href="https://twitter.com/gregskril" target="_blank">
             @gregskril
           </a> and{" "}
           <a href="https://twitter.com/taytemss" target="_blank">
             @taytemss
-          </a>
-        </small>
-        <small>
-          See updates at{" "}
-          <a href="https://twitter.com/ethleaderboard" target="_blank">
-            @ethleaderboard
           </a>
         </small>
         <small>
