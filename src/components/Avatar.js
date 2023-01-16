@@ -1,17 +1,17 @@
-import { useState } from 'react'
-import Image from 'next/image'
+import { useState } from 'react';
+import Image from 'next/image';
 
 export default function Avatar(props) {
-	const { src, fallbackSrc, ...rest } = props
-	const [imgSrc, setImgSrc] = useState(src)
+  const { src, fallbackSrc, ...rest } = props;
+  const [imgSrc, setImgSrc] = useState(src);
 
-	return (
-		<Image
-			{...rest}
-			src={imgSrc}
-			onError={() => {
-				setImgSrc(fallbackSrc)
-			}}
-		/>
-	)
+  return (
+    <Image
+      {...rest}
+      src={imgSrc}
+      onError={() => {
+        setImgSrc(fallbackSrc);
+      }}
+    />
+  );
 }

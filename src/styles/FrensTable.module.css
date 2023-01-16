@@ -85,16 +85,16 @@
 }
 
 .newProfile:hover::after {
-  content: "This name was added in the last 24 hours.";
+  content: 'This name was added in the last 24 hours.';
   position: absolute;
   bottom: 1rem;
   display: block;
   width: 15rem;
   background-color: var(--background-base);
   border: 1px solid var(--color-outline);
-  border-radius: .625rem;
+  border-radius: 0.625rem;
   font-size: 1.125rem;
-  padding: .65rem;
+  padding: 0.65rem;
   z-index: 100;
 }
 

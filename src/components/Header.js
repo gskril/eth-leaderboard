@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import { useMeta } from "../api";
-import headerStyles from "../styles/Header.module.css";
-import { nFormatter } from "../utils/format";
+import { useEffect, useState } from 'react';
+import { useMeta } from '../api';
+import headerStyles from '../styles/Header.module.css';
+import { nFormatter } from '../utils/format';
 
 export default function Header({ top10, top100, top500, children }) {
   return (
@@ -12,7 +12,11 @@ export default function Header({ top10, top100, top500, children }) {
             <span className={headerStyles.heroHighlight}>.eth</span> Leaderboard
           </a>
         </h1>
-        <a className={headerStyles.heroTwitter} href="https://twitter.com/ethleaderboard" target="_blank">
+        <a
+          className={headerStyles.heroTwitter}
+          href="https://twitter.com/ethleaderboard"
+          target="_blank"
+        >
           <svg
             width="22"
             height="22"
@@ -32,34 +36,34 @@ export default function Header({ top10, top100, top500, children }) {
       <div className={headerStyles.floor}>
         <div className={headerStyles.floorSection}>
           <span className={headerStyles.floorNumber}>
-            {"> " + nFormatter(top10, 1)}
+            {'> ' + nFormatter(top10, 1)}
           </span>
           <span className={headerStyles.floorSectionLabel}>
             <span className={headerStyles.floorFollowersLabel}>
               Followers for
-            </span>{" "}
+            </span>{' '}
             <strong>Top 10</strong>
           </span>
         </div>
         <div className={headerStyles.floorSection}>
           <span className={headerStyles.floorNumber}>
-            {"> " + nFormatter(top100, 1)}
+            {'> ' + nFormatter(top100, 1)}
           </span>
           <span className={headerStyles.floorSectionLabel}>
             <span className={headerStyles.floorFollowersLabel}>
               Followers for
-            </span>{" "}
+            </span>{' '}
             <strong>Top 100</strong>
           </span>
         </div>
         <div className={headerStyles.floorSection}>
           <span className={headerStyles.floorNumber}>
-            {"> " + nFormatter(top500, 1)}
+            {'> ' + nFormatter(top500, 1)}
           </span>
           <span className={headerStyles.floorSectionLabel}>
             <span className={headerStyles.floorFollowersLabel}>
               Followers for
-            </span>{" "}
+            </span>{' '}
             <strong>Top 1000</strong>
           </span>
         </div>
