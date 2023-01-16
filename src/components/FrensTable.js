@@ -114,8 +114,8 @@ const FrensTablePage = ({
                     <div className={frensTableStyles.ensProfile}>
                       <Image
                         layout="fixed"
-                        width="34px"
-                        height="34px"
+                        width={34}
+                        height={34}
                         className={frensTableStyles.pfp}
                         src={
                           "/img/av-default.png"
@@ -137,8 +137,8 @@ const FrensTablePage = ({
                     >
                       <Avatar
                         layout="fixed"
-                        width="34px"
-                        height="34px"
+                        width={34}
+                        height={34}
                         className={frensTableStyles.pfp}
                         src={
                           "https://metadata.ens.domains/mainnet/avatar/" +
@@ -175,8 +175,8 @@ const FrensTablePage = ({
                   >
                     <Image
                       layout="fixed"
-                      width="34px"
-                      height="34px"
+                      width={34}
+                      height={34}
                       className={frensTableStyles.pfp}
                       src={
                         fren.pfp ||
