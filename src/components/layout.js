@@ -78,16 +78,6 @@ export default function Layout({ children, showFixed }) {
         <meta name="twitter:card" content="summary_large_image" />
         <link rel="canonical" href="https://ethleaderboard.xyz/" />
 
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="true"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
         <link href="/fonts/CircularXXWeb-Bold.woff2" rel="preload" as="font" />
         <link href="/fonts/CircularXXWeb-Book.woff2" rel="preload" as="font" />
         <link href="/fonts/CircularXXWeb-Medium.woff" rel="preload" as="font" />
