@@ -1,29 +1,15 @@
-import { Fragment, useRef, useState } from 'react';
-import { useEffect } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Fragment, useRef, useState, useEffect } from 'react';
+import { Link } from 'next/link';
+
 import { useFrens } from '../api';
+import { usePrevious } from '../utils/hooks';
+import CancelIcon from '../assets/icons/CancelIcon.svg';
+import ChevronIcon from '../assets/icons/ChevronIcon.svg';
 import filtersStyles from '../styles/Filters.module.css';
 import headerStyles from '../styles/Header.module.css';
 import PageButtons from './PageButtons';
-import { default as CancelIcon } from '../assets/icons/CancelIcon.svg';
-import { default as SearchIcon } from '../assets/icons/SearchIcon.svg';
-import { default as ChevronIcon } from '../assets/icons/ChevronIcon.svg';
-import { usePrevious } from '../utils/hooks';
-import { AnimatePresence, motion } from 'framer-motion';
-import { useScrollPosition } from '@n8tb1t/use-scroll-position';
-
-const FilterOption = ({ category, type, setType, currentType }) => (
-  <div className={filtersStyles.filtersOption}>
-    <input
-      type="radio"
-      name={category}
-      id={`${category}-${type}`}
-      value={type}
-      checked={type === currentType}
-      onChange={() => setType(type)}
-    />
-    <label htmlFor={`${category}-${type}`}>{type}</label>
-  </div>
-);
+import SearchIcon from '../assets/icons/SearchIcon.svg';
 
 export default function Filters({
   page,
@@ -213,15 +199,16 @@ export default function Filters({
             <div className={headerStyles.fixedHeader}>
               <div className={headerStyles.heroTitle}>
                 <h1>
-                  <a className={headerStyles.heroTitleLink} href="/">
+                  <Link className={headerStyles.heroTitleLink} href="/">
                     <span className={headerStyles.heroHighlight}>.eth</span>{' '}
                     Leaderboard
-                  </a>
+                  </Link>
                 </h1>
                 <a
                   class={headerStyles.heroTwitter}
                   href="https://twitter.com/ethleaderboard"
                   target="_blank"
+                  rel="noreferrer"
                 >
                   <svg
                     width="22"

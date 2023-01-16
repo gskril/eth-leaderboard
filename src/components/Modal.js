@@ -1,8 +1,8 @@
-import Image from 'next/image';
 import useSWR from 'swr';
+
+import Avatar from './Avatar';
 import ModalStyles from './../styles/Modal.module.css';
 import NftGrid from './NftGrid';
-import Avatar from './Avatar';
 
 export default function Modal({ setIsOpen, fren }) {
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
@@ -56,6 +56,7 @@ export default function Modal({ setIsOpen, fren }) {
                         data && data.twitter ? data.twitter : fren.handle
                       }`}
                       target="_blank"
+                      rel="noreferrer"
                     >
                       Twitter
                     </a>
@@ -64,6 +65,7 @@ export default function Modal({ setIsOpen, fren }) {
                         data && data.address ? data.address : fren.ens
                       }`}
                       target="_blank"
+                      rel="noreferrer"
                     >
                       OpenSea
                     </a>
@@ -71,12 +73,13 @@ export default function Modal({ setIsOpen, fren }) {
                       <a
                         href={`https://github.com/${data.github}`}
                         target="_blank"
+                        rel="noreferrer"
                       >
                         GitHub
                       </a>
                     ) : null}
                     {data && data.url ? (
-                      <a href={data.url} target="_blank">
+                      <a href={data.url} target="_blank" rel="noreferrer">
                         Website
                       </a>
                     ) : null}

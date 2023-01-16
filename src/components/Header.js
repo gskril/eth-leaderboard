@@ -1,21 +1,22 @@
-import { useEffect, useState } from 'react';
-import { useMeta } from '../api';
-import headerStyles from '../styles/Header.module.css';
+import Link from 'next/link';
+
 import { nFormatter } from '../utils/format';
+import headerStyles from '../styles/Header.module.css';
 
 export default function Header({ top10, top100, top500, children }) {
   return (
     <div className={headerStyles.hero}>
       <div className={headerStyles.heroTitle}>
         <h1>
-          <a className={headerStyles.heroTitleLink} href="/">
+          <Link className={headerStyles.heroTitleLink} href="/">
             <span className={headerStyles.heroHighlight}>.eth</span> Leaderboard
-          </a>
+          </Link>
         </h1>
         <a
           className={headerStyles.heroTwitter}
           href="https://twitter.com/ethleaderboard"
           target="_blank"
+          rel="noreferrer"
         >
           <svg
             width="22"

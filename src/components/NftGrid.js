@@ -1,4 +1,5 @@
 import useSWR from 'swr';
+
 import Styles from './../styles/NftGrid.module.css';
 
 export default function NftGrid({ address }) {
@@ -35,7 +36,10 @@ export default function NftGrid({ address }) {
         loadingItems.map((item) => {
           return (
             // add 'loading' class if isLoading is true
-            <div className={[Styles.nftDiv, Styles.loading].join(' ')} />
+            <div
+              className={[Styles.nftDiv, Styles.loading].join(' ')}
+              key={Math.random()}
+            />
           );
         })}
 

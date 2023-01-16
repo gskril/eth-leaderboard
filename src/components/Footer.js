@@ -11,17 +11,29 @@ export default function Footer() {
         </small>
         <small>
           Website by{' '}
-          <a href="https://twitter.com/gregskril" target="_blank">
+          <a
+            href="https://twitter.com/gregskril"
+            target="_blank"
+            rel="noreferrer"
+          >
             @gregskril
           </a>{' '}
           and{' '}
-          <a href="https://twitter.com/taytemss" target="_blank">
+          <a
+            href="https://twitter.com/taytemss"
+            target="_blank"
+            rel="noreferrer"
+          >
             @taytemss
           </a>
         </small>
         <small>
           Initial data from{' '}
-          <a href="https://twitter.com/ultrasoundmoney" target="_blank">
+          <a
+            href="https://twitter.com/ultrasoundmoney"
+            target="_blank"
+            rel="noreferrer"
+          >
             @ultrasoundmoney
           </a>
         </small>

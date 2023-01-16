@@ -1,12 +1,13 @@
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { SWRConfig } from 'swr';
+import { useEffect, useRef, useState } from 'react';
+import { useRouter } from 'next/router';
+import { useScrollPosition } from '@n8tb1t/use-scroll-position';
+
 import { fetchInitialData, fetchInitialMetadata } from '../staticapi';
 import Filters from '../components/Filters';
 import FrensTable from '../components/FrensTable';
 import Header from '../components/Header';
 import Layout from '../components/layout';
-import { useScrollPosition } from '@n8tb1t/use-scroll-position';
-import { useRouter } from 'next/router';
 import Modal from '../components/Modal';
 
 export default function Home({ frensMeta, fallback }) {

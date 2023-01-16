@@ -1,11 +1,17 @@
-import getDb from "./db";
+import getDb from './db';
 
-export const fetchInitialData = async (q, count = 100, skip = 0, verified, location) => {
+export const fetchInitialData = async (
+  q,
+  count = 100,
+  skip = 0,
+  verified,
+  location
+) => {
   const db = await getDb();
 
   const criteria = {};
   if (q !== undefined)
-    criteria.or = [{ "handle ilike": `%${q}%` }, { "ens ilike": `%${q}%` }];
+    criteria.or = [{ 'handle ilike': `%${q}%` }, { 'ens ilike': `%${q}%` }];
 
   if (location === 'new-york-city') {
     criteria.or = [
@@ -13,25 +19,19 @@ export const fetchInitialData = async (q, count = 100, skip = 0, verified, locat
       { 'location ilike': `%new york%` },
       { 'location ilike': `%brooklyn%` },
       { 'location ilike': `%manhattan%` },
-    ]
+    ];
   } else if (location === 'san-francisco') {
     criteria.or = [
       { 'location ilike': `%san francisco%` },
       { 'location ilike': `%bay area%` },
       { 'location like': `%SF%` },
-    ]
+    ];
   } else if (location === 'los-angeles') {
-    criteria.or = [
-      { 'location ilike': `%los angeles%` },
-    ]
+    criteria.or = [{ 'location ilike': `%los angeles%` }];
   } else if (location === 'chicago') {
-    criteria.or = [
-      { 'location ilike': `%chicago%` },
-    ]
+    criteria.or = [{ 'location ilike': `%chicago%` }];
   } else if (location === 'paris') {
-    criteria.or = [
-      { 'location ilike': `%paris%` },
-    ]
+    criteria.or = [{ 'location ilike': `%paris%` }];
   } else if (location === 'california') {
     criteria.or = [
       { 'location ilike': `%california%` },
@@ -41,7 +41,7 @@ export const fetchInitialData = async (q, count = 100, skip = 0, verified, locat
       { 'location ilike': `%bay area%` },
       { 'location like': `%SF%` },
       { 'location ilike': `%los angeles%` },
-    ]
+    ];
   } else if (location === 'texas') {
     criteria.or = [
       { 'location ilike': `%texas%` },
@@ -49,25 +49,20 @@ export const fetchInitialData = async (q, count = 100, skip = 0, verified, locat
       { 'location ilike': `%houston%` },
       { 'location ilike': `%dallas%` },
       { 'location ilike': `%austin%` },
-    ]
+    ];
   } else if (location === 'toronto') {
-    criteria.or = [
-      { 'location ilike': `%toronto%` },
-    ]
-  } else if (location === 'quebec'){
-    criteria.or = [
-      { 'location ilike': `%quebec%` },
-    ]
+    criteria.or = [{ 'location ilike': `%toronto%` }];
+  } else if (location === 'quebec') {
+    criteria.or = [{ 'location ilike': `%quebec%` }];
   }
 
-  if (verified !== undefined)
-    criteria.verified = verified;
+  if (verified !== undefined) criteria.verified = verified;
 
   const [allFrens, frensCount] = await db.withConnection(async (tx) => {
     const allFrensReq = await tx.eth.find(criteria, {
       order: [
-        { field: "followers", direction: "desc", nulls: "last" }, 
-        { field: "handle" }
+        { field: 'followers', direction: 'desc', nulls: 'last' },
+        { field: 'handle' },
       ],
       offset: skip,
       limit: count,
@@ -98,7 +93,7 @@ export const fetchInitialMetadata = async () => {
     const top1000Req = await tx.eth.find(
       {},
       {
-        order: [{ field: "followers", direction: "desc", nulls: "last" }],
+        order: [{ field: 'followers', direction: 'desc', nulls: 'last' }],
         offset: 0,
         limit: 1000,
       }

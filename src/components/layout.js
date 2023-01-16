@@ -1,8 +1,9 @@
-import Head from 'next/head';
-import Footer from './Footer';
-import layoutStyles from '../styles/Layout.module.css';
 import { useRef, useState } from 'react';
 import { useScrollPosition } from '@n8tb1t/use-scroll-position';
+import Head from 'next/head';
+
+import Footer from './Footer';
+import layoutStyles from '../styles/Layout.module.css';
 
 export default function Layout({ children, showFixed }) {
   const [reachedFooter, setReachedFooter] = useState(false);

@@ -1,6 +1,6 @@
 import { fetchInitialData } from '../../staticapi';
 
-export default async (req, res) => {
+export default async function handler(req, res) {
   if (req.method === 'GET') {
     const startTime = Date.now();
     console.log('FETCHING DATA FROM API', req.query);
@@ -15,4 +15,4 @@ export default async (req, res) => {
     res.status(200);
     res.json({ ...data, response_time: diff });
   }
-};
+}

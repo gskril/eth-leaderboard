@@ -1,9 +1,10 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
+
 import { useFrens } from '../api';
-import frensTableStyles from '../styles/FrensTable.module.css';
 import { usePrevious } from '../utils/hooks';
 import Avatar from './Avatar';
+import frensTableStyles from '../styles/FrensTable.module.css';
 
 export default function FrensTable({
   searchInput,
@@ -166,6 +167,7 @@ const FrensTablePage = ({
                     className={frensTableStyles.ensProfile}
                     href={'https://twitter.com/' + fren.handle}
                     target="_blank"
+                    rel="noreferrer"
                   >
                     <Image
                       layout="fixed"
@@ -198,6 +200,7 @@ const FrensTablePage = ({
             <a
               href="https://twitter.com/intent/tweet?text=%40ethleaderboard%20add%20me%20pls%20:)"
               target="_blank"
+              rel="noreferrer"
             >
               Tweet at @ethleaderboard
             </a>{' '}

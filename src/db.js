@@ -1,8 +1,8 @@
-import massive from "massive";
+import massive from 'massive';
 
 let db;
 
-export default async () => {
+export default async function getDb() {
   if (db) {
     return db;
   }
@@ -18,4 +18,4 @@ export default async () => {
     db = instance;
     return Promise.resolve(db);
   });
-};
+}

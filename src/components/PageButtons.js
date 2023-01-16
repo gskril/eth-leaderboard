@@ -1,4 +1,5 @@
 import { Fragment } from 'react';
+
 import pageButtonStyles from '../styles/PageButtons.module.css';
 
 const PageButton = ({ number, page, setPage, isActive }) => (
