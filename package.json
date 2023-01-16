@@ -17,15 +17,15 @@
     "@n8tb1t/use-scroll-position": "^2.0.3",
     "@prisma/client": "2.30.0",
     "@svgr/webpack": "^6.2.0",
-    "dotenv": "^11.0.0",
-    "framer-motion": "^5.5.7",
-    "massive": "^6.10.2",
+    "dotenv": "^16.0.3",
+    "framer-motion": "^8.4.3",
+    "massive": "^6.11.1",
     "next": "^13.1.2",
-    "pg": "^8.5.1",
+    "pg": "^8.8.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "sharp": "^0.30.5",
-    "swr": "^1.1.2"
+    "sharp": "^0.31.3",
+    "swr": "^2.0.0"
   },
   "devDependencies": {
     "@types/node": "^18.11.18",
