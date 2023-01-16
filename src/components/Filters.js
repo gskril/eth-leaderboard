@@ -2,14 +2,14 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Fragment, useRef, useState, useEffect } from 'react';
 import { Link } from 'next/link';
 
+import { default as CancelIcon } from '../assets/icons/CancelIcon.svg';
+import { default as ChevronIcon } from '../assets/icons/ChevronIcon.svg';
+import { default as SearchIcon } from '../assets/icons/SearchIcon.svg';
 import { useFrens } from '../api';
 import { usePrevious } from '../utils/hooks';
-import CancelIcon from '../assets/icons/CancelIcon.svg';
-import ChevronIcon from '../assets/icons/ChevronIcon.svg';
 import filtersStyles from '../styles/Filters.module.css';
 import headerStyles from '../styles/Header.module.css';
 import PageButtons from './PageButtons';
-import SearchIcon from '../assets/icons/SearchIcon.svg';
 
 export default function Filters({
   page,
