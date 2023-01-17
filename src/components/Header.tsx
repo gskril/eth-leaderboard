@@ -3,7 +3,19 @@ import Link from 'next/link';
 import { nFormatter } from '../utils/format';
 import headerStyles from '../styles/Header.module.css';
 
-export default function Header({ top10, top100, top500, children }) {
+interface HeaderProps {
+  top10: number;
+  top100: number;
+  top500: number;
+  children: React.ReactNode;
+}
+
+export default function Header({
+  top10,
+  top100,
+  top500,
+  children,
+}: HeaderProps) {
   return (
     <div className={headerStyles.hero}>
       <div className={headerStyles.heroTitle}>

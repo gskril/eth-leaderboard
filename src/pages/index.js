@@ -7,7 +7,7 @@ import { fetchInitialData, fetchInitialMetadata } from '../staticapi';
 import Filters from '../components/Filters';
 import FrensTable from '../components/FrensTable';
 import Header from '../components/Header';
-import Layout from '../components/layout';
+import Layout from '../components/Layout';
 import Modal from '../components/Modal';
 
 export default function Home({ frensMeta, fallback }) {

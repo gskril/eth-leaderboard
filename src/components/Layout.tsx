@@ -5,12 +5,17 @@ import Head from 'next/head';
 import Footer from './Footer';
 import layoutStyles from '../styles/Layout.module.css';
 
-export default function Layout({ children, showFixed }) {
+interface LayoutProps {
+  children: React.ReactNode;
+  showFixed?: boolean;
+}
+
+export default function Layout({ children, showFixed }: LayoutProps) {
   const [reachedFooter, setReachedFooter] = useState(false);
-  const bodyRef = useRef();
+  const bodyRef = useRef() as React.MutableRefObject<HTMLDivElement>;
 
   useScrollPosition(
-    ({ _, currPos }) => {
+    () => {
       if (
         window.innerHeight >= bodyRef.current.getBoundingClientRect().bottom &&
         !reachedFooter
