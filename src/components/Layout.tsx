@@ -87,22 +87,6 @@ export default function Layout({ children, showFixed }: LayoutProps) {
         <link href="/fonts/CircularXXWeb-Book.woff2" rel="preload" as="font" />
         <link href="/fonts/CircularXXWeb-Medium.woff" rel="preload" as="font" />
         <link href="/fonts/CircularXXWeb-Light.woff2" rel="preload" as="font" />
-        <script
-          async
-          src={`https://www.googletagmanager.com/gtag/js?id=G-JFX7VQ8937`}
-        />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}', {
-              page_path: window.location.pathname,
-            });
-          `,
-          }}
-        />
       </Head>
       <main>{children}</main>
       <Footer />
