@@ -29,7 +29,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "sharp": "^0.31.3",
-    "swr": "^2.0.0"
+    "swr": "^2.0.0",
+    "zod": "^3.20.2"
   },
   "devDependencies": {
     "@types/massive": "^5.4.4",
