@@ -2,7 +2,14 @@ import { Fragment } from 'react';
 
 import pageButtonStyles from '../styles/PageButtons.module.css';
 
-const PageButton = ({ number, page, setPage, isActive }) => (
+type PageButtonProps = {
+  number: number;
+  page: number;
+  setPage: (page: number) => void;
+  isActive: boolean;
+};
+
+const PageButton = ({ number, page, setPage, isActive }: PageButtonProps) => (
   <button
     className={`${pageButtonStyles.button} ${
       isActive && pageButtonStyles.activeButton
@@ -16,13 +23,21 @@ const PageButton = ({ number, page, setPage, isActive }) => (
   </button>
 );
 
+interface PageButtonsProps {
+  page: number;
+  setPage: (page: number) => void;
+  count: number;
+  amntPerPage: number;
+  hide: boolean;
+}
+
 export default function PageButtons({
   page,
   setPage,
   count,
   amntPerPage,
   hide,
-}) {
+}: PageButtonsProps) {
   return (
     <div
       className={`${pageButtonStyles.buttonWrapper} ${

@@ -9,3 +9,13 @@ export interface Fren {
   pfp: string;
   ranking: number;
 }
+
+interface Nft {
+  id: number;
+  permalink: string;
+  image_preview_url: string;
+}
+
+export interface OpenseaResponse {
+  assets: Nft[];
+}

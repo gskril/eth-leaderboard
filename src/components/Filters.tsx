@@ -198,10 +198,13 @@ export default function Filters({
               <div className={headerStyles.heroTitle}>
                 <h1>
                   {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
-                  <a className={headerStyles.heroTitleLink} href="/">
+                  <div
+                    className={headerStyles.heroTitleLink}
+                    onClick={scrollToTop}
+                  >
                     <span className={headerStyles.heroHighlight}>.eth</span>{' '}
                     Leaderboard
-                  </a>
+                  </div>
                 </h1>
                 <a
                   className={headerStyles.heroTwitter}

@@ -105,7 +105,6 @@ const FrensTablePage = ({
                     // Don't show profile modal if the name has special characters
                     <div className={frensTableStyles.ensProfile}>
                       <Image
-                        layout="fixed"
                         width={34}
                         height={34}
                         className={frensTableStyles.pfp}
@@ -167,7 +166,6 @@ const FrensTablePage = ({
                     rel="noreferrer"
                   >
                     <Image
-                      layout="fixed"
                       width={34}
                       height={34}
                       className={frensTableStyles.pfp}
