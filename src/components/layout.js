@@ -1,8 +1,9 @@
-import Head from "next/head";
-import Footer from "./Footer";
-import layoutStyles from "../styles/Layout.module.css";
-import { useRef, useState } from "react";
-import { useScrollPosition } from "@n8tb1t/use-scroll-position";
+import { useRef, useState } from 'react';
+import { useScrollPosition } from '@n8tb1t/use-scroll-position';
+import Head from 'next/head';
+
+import Footer from './Footer';
+import layoutStyles from '../styles/Layout.module.css';
 
 export default function Layout({ children, showFixed }) {
   const [reachedFooter, setReachedFooter] = useState(false);
@@ -77,16 +78,6 @@ export default function Layout({ children, showFixed }) {
         <meta name="twitter:card" content="summary_large_image" />
         <link rel="canonical" href="https://ethleaderboard.xyz/" />
 
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="true"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
         <link href="/fonts/CircularXXWeb-Bold.woff2" rel="preload" as="font" />
         <link href="/fonts/CircularXXWeb-Book.woff2" rel="preload" as="font" />
         <link href="/fonts/CircularXXWeb-Medium.woff" rel="preload" as="font" />

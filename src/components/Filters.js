@@ -1,29 +1,14 @@
-import { Fragment, useRef, useState } from "react";
-import { useEffect } from "react";
-import { useFrens } from "../api";
-import filtersStyles from "../styles/Filters.module.css";
-import headerStyles from "../styles/Header.module.css";
-import PageButtons from "./PageButtons";
-import { default as CancelIcon } from "../assets/icons/CancelIcon.svg";
-import { default as SearchIcon } from "../assets/icons/SearchIcon.svg";
-import { default as ChevronIcon } from "../assets/icons/ChevronIcon.svg";
-import { usePrevious } from "../utils/hooks";
-import { AnimatePresence, motion } from "framer-motion";
-import { useScrollPosition } from "@n8tb1t/use-scroll-position";
+import { AnimatePresence, motion } from 'framer-motion';
+import { Fragment, useRef, useState, useEffect } from 'react';
 
-const FilterOption = ({ category, type, setType, currentType }) => (
-  <div className={filtersStyles.filtersOption}>
-    <input
-      type="radio"
-      name={category}
-      id={`${category}-${type}`}
-      value={type}
-      checked={type === currentType}
-      onChange={() => setType(type)}
-    />
-    <label htmlFor={`${category}-${type}`}>{type}</label>
-  </div>
-);
+import { default as CancelIcon } from '../assets/icons/CancelIcon.svg';
+import { default as ChevronIcon } from '../assets/icons/ChevronIcon.svg';
+import { default as SearchIcon } from '../assets/icons/SearchIcon.svg';
+import { useFrens } from '../api';
+import { usePrevious } from '../utils/hooks';
+import filtersStyles from '../styles/Filters.module.css';
+import headerStyles from '../styles/Header.module.css';
+import PageButtons from './PageButtons';
 
 export default function Filters({
   page,
@@ -35,7 +20,7 @@ export default function Filters({
   initialQuery,
 }) {
   const [isInitial, setIsInitial] = useState(true);
-  const [currentSearchInput, setCurrentSearchInput] = useState("");
+  const [currentSearchInput, setCurrentSearchInput] = useState('');
   const [timeout, setTimeoutVar] = useState(null);
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const searchRef = useRef();
@@ -56,34 +41,34 @@ export default function Filters({
 
   const handleClear = (e) => {
     e.stopPropagation();
-    setCurrentSearchInput("");
+    setCurrentSearchInput('');
     showFixed ? searchRefFixed.current.blur() : searchRef.current.blur();
   };
 
   const openSearch = (e) => {
     e.stopPropagation();
-    console.log("opening search...");
+    console.log('opening search...');
     setMobileSearchOpen(true);
   };
 
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: "smooth",
+      behavior: 'smooth',
     });
   };
 
   useEffect(() => {
     window.scrollTo({
       top: 0,
-      behavior: "smooth",
+      behavior: 'smooth',
     });
   }, [searchInput]);
 
   useEffect(() => {
     window.scrollTo({
       top: 0,
-      behavior: "smooth",
+      behavior: 'smooth',
     });
   }, [page]);
 
@@ -120,8 +105,8 @@ export default function Filters({
     <Fragment>
       <div
         className={`${filtersStyles.filters} ${
-          mobileSearchOpen ? filtersStyles.mobileSearchOpen : ""
-        } ${currentSearchInput !== "" ? filtersStyles.searchHasValue : ""}`}
+          mobileSearchOpen ? filtersStyles.mobileSearchOpen : ''
+        } ${currentSearchInput !== '' ? filtersStyles.searchHasValue : ''}`}
         ref={filterDivRef}
       >
         {showFixed && <div className={headerStyles.headerPlaceholder}></div>}
@@ -152,9 +137,9 @@ export default function Filters({
               <button
                 ref={searchRef}
                 className={`${filtersStyles.removeButton} ${
-                  currentSearchInput === ""
+                  currentSearchInput === ''
                     ? filtersStyles.removeButtonHidden
-                    : ""
+                    : ''
                 }`}
                 onClick={handleClear}
               >
@@ -164,7 +149,7 @@ export default function Filters({
             <div className={filtersStyles.spacer}></div>
             <AnimatePresence>
               <motion.div
-                layout={mobileSearchOpen ? false : "position"}
+                layout={mobileSearchOpen ? false : 'position'}
                 className={filtersStyles.rightSide}
               >
                 <div
@@ -173,9 +158,9 @@ export default function Filters({
                   }`}
                 >
                   <strong>
-                    {count.toLocaleString("en", { useGrouping: true })}
-                  </strong>{" "}
-                  <span>name{count !== 1 && "s"}</span>
+                    {count.toLocaleString('en', { useGrouping: true })}
+                  </strong>{' '}
+                  <span>name{count !== 1 && 's'}</span>
                 </div>
                 <PageButtons
                   {...{ page, setPage, count }}
@@ -190,17 +175,17 @@ export default function Filters({
       <AnimatePresence>
         <motion.div
           layout="position"
-          key={showFixed ? "fixed" : "not-fixed"}
+          key={showFixed ? 'fixed' : 'not-fixed'}
           initial={{
             y:
-              typeof window !== "undefined" && window.innerWidth > 625
+              typeof window !== 'undefined' && window.innerWidth > 625
                 ? -100
                 : 50,
           }}
           animate={{ y: 0 }}
           exit={{
             y:
-              typeof window !== "undefined" && window.innerWidth > 625
+              typeof window !== 'undefined' && window.innerWidth > 625
                 ? -100
                 : 50,
           }}
@@ -213,12 +198,18 @@ export default function Filters({
             <div className={headerStyles.fixedHeader}>
               <div className={headerStyles.heroTitle}>
                 <h1>
+                  {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
                   <a className={headerStyles.heroTitleLink} href="/">
-                    <span className={headerStyles.heroHighlight}>.eth</span>{" "}
+                    <span className={headerStyles.heroHighlight}>.eth</span>{' '}
                     Leaderboard
                   </a>
                 </h1>
-                <a class={headerStyles.heroTwitter} href="https://twitter.com/ethleaderboard" target="_blank">
+                <a
+                  class={headerStyles.heroTwitter}
+                  href="https://twitter.com/ethleaderboard"
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   <svg
                     width="22"
                     height="22"
@@ -257,9 +248,9 @@ export default function Filters({
                 <button
                   ref={searchRefFixed}
                   className={`${filtersStyles.removeButton} ${
-                    currentSearchInput === ""
+                    currentSearchInput === ''
                       ? filtersStyles.removeButtonHidden
-                      : ""
+                      : ''
                   }`}
                   onClick={handleClear}
                 >
@@ -277,7 +268,7 @@ export default function Filters({
               <div className={filtersStyles.spacer}></div>
               <AnimatePresence>
                 <motion.div
-                  layout={mobileSearchOpen ? false : "position"}
+                  layout={mobileSearchOpen ? false : 'position'}
                   className={filtersStyles.rightSide}
                 >
                   <div
@@ -286,9 +277,9 @@ export default function Filters({
                     } ${filtersStyles.frensCount} ${headerStyles.mobHidden}`}
                   >
                     <strong>
-                      {count.toLocaleString("en", { useGrouping: true })}
-                    </strong>{" "}
-                    <span>name{count !== 1 && "s"}</span>
+                      {count.toLocaleString('en', { useGrouping: true })}
+                    </strong>{' '}
+                    <span>name{count !== 1 && 's'}</span>
                   </div>
                   <PageButtons
                     {...{ page, setPage, count }}

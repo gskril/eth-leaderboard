@@ -53,7 +53,7 @@
   background-color: var(--background-accent);
 }
 
-.filtersOption > input[type="radio"]:checked ~ label {
+.filtersOption > input[type='radio']:checked ~ label {
   background-color: var(--background-accent-light);
 }
 

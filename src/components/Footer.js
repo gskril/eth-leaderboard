@@ -1,4 +1,4 @@
-import footerStyles from "../styles/Footer.module.css";
+import footerStyles from '../styles/Footer.module.css';
 
 export default function Footer() {
   return (
@@ -10,17 +10,30 @@ export default function Footer() {
           </a>
         </small>
         <small>
-          Website by{" "}
-          <a href="https://twitter.com/gregskril" target="_blank">
+          Website by{' '}
+          <a
+            href="https://twitter.com/gregskril"
+            target="_blank"
+            rel="noreferrer"
+          >
             @gregskril
-          </a> and{" "}
-          <a href="https://twitter.com/taytemss" target="_blank">
+          </a>{' '}
+          and{' '}
+          <a
+            href="https://twitter.com/taytemss"
+            target="_blank"
+            rel="noreferrer"
+          >
             @taytemss
           </a>
         </small>
         <small>
-          Initial data from{" "}
-          <a href="https://twitter.com/ultrasoundmoney" target="_blank">
+          Initial data from{' '}
+          <a
+            href="https://twitter.com/ultrasoundmoney"
+            target="_blank"
+            rel="noreferrer"
+          >
             @ultrasoundmoney
           </a>
         </small>

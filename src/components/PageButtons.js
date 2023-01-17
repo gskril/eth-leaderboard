@@ -1,5 +1,6 @@
-import { Fragment } from "react";
-import pageButtonStyles from "../styles/PageButtons.module.css";
+import { Fragment } from 'react';
+
+import pageButtonStyles from '../styles/PageButtons.module.css';
 
 const PageButton = ({ number, page, setPage, isActive }) => (
   <button
@@ -34,14 +35,16 @@ export default function PageButtons({
           (arr.length === number + 1 && arr.length > 2) ||
           (page > 1 && number === 0)) ? (
           <Fragment key={number}>
-            {arr.length === number + 1 && arr.length > 2 && number - page > 2 && (
-              <span
-                key={`${number}-dots`}
-                className={pageButtonStyles.dotsSpan}
-              >
-                ...
-              </span>
-            )}
+            {arr.length === number + 1 &&
+              arr.length > 2 &&
+              number - page > 2 && (
+                <span
+                  key={`${number}-dots`}
+                  className={pageButtonStyles.dotsSpan}
+                >
+                  ...
+                </span>
+              )}
             <PageButton
               key={number}
               number={number}

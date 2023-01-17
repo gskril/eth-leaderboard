@@ -1,18 +1,19 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { SWRConfig } from "swr";
-import { fetchInitialData, fetchInitialMetadata } from "../staticapi";
-import Filters from "../components/Filters";
-import FrensTable from "../components/FrensTable";
-import Header from "../components/Header";
-import Layout from "../components/layout";
-import { useScrollPosition } from "@n8tb1t/use-scroll-position";
-import { useRouter } from "next/router";
-import Modal from "../components/Modal";
+import { SWRConfig } from 'swr';
+import { useEffect, useRef, useState } from 'react';
+import { useRouter } from 'next/router';
+import { useScrollPosition } from '@n8tb1t/use-scroll-position';
+
+import { fetchInitialData, fetchInitialMetadata } from '../staticapi';
+import Filters from '../components/Filters';
+import FrensTable from '../components/FrensTable';
+import Header from '../components/Header';
+import Layout from '../components/layout';
+import Modal from '../components/Modal';
 
 export default function Home({ frensMeta, fallback }) {
   const router = useRouter();
   const initialQuery = useRef();
-  const [searchInput, _setSearchInput] = useState("");
+  const [searchInput, _setSearchInput] = useState('');
   const [page, _setPage] = useState(0);
   const [showFixed, setShowFixed] = useState(false);
   const filterDivRef = useRef();
@@ -25,7 +26,7 @@ export default function Home({ frensMeta, fallback }) {
     Object.keys(query).forEach(
       (key) => query[key] === null && delete query[key]
     );
-    console.log("setting query to", query);
+    console.log('setting query to', query);
     router.push(
       {
         query,
@@ -91,9 +92,11 @@ export default function Home({ frensMeta, fallback }) {
           />
         </Header>
         {modalIsOpen && (
-          <Modal setIsOpen={setModalIsOpen} fren={selectedFren}/>
+          <Modal setIsOpen={setModalIsOpen} fren={selectedFren} />
         )}
-        <FrensTable {...{ page, searchInput, showFixed, setModalIsOpen, setSelectedFren }} />
+        <FrensTable
+          {...{ page, searchInput, showFixed, setModalIsOpen, setSelectedFren }}
+        />
       </Layout>
     </SWRConfig>
   );
@@ -106,7 +109,7 @@ export async function getStaticProps() {
     props: {
       frensMeta,
       fallback: {
-        "/api/frens?": frensData,
+        '/api/frens?': frensData,
       },
     },
     revalidate: 300,
