@@ -1,18 +1,26 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 
+import { Fren } from '../types';
 import { useFrens } from '../api';
 import { usePrevious } from '../utils/hooks';
 import Avatar from './Avatar';
 import frensTableStyles from '../styles/FrensTable.module.css';
 
+interface FrensTableProps {
+  searchInput: string;
+  page: number;
+  showFixed: boolean;
+  setModalIsOpen: (isOpen: boolean) => void;
+  setSelectedFren: (fren: any) => void;
+}
+
 export default function FrensTable({
   searchInput,
   page,
-  showFixed,
   setModalIsOpen,
   setSelectedFren,
-}) {
+}: FrensTableProps) {
   const {
     data: frensData,
     error,
@@ -32,13 +40,12 @@ export default function FrensTable({
     );
 
   return (
-    <AnimatePresence exitBeforeEnter>
+    <AnimatePresence mode="wait">
       <motion.div
         animate={isValidating && !frensData ? 'loading' : 'loaded'}
         key={frens.length > 0 ? frens[0].id : 'empty'}
         initial={{ opacity: 1, filter: 'blur(5px) brightness(1.05)' }}
         exit={{ opacity: 0.2, filter: 'blur(5px) brightness(1.05)' }}
-        enter={{ opacity: 0.2, filter: 'blur(5px) brightness(1.05)' }}
         variants={{
           loading: () => ({
             opacity: 0.2,
@@ -52,10 +59,7 @@ export default function FrensTable({
       >
         <FrensTablePage
           frens={frens}
-          showFixed={showFixed}
-          modalIsOpen
           setModalIsOpen={setModalIsOpen}
-          selectedFren
           setSelectedFren={setSelectedFren}
         />
       </motion.div>
@@ -63,12 +67,17 @@ export default function FrensTable({
   );
 }
 
+interface FrensTablePageProps {
+  frens: Fren[];
+  setModalIsOpen: (isOpen: boolean) => void;
+  setSelectedFren: (fren: Fren) => void;
+}
+
 const FrensTablePage = ({
   frens,
-  showFixed,
   setModalIsOpen,
   setSelectedFren,
-}) => {
+}: FrensTablePageProps) => {
   return (
     <div
       className={`${frensTableStyles.tableWrapper} ${
@@ -90,17 +99,6 @@ const FrensTablePage = ({
               <tr key={fren.id} data-verified={fren.verified}>
                 <td>
                   {fren.ranking.toLocaleString('en', { useGrouping: true })}
-                  {new Date(fren.created).getTime() >
-                  new Date(
-                    new Date(
-                      new Date().toString().split('GMT')[0] + ' UTC'
-                    ).toISOString()
-                  ).getTime() -
-                    86400000 ? (
-                    <span className={frensTableStyles.newProfile}>🎉</span>
-                  ) : (
-                    ''
-                  )}
                 </td>
                 <td>
                   {fren.ens && !fren.ens.match(/^[a-z0-9.-]+(.eth)/g) ? (
@@ -131,7 +129,6 @@ const FrensTablePage = ({
                       }}
                     >
                       <Avatar
-                        layout="fixed"
                         width={34}
                         height={34}
                         className={frensTableStyles.pfp}
