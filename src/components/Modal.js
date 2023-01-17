@@ -41,13 +41,19 @@ export default function Modal({ setIsOpen, fren }) {
           ) : (
             <>
               <div className={ModalStyles.header}>
-                <Avatar
-                  className={ModalStyles.headerAvatar}
-                  src={`https://metadata.ens.domains/mainnet/avatar/${fren.ens}`}
-                  fallbackSrc="/img/av-default.svg"
-                  width={100}
-                  height={100}
-                />
+                <div
+                  style={{
+                    lineHeight: 0,
+                  }}
+                >
+                  <Avatar
+                    className={ModalStyles.headerAvatar}
+                    src={`https://metadata.ens.domains/mainnet/avatar/${fren.ens}`}
+                    fallbackSrc="/img/av-default.svg"
+                    width={80}
+                    height={80}
+                  />
+                </div>
                 <div className={ModalStyles.headerContent}>
                   <span className={ModalStyles.headerName}>{fren.ens}</span>
                   <div className={ModalStyles.headerLinks}>

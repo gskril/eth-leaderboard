@@ -75,8 +75,6 @@
 }
 
 .headerAvatar {
-  width: 6.25rem;
-  height: 6.25rem;
   object-fit: cover;
   border-radius: 0.5rem;
   overflow: hidden;
