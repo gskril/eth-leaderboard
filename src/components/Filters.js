@@ -1,6 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { Fragment, useRef, useState, useEffect } from 'react';
-import { Link } from 'next/link';
 
 import { default as CancelIcon } from '../assets/icons/CancelIcon.svg';
 import { default as ChevronIcon } from '../assets/icons/ChevronIcon.svg';
@@ -199,10 +198,11 @@ export default function Filters({
             <div className={headerStyles.fixedHeader}>
               <div className={headerStyles.heroTitle}>
                 <h1>
-                  <Link className={headerStyles.heroTitleLink} href="/">
+                  {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
+                  <a className={headerStyles.heroTitleLink} href="/">
                     <span className={headerStyles.heroHighlight}>.eth</span>{' '}
                     Leaderboard
-                  </Link>
+                  </a>
                 </h1>
                 <a
                   class={headerStyles.heroTwitter}
