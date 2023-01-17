@@ -1,6 +1,6 @@
-import massive from 'massive';
+import massive, { Database } from 'massive';
 
-let db;
+let db: Database;
 
 export default async function getDb() {
   if (db) {
@@ -9,11 +9,10 @@ export default async function getDb() {
 
   return massive({
     host: process.env.PGHOST,
-    port: process.env.PGPORT,
+    port: Number(process.env.PGPORT),
     database: process.env.PGDATABASE,
     user: process.env.PGUSER,
     password: process.env.PGPASSWORD,
-    poolSize: 10,
   }).then((instance) => {
     db = instance;
     return Promise.resolve(db);

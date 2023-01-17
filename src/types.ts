@@ -5,9 +5,14 @@ export interface Fren {
   handle: string;
   followers: number;
   verified: boolean;
-  updated: string;
+  updated: Date;
   pfp: string;
   ranking: number;
+}
+
+export interface DatabaseFren extends Fren {
+  avatar: string;
+  pfp: never;
 }
 
 interface Nft {

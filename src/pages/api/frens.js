@@ -9,7 +9,7 @@ export default async function handler(req, res) {
     count ? (count > 500 ? (count = 500) : count) : (count = 100);
     skip |= 0;
 
-    const data = await fetchInitialData(q, count, skip, verified, location);
+    const data = await fetchInitialData({ q, count, skip, verified, location });
     const endTime = Date.now();
     const diff = endTime - startTime;
     res.status(200);

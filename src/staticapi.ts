@@ -1,17 +1,27 @@
 import getDb from './db';
+import { DatabaseFren, Fren } from './types';
 
-export const fetchInitialData = async (
+interface InitialDataProps {
+  q?: string;
+  count?: number;
+  skip?: number;
+  verified?: boolean;
+  location?: string;
+}
+
+export const fetchInitialData = async ({
   q,
   count = 100,
   skip = 0,
   verified,
-  location
-) => {
+  location,
+}: InitialDataProps) => {
   const db = await getDb();
 
-  const criteria = {};
-  if (q !== undefined)
+  const criteria: any = {};
+  if (q !== undefined) {
     criteria.or = [{ 'handle ilike': `%${q}%` }, { 'ens ilike': `%${q}%` }];
+  }
 
   if (location === 'new-york-city') {
     criteria.or = [
@@ -71,7 +81,7 @@ export const fetchInitialData = async (
     return [allFrensReq, allFrensCount];
   });
 
-  const frens = allFrens.map((x, i) => ({
+  const frens = allFrens.map((x: DatabaseFren, i: number) => ({
     id: x.id,
     name: x.name,
     ens: x.ens.split('.eth')[0] + '.eth',

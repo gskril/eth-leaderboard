@@ -110,7 +110,7 @@ const FrensTablePage = ({
                         className={frensTableStyles.pfp}
                         src={'/img/av-default.png'}
                         alt=""
-                        priority={inx < 10}
+                        loading={inx < 10 ? 'eager' : 'lazy'}
                       />
                       <span className={frensTableStyles.ensName}>
                         {fren.ens}
@@ -137,7 +137,7 @@ const FrensTablePage = ({
                         }
                         fallbackSrc="/img/av-default.png"
                         alt=""
-                        priority={inx < 10}
+                        loading={inx < 10 ? 'eager' : 'lazy'}
                       />
                       <span className={frensTableStyles.ensName}>
                         {fren.ens}
