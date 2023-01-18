@@ -17,10 +17,7 @@ interface FiltersProps {
   setSearchInput: (searchInput: string) => void;
   filterDivRef: React.RefObject<HTMLDivElement>;
   showFixed: boolean;
-  initialQuery: React.MutableRefObject<{
-    q?: string;
-    page?: string;
-  }>;
+  initialQuery: React.MutableRefObject<{ q: string; page: number | null }>;
 }
 
 export default function Filters({

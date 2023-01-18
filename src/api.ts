@@ -31,5 +31,3 @@ export const useFrens = ({ searchInput, page }: UseFrens) => {
 
   return useSWR(frensPath + searchParams.toString(), fetcher);
 };
-
-export const useMeta = () => useSWR(metaPath);

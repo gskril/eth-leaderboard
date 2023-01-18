@@ -7,16 +7,18 @@ import { Fren } from '../types';
 
 interface ModalProps {
   setIsOpen: (isOpen: boolean) => void;
-  fren: Fren;
+  fren: Fren | null;
 }
 
 export default function Modal({ setIsOpen, fren }: ModalProps) {
   const fetcher = (args: RequestInfo) => fetch(args).then((res) => res.json());
 
   const { data, error } = useSWR(
-    `https://ens-records.vercel.app/${fren.ens}`,
+    fren && `https://ens-records.vercel.app/${fren.ens}`,
     fetcher
   );
+
+  if (!fren) return null;
 
   return (
     <>

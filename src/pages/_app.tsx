@@ -1,10 +1,11 @@
+import { AppProps } from 'next/app';
 import PlausibleProvider from 'next-plausible';
 import React from 'react';
 import Script from 'next/script';
 
 import '../styles/global.css';
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Script

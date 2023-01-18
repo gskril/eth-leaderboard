@@ -24,3 +24,10 @@ interface Nft {
 export interface OpenseaResponse {
   assets: Nft[];
 }
+
+export interface Metadata {
+  top10: number;
+  top100: number;
+  top500: number;
+  countAll: number;
+}

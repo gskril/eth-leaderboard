@@ -10,7 +10,6 @@ import frensTableStyles from '../styles/FrensTable.module.css';
 interface FrensTableProps {
   searchInput: string;
   page: number;
-  showFixed: boolean;
   setModalIsOpen: (isOpen: boolean) => void;
   setSelectedFren: (fren: any) => void;
 }
@@ -26,8 +25,8 @@ export default function FrensTable({
     error,
     isValidating,
   } = useFrens({
-    searchInput,
-    page,
+    searchInput: searchInput,
+    page: page,
   });
   const prevFrensData = usePrevious(frensData);
   const { frens } = frensData || prevFrensData || {};
@@ -43,7 +42,7 @@ export default function FrensTable({
     <AnimatePresence mode="wait">
       <motion.div
         animate={isValidating && !frensData ? 'loading' : 'loaded'}
-        key={frens.length > 0 ? frens[0].id : 'empty'}
+        key={frens && frens.length > 0 ? frens[0].id : 'empty'}
         initial={{ opacity: 1, filter: 'blur(5px) brightness(1.05)' }}
         exit={{ opacity: 0.2, filter: 'blur(5px) brightness(1.05)' }}
         variants={{
@@ -81,10 +80,10 @@ const FrensTablePage = ({
   return (
     <div
       className={`${frensTableStyles.tableWrapper} ${
-        frens.length > 0 ? '' : frensTableStyles.noResultsWrapper
+        frens && frens.length > 0 ? '' : frensTableStyles.noResultsWrapper
       }`}
     >
-      {frens.length > 0 ? (
+      {frens && frens.length > 0 ? (
         <table className={frensTableStyles.profiles}>
           <thead>
             <tr>
@@ -97,9 +96,7 @@ const FrensTablePage = ({
           <tbody>
             {frens.map((fren, inx) => (
               <tr key={fren.id} data-verified={fren.verified}>
-                <td>
-                  {fren.ranking.toLocaleString('en', { useGrouping: true })}
-                </td>
+                <td>{fren.ranking?.toLocaleString('en')}</td>
                 <td>
                   {fren.ens && !fren.ens.match(/^[a-z0-9.-]+(.eth)/g) ? (
                     // Don't show profile modal if the name has special characters

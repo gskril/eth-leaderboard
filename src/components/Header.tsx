@@ -1,12 +1,10 @@
 import Link from 'next/link';
 
+import { Metadata } from '../types';
 import { nFormatter } from '../utils/format';
 import headerStyles from '../styles/Header.module.css';
 
-interface HeaderProps {
-  top10: number;
-  top100: number;
-  top500: number;
+interface HeaderProps extends Metadata {
   children: React.ReactNode;
 }
 

@@ -1,5 +1,5 @@
 import getDb from './db';
-import { DatabaseFren, Fren } from './types';
+import { DatabaseFren } from './types';
 
 interface InitialDataProps {
   q?: string;
