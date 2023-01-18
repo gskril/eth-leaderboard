@@ -4,7 +4,7 @@ import { DatabaseFren } from './types';
 interface InitialDataProps {
   q?: string;
   count?: number;
-  skip?: number;
+  skip?: number | undefined;
   verified?: boolean;
   location?: string;
 }
@@ -12,11 +12,12 @@ interface InitialDataProps {
 export const fetchInitialData = async ({
   q,
   count = 100,
-  skip = 0,
+  skip: _skip,
   verified,
   location,
 }: InitialDataProps) => {
   const db = await getDb();
+  const skip = _skip || 0;
 
   const criteria: any = {};
   if (q !== undefined) {
