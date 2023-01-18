@@ -1,9 +1,19 @@
 import Link from 'next/link';
 
+import { Metadata } from '../types';
 import { nFormatter } from '../utils/format';
 import headerStyles from '../styles/Header.module.css';
 
-export default function Header({ top10, top100, top500, children }) {
+interface HeaderProps extends Metadata {
+  children: React.ReactNode;
+}
+
+export default function Header({
+  top10,
+  top100,
+  top500,
+  children,
+}: HeaderProps) {
   return (
     <div className={headerStyles.hero}>
       <div className={headerStyles.heroTitle}>

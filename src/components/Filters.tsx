@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import { Fragment, useRef, useState, useEffect } from 'react';
+import { Fragment, useRef, useState, useEffect, LegacyRef } from 'react';
 
 import { default as CancelIcon } from '../assets/icons/CancelIcon.svg';
 import { default as ChevronIcon } from '../assets/icons/ChevronIcon.svg';
@@ -10,6 +10,16 @@ import filtersStyles from '../styles/Filters.module.css';
 import headerStyles from '../styles/Header.module.css';
 import PageButtons from './PageButtons';
 
+interface FiltersProps {
+  page: number;
+  setPage: (page: number) => void;
+  searchInput: string;
+  setSearchInput: (searchInput: string) => void;
+  filterDivRef: React.RefObject<HTMLDivElement>;
+  showFixed: boolean;
+  initialQuery: React.MutableRefObject<{ q: string; page: number | null }>;
+}
+
 export default function Filters({
   page,
   setPage,
@@ -18,20 +28,16 @@ export default function Filters({
   filterDivRef,
   showFixed,
   initialQuery,
-}) {
+}: FiltersProps) {
   const [isInitial, setIsInitial] = useState(true);
   const [currentSearchInput, setCurrentSearchInput] = useState('');
-  const [timeout, setTimeoutVar] = useState(null);
+  const [timeout, setTimeoutVar] = useState<any>(null);
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
-  const searchRef = useRef();
-  const searchRefFixed = useRef();
-  const searchInputRef = useRef();
-  const searchInputRefFixed = useRef();
-  const {
-    data: frensData,
-    error,
-    isValidating,
-  } = useFrens({
+  const searchRef = useRef() as LegacyRef<HTMLButtonElement>;
+  const searchRefFixed = useRef() as LegacyRef<HTMLButtonElement>;
+  const searchInputRef = useRef() as LegacyRef<HTMLInputElement>;
+  const searchInputRefFixed = useRef() as LegacyRef<HTMLInputElement>;
+  const { data: frensData, isValidating } = useFrens({
     searchInput,
     page,
   });
@@ -39,15 +45,13 @@ export default function Filters({
   const prevCount = usePrevious(_count);
   const count = _count !== undefined ? _count : prevCount || 0;
 
-  const handleClear = (e) => {
+  const handleClear = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.stopPropagation();
     setCurrentSearchInput('');
-    showFixed ? searchRefFixed.current.blur() : searchRef.current.blur();
   };
 
-  const openSearch = (e) => {
+  const openSearch = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.stopPropagation();
-    console.log('opening search...');
     setMobileSearchOpen(true);
   };
 
@@ -73,21 +77,12 @@ export default function Filters({
   }, [page]);
 
   useEffect(() => {
-    if (mobileSearchOpen)
-      setTimeout(
-        () =>
-          showFixed
-            ? searchInputRefFixed.current.focus()
-            : searchInputRef.current.focus(),
-        150
-      );
-  }, [mobileSearchOpen]);
-
-  useEffect(() => {
     if (isInitial) return;
-    clearTimeout(timeout);
-    searchInput !== currentSearchInput &&
+    timeout && clearTimeout(timeout);
+    if (searchInput !== currentSearchInput) {
       setTimeoutVar(setTimeout(() => setSearchInput(currentSearchInput), 600));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentSearchInput]);
 
   useEffect(() => {
@@ -99,6 +94,7 @@ export default function Filters({
       setCurrentSearchInput(initialQuery.current.q);
     }
     setIsInitial(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialQuery]);
 
   return (
@@ -199,13 +195,16 @@ export default function Filters({
               <div className={headerStyles.heroTitle}>
                 <h1>
                   {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
-                  <a className={headerStyles.heroTitleLink} href="/">
+                  <div
+                    className={headerStyles.heroTitleLink}
+                    onClick={scrollToTop}
+                  >
                     <span className={headerStyles.heroHighlight}>.eth</span>{' '}
                     Leaderboard
-                  </a>
+                  </div>
                 </h1>
                 <a
-                  class={headerStyles.heroTwitter}
+                  className={headerStyles.heroTwitter}
                   href="https://twitter.com/ethleaderboard"
                   target="_blank"
                   rel="noreferrer"

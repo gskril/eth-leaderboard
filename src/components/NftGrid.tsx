@@ -1,10 +1,16 @@
 import useSWR from 'swr';
+import { OpenseaResponse } from '../types';
 
 import Styles from './../styles/NftGrid.module.css';
 
-export default function NftGrid({ address }) {
-  const fetcher = (...args) => fetch(...args).then((res) => res.json());
-  const { data: allNfts, error } = useSWR(
+interface NftGrid {
+  address: string;
+}
+
+export default function NftGrid({ address }: NftGrid) {
+  const fetcher = (args: RequestInfo) => fetch(args).then((res) => res.json());
+
+  const { data: allNfts, error } = useSWR<OpenseaResponse>(
     `https://api.opensea.io/api/v1/assets?owner=${address}&order_direction=desc&limit=18&include_orders=false`,
     fetcher
   );

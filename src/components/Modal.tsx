@@ -3,13 +3,22 @@ import useSWR from 'swr';
 import Avatar from './Avatar';
 import ModalStyles from './../styles/Modal.module.css';
 import NftGrid from './NftGrid';
+import { Fren } from '../types';
 
-export default function Modal({ setIsOpen, fren }) {
-  const fetcher = (...args) => fetch(...args).then((res) => res.json());
+interface ModalProps {
+  setIsOpen: (isOpen: boolean) => void;
+  fren: Fren | null;
+}
+
+export default function Modal({ setIsOpen, fren }: ModalProps) {
+  const fetcher = (args: RequestInfo) => fetch(args).then((res) => res.json());
+
   const { data, error } = useSWR(
-    `https://ens-records.vercel.app/${fren.ens}`,
+    fren && `https://ens-records.vercel.app/${fren.ens}`,
     fetcher
   );
+
+  if (!fren) return null;
 
   return (
     <>
@@ -52,6 +61,7 @@ export default function Modal({ setIsOpen, fren }) {
                     fallbackSrc="/img/av-default.svg"
                     width={80}
                     height={80}
+                    alt=""
                   />
                 </div>
                 <div className={ModalStyles.headerContent}>
