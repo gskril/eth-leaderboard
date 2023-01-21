@@ -20,17 +20,53 @@ export default function Stats({ data }: { data: LineData }) {
   return (
     <>
       <Head>
-        <title>Stats</title>
+        <title>Stats | ETH Leaderboard</title>
       </Head>
 
-      <div
-        style={{
-          // width: '400px',
-          height: '400px',
-        }}
-      >
-        <MyResponsiveLine data={data} />
+      <div className="container">
+        <div className="container--small">
+          <p>
+            This line chart represents the number of .eth profiles in our
+            database on a given day.
+          </p>
+          <p>
+            Note that we can never have 100% coverage due to Twitter API
+            limitations, but our indexer captures as many profiles as it can.
+            Sudden changes may be caused by improvements made to the indexer.
+          </p>
+        </div>
+
+        <div className="line">
+          <MyResponsiveLine data={data} />
+        </div>
       </div>
+
+      <style jsx>{`
+        .container {
+          width: 100%;
+          max-width: 55rem;
+          margin: 0 auto;
+          padding: 2rem 1rem;
+          height: 200px;
+        }
+
+        .container--small {
+          max-width: 37rem;
+          margin: 0 auto;
+        }
+
+        p {
+          text-align: center;
+          font-weight: 300;
+          margin-bottom: 2rem;
+          color: var(--text-color-light);
+        }
+
+        .line {
+          width: 100%;
+          height: min(30rem, 100vh);
+        }
+      `}</style>
     </>
   );
 }
@@ -38,7 +74,7 @@ export default function Stats({ data }: { data: LineData }) {
 const MyResponsiveLine = ({ data }: { data: LineData }) => (
   <ResponsiveLine
     data={data}
-    margin={{ top: 5, right: 15, bottom: 50, left: 70 }}
+    margin={{ top: 5, right: 15, bottom: 50, left: 65 }}
     xScale={{ type: 'point' }}
     yScale={{
       type: 'linear',
@@ -50,15 +86,19 @@ const MyResponsiveLine = ({ data }: { data: LineData }) => (
     yFormat=" >-.2f"
     axisBottom={{
       tickRotation: 0,
-      legend: 'Week',
+      legend: 'Date',
       legendOffset: 45,
       legendPosition: 'middle',
     }}
     axisLeft={{
       tickRotation: 0,
       legend: '.eth Profiles',
-      legendOffset: -65,
+      legendOffset: -60,
       legendPosition: 'middle',
+      format: (v) =>
+        `${new Intl.NumberFormat('en-US', {
+          notation: 'compact',
+        }).format(v)}`,
     }}
     theme={{
       background: 'transparent',
