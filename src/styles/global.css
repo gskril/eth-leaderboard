@@ -27,6 +27,7 @@ body {
   letter-spacing: -0.01em;
   line-height: 1.4;
   color: var(--text-color);
+  min-height: 100vh;
 }
 
 *,
@@ -83,6 +84,7 @@ textarea {
   --text-color: #3f3f3f;
   --text-color-light: #717171;
   --text-color-lighter: rgba(0, 0, 0, 0.23);
+  --text-color-lightest: rgba(0, 0, 0, 0.12);
   --text-color-accent: #7298f8;
   --text-color-accent-200: #5d80d6;
 }
@@ -118,6 +120,7 @@ textarea {
     --text-color: #e7e7e7;
     --text-color-light: #a1a1a1;
     --text-color-lighter: #6c6c6c;
+    --text-color-lightest: #353535;
   }
 }
 

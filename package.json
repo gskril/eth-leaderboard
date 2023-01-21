@@ -18,6 +18,8 @@
   "license": "ISC",
   "dependencies": {
     "@n8tb1t/use-scroll-position": "^2.0.3",
+    "@nivo/core": "^0.80.0",
+    "@nivo/line": "^0.80.0",
     "@prisma/client": "2.30.0",
     "@svgr/webpack": "^6.2.0",
     "dotenv": "^16.0.3",
