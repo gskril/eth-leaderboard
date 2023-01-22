@@ -51,7 +51,7 @@ export default function Stats({
   lineData,
 }: StatsProps) {
   return (
-    <Layout>
+    <Layout footer={false}>
       <Head>
         <title>.eth Leaderboard Stats</title>
         <meta

@@ -8,10 +8,14 @@ import layoutStyles from '../styles/Layout.module.css';
 interface LayoutProps {
   children: React.ReactNode;
   showFixed?: boolean;
-  footer?: false;
+  footer?: boolean;
 }
 
-export default function Layout({ children, showFixed, footer }: LayoutProps) {
+export default function Layout({
+  children,
+  showFixed,
+  footer = true,
+}: LayoutProps) {
   const [reachedFooter, setReachedFooter] = useState(false);
   const bodyRef = useRef() as React.MutableRefObject<HTMLDivElement>;
 
