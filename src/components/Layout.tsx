@@ -8,9 +8,14 @@ import layoutStyles from '../styles/Layout.module.css';
 interface LayoutProps {
   children: React.ReactNode;
   showFixed?: boolean;
+  footer?: boolean;
 }
 
-export default function Layout({ children, showFixed }: LayoutProps) {
+export default function Layout({
+  children,
+  showFixed,
+  footer = true,
+}: LayoutProps) {
   const [reachedFooter, setReachedFooter] = useState(false);
   const bodyRef = useRef() as React.MutableRefObject<HTMLDivElement>;
 
@@ -66,30 +71,16 @@ export default function Layout({ children, showFixed }: LayoutProps) {
           href="/icons/favicon_256.png"
         />
 
-        <title>.eth Leaderboard</title>
-        <meta
-          name="description"
-          content="The most followed Twitter accounts with .eth names."
-        />
-        <meta property="og:title" content=".eth Leaderboard" />
-        <meta
-          property="og:description"
-          content="The most followed Twitter accounts with .eth names."
-        />
-        <meta
-          property="og:image"
-          content="https://ethleaderboard.xyz/sharing.jpg"
-        />
         <meta name="twitter:card" content="summary_large_image" />
-        <link rel="canonical" href="https://ethleaderboard.xyz/" />
-
         <link href="/fonts/CircularXXWeb-Bold.woff2" rel="preload" as="font" />
         <link href="/fonts/CircularXXWeb-Book.woff2" rel="preload" as="font" />
         <link href="/fonts/CircularXXWeb-Medium.woff" rel="preload" as="font" />
         <link href="/fonts/CircularXXWeb-Light.woff2" rel="preload" as="font" />
       </Head>
       <main>{children}</main>
-      <Footer />
+
+      {footer && <Footer />}
+
       <div
         className={`${layoutStyles.showFixedGradient} ${
           showFixed && layoutStyles.showFixed

@@ -5,7 +5,7 @@ import { nFormatter } from '../utils/format';
 import headerStyles from '../styles/Header.module.css';
 
 interface HeaderProps extends Metadata {
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 export default function Header({
