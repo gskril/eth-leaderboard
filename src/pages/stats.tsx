@@ -1,6 +1,12 @@
 import { ResponsiveLine } from '@nivo/line';
+import { useEffect, useState } from 'react';
 import Head from 'next/head';
+
+import { fetchInitialMetadata } from '../staticapi';
+import { Metadata } from '../types';
 import getDb from '../db';
+import Header from '../components/Header';
+import Layout from '../components/Layout';
 
 type LineData = {
   id: string;
@@ -16,12 +22,32 @@ type EthCount = {
   count: number;
 };
 
-export default function Stats({ data }: { data: LineData }) {
+type StatsProps = {
+  data: LineData;
+  frensMeta: Metadata;
+};
+
+export default function Stats({ data, frensMeta }: StatsProps) {
   return (
-    <>
+    <Layout>
       <Head>
-        <title>Stats | ETH Leaderboard</title>
+        <title>.eth Leaderboard Stats</title>
+        <meta
+          name="description"
+          content="Insights on the .eth Twitter community"
+        />
+        <meta property="og:title" content=".eth Leaderboard Stats" />
+        <meta
+          property="og:description"
+          content="Insights on the .eth Twitter community"
+        />
+        <meta
+          property="og:image"
+          content="https://ethleaderboard.xyz/sharing.jpg"
+        />
       </Head>
+
+      <Header {...frensMeta} />
 
       <div className="container">
         <div className="container--small">
@@ -46,8 +72,7 @@ export default function Stats({ data }: { data: LineData }) {
           width: 100%;
           max-width: 55rem;
           margin: 0 auto;
-          padding: 2rem 1rem;
-          height: 200px;
+          padding-bottom: 2rem;
         }
 
         .container--small {
@@ -67,7 +92,7 @@ export default function Stats({ data }: { data: LineData }) {
           height: min(30rem, 100vh);
         }
       `}</style>
-    </>
+    </Layout>
   );
 }
 
@@ -156,9 +181,12 @@ export async function getStaticProps() {
     },
   ];
 
+  const frensMeta = await fetchInitialMetadata();
+
   return {
     props: {
       data,
+      frensMeta,
     },
     revalidate: 60 * 60, // 1 hour
   };

@@ -1,7 +1,8 @@
-import { SWRConfig } from 'swr';
 import { RefObject, useEffect, useRef, useState } from 'react';
+import { SWRConfig } from 'swr';
 import { useRouter } from 'next/router';
 import { useScrollPosition } from '@n8tb1t/use-scroll-position';
+import Head from 'next/head';
 
 import { fetchInitialData, fetchInitialMetadata } from '../staticapi';
 import { Metadata } from '../types';
@@ -83,6 +84,23 @@ export default function Home({ frensMeta, fallback }: HomeProps) {
         revalidateOnFocus: false,
       }}
     >
+      <Head>
+        <title>.eth Leaderboard</title>
+        <meta
+          name="description"
+          content="The most followed Twitter accounts with .eth names."
+        />
+        <meta property="og:title" content=".eth Leaderboard" />
+        <meta
+          property="og:description"
+          content="The most followed Twitter accounts with .eth names."
+        />
+        <meta
+          property="og:image"
+          content="https://ethleaderboard.xyz/sharing.jpg"
+        />
+      </Head>
+
       <Layout {...{ showFixed }}>
         <Header {...frensMeta}>
           <Filters
