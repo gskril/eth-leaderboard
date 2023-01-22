@@ -4,7 +4,9 @@ import { useWindowSize } from 'usehooks-ts';
 import Head from 'next/head';
 
 import { fetchInitialMetadata } from '../staticapi';
+import { IntlNumberFormat } from '../utils/format';
 import { Metadata } from '../types';
+import { nivoTheme, nivoTooltipStyles } from '../utils/nivo';
 import getDb from '../db';
 import Header from '../components/Header';
 import Layout from '../components/Layout';
@@ -24,6 +26,12 @@ type BarData = {
   color: string;
 }[];
 
+type FollowerDistributionBar = {
+  color: string;
+  count: number;
+  group: string;
+}[];
+
 type EthCount = {
   date: Date;
   count: number;
@@ -31,38 +39,17 @@ type EthCount = {
 
 type StatsProps = {
   barData: BarData;
-  lineData: LineData;
+  followerDistribution: FollowerDistributionBar;
   frensMeta: Metadata;
+  lineData: LineData;
 };
 
-const nivoTheme = {
-  background: 'transparent',
-  textColor: 'var(--text-color)',
-  axis: {
-    ticks: {
-      line: {
-        stroke: 'var(--text-color-lightest)',
-      },
-      text: {
-        fontSize: 11,
-        fill: 'var(--text-color-light)',
-      },
-    },
-  },
-  grid: {
-    line: {
-      stroke: 'var(--text-color-lightest)',
-    },
-  },
-  tooltip: {
-    container: {
-      background: 'var(--background-accent-light)',
-      border: '1px solid var(--text-color-lighter)',
-    },
-  },
-};
-
-export default function Stats({ barData, lineData, frensMeta }: StatsProps) {
+export default function Stats({
+  barData,
+  followerDistribution,
+  frensMeta,
+  lineData,
+}: StatsProps) {
   return (
     <Layout>
       <Head>
@@ -109,7 +96,18 @@ export default function Stats({ barData, lineData, frensMeta }: StatsProps) {
         </div>
 
         <div className="line">
-          <MyResponsiveBar data={barData} />
+          <RegionBarGraph data={barData} />
+        </div>
+
+        <div className="container--small">
+          <p>
+            This bar graph represents the breakdown of .eth Twitter profiles
+            based on their follower count.
+          </p>
+        </div>
+
+        <div className="line">
+          <FollowerBarGraph data={followerDistribution} />
         </div>
       </div>
 
@@ -187,11 +185,19 @@ const MyResponsiveLine = ({ data }: { data: LineData }) => {
       pointColor={{ theme: 'background' }}
       pointLabelYOffset={-200}
       useMesh={true}
+      tooltip={function (e) {
+        return (
+          <div style={nivoTooltipStyles}>
+            {IntlNumberFormat(e.point.data.yFormatted)} profiles on{' '}
+            {e.point.data.xFormatted}
+          </div>
+        );
+      }}
     />
   );
 };
 
-const MyResponsiveBar = ({ data }: { data: BarData }) => (
+const RegionBarGraph = ({ data }: { data: BarData }) => (
   <ResponsiveBar
     data={data}
     keys={['count']}
@@ -216,6 +222,57 @@ const MyResponsiveBar = ({ data }: { data: BarData }) => (
     ariaLabel=".eth Twitter profiles per region"
     barAriaLabel={function (e) {
       return e.id + ': ' + e.formattedValue + ' in region: ' + e.indexValue;
+    }}
+    tooltip={({ value, indexValue }) => (
+      <div style={nivoTooltipStyles}>
+        {IntlNumberFormat(value)} profiles in {indexValue}
+      </div>
+    )}
+    valueFormat={function (e) {
+      return IntlNumberFormat(e);
+    }}
+  />
+);
+
+const FollowerBarGraph = ({ data }: { data: FollowerDistributionBar }) => (
+  <ResponsiveBar
+    data={data}
+    keys={['count']}
+    layout="vertical"
+    indexBy="group"
+    margin={{ top: 0, right: 0, bottom: 20, left: 0 }}
+    padding={0.3}
+    colors={{ datum: 'data.color' }}
+    labelTextColor={{
+      from: 'color',
+      modifiers: [['darker', 1.6]],
+    }}
+    axisLeft={null}
+    axisBottom={{
+      tickSize: 0,
+      tickPadding: 10,
+      tickValues: 5,
+      tickRotation: 0,
+      format: (v) => `${v} followers`,
+    }}
+    theme={nivoTheme}
+    role="application"
+    ariaLabel=".eth Twitter profiles broken down by number of followers"
+    barAriaLabel={function (e) {
+      return (
+        e.id + ': ' + e.formattedValue + ' with ' + e.indexValue + ' followers'
+      );
+    }}
+    tooltip={({ value, indexValue }) => (
+      <div style={nivoTooltipStyles}>
+        {IntlNumberFormat(value)} profiles with {indexValue} followers
+      </div>
+    )}
+    valueFormat={function (e) {
+      return new Intl.NumberFormat('en-US', {
+        notation: 'compact',
+        maximumFractionDigits: 1,
+      }).format(Number(e));
     }}
   />
 );
@@ -291,13 +348,35 @@ export async function getStaticProps() {
     },
   ];
 
+  const followerDistributionRaw = await db.query(`
+    SELECT 
+      CASE
+        WHEN followers BETWEEN 0 AND 9 THEN '0-9'
+        WHEN followers BETWEEN 10 AND 99 THEN '10-99'
+        WHEN followers BETWEEN 100 AND 999 THEN '100-999'
+        ELSE '1000+'
+      END as "Followers",
+      COUNT(*) as "count"
+    FROM "eth"
+    GROUP BY "Followers"
+  `);
+
+  // followerDistribution is formatted as [{ Followers: '0-9', count: '123' }, ...]
+  // we want to convert it to [{ group: '0-9', count: 123 }, ...]
+  const followerDistribution = followerDistributionRaw.map((entry: any) => ({
+    color: 'var(--text-color-accent)',
+    count: parseInt(entry.count),
+    group: entry.Followers,
+  }));
+
   const frensMeta = await fetchInitialMetadata();
 
   return {
     props: {
-      lineData,
       barData,
+      followerDistribution,
       frensMeta,
+      lineData,
     },
     revalidate: 60 * 60, // 1 hour
   };
