@@ -11,6 +11,7 @@ import FrensTable from '../components/FrensTable';
 import Header from '../components/Header';
 import Layout from '../components/Layout';
 import Modal from '../components/Modal';
+import Helper from '../components/Helper';
 
 interface HomeProps {
   frensMeta: Metadata;
@@ -102,6 +103,8 @@ export default function Home({ frensMeta, fallback }: HomeProps) {
       </Head>
 
       <Layout {...{ showFixed }}>
+        <Helper>Data is outdated due to the recent Twitter API changes.</Helper>
+
         <Header {...frensMeta}>
           <Filters
             page={page}

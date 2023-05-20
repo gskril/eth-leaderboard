@@ -1,0 +1,30 @@
+.wrapper {
+  margin: 0 auto;
+  padding-top: 1.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  max-width: 42rem;
+}
+
+.helper {
+  --dark: rgb(56, 136, 255);
+  --light: rgb(240, 246, 255);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 400;
+  color: #262626;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  color: var(--text-color);
+  border: 1px solid var(--dark);
+  background-color: var(--light);
+}
+
+@media (prefers-color-scheme: dark) {
+  .helper {
+    --dark: rgb(54 103 175);
+    --light: rgb(15 25 40);
+  }
+}
